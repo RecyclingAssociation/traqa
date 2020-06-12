@@ -36,27 +36,22 @@
 		},
 		"organizationId": "GBLIVRFACL"
 	},
-	"Reference": {
-		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002"
+	"reference": {
+		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
+		"pickupReferenceNumber": "LR12345-1",
+		"carriersReferenceNumber": "MAEU12345678"
 	},
-	"consignment": {
-		"portOfLoading": {
-			"UNLocode": "GBLGP"
-		},
-		"portOfDischarge": {
-			"UNLocode": "CNXMN"
-		}
+	"date": {
+		"scheduledLoadingTransportEvent": "2020-03-27 09:00:00"
 	},
-	"TransportEquipment": {
-		"Reference": {
-			"pickupReferenceNumber": "LR12345-1",
-			"carriersReferenceNumber": "MAEU12345678"
-		},
-		"Date": {
-			"ScheduledLoadingTransportEvent": "2020-03-27 09:00:00"
-		},
+	"portOfLoading": {
+		"UNLocode": "GBLGP"
 	},
-	"TradeItem": {
+	"portOfDischarge": {
+		"UNLocode": "CNXMN"
+	},
+	"transportEquipment": {},
+	"tradeItem": {
 		"harmonizeSystemCode": "4712345",
 		"description": "OCC 90/10"
 	}
