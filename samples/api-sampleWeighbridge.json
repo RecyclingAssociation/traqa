@@ -1,0 +1,71 @@
+{
+	"shipper": {
+		"name": "Acme Exporter Limited",
+		"address": {
+			"street": "1 Old Hall Street",
+			"city": "Liverpool",
+			"state": "Merseyside",
+			"country": "GB",
+			"postcode": "L3 9HG"
+		},
+		"organizationId": "GBLIVACME"
+	}
+	"carrier": {
+		"name": "Maersk Line",
+		"organizationId": "MAEU"
+	},
+  "haulier": {
+		"name": "Haulier Co Ltd",
+		"organizationId": "GBHAUL"
+	},
+	"loadingSite": {
+		"name": "Recycling Facility Limited",
+		"address": {
+			"street": "1 Old Hall Street",
+			"city": "Liverpool",
+			"state": "Merseyside",
+			"country": "GB",
+			"postcode": "L3 9HG"
+		},
+		"organizationId": "GBLIVRFACL"
+	},
+	"Reference": {
+		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002"
+	},
+	"TransportEquipment": {
+		"equipmentNumber": "SUDU1616828",
+		"equipmentType": "42G0",
+		"seal": [{
+			"identifier": "0859498"
+		}],
+		"Reference": {
+			"pickupReferenceNumber": "LR12345-1",
+			"despatchNoteNumber": "211449",
+			"vehicleIdentificationNumber": "NV18NLD"
+		},
+		"Date": {
+			"ScheduledLoadingTransportEvent": "2020-03-27 09:00:00",
+			"ActualArrivalTransportEvent": "2020-03-27 09:05:49",
+			"ActualDepartureTransportEvent": "2020-03-27 09:47:38"
+		},
+		"verifiedWeight": {
+			"value": "28500.000",
+			"unit": "KGM",
+			"weightVerificationMethod": "1",
+			"weighingDate": "2018-06-11"
+		},
+		"equipmentTareWeight": {
+			"value": "3000.000",
+			"unit": "KGM"
+		}
+	},
+	"TradeItem": {
+		"quantity": "25",
+		"harmonizeSystemCode": "4712345",
+		"description": "OCC 90/10",
+		"grossWeight": {
+			"value": "25500",
+			"unit": "KGM"
+		}
+	}
+}
