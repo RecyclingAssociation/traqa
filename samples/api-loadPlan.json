@@ -1,0 +1,63 @@
+{
+	"shipper": {
+		"name": "Acme Exporter Limited",
+		"address": {
+			"street": "1 Old Hall Street",
+			"city": "Liverpool",
+			"state": "Merseyside",
+			"country": "GB",
+			"postcode": "L3 9HG"
+		},
+		"organizationId": "GBLIVACME"
+	},
+	"consignee": {
+		"name": "Acme Importer",
+		"address": {
+			"street": "5329 Industrial Zone",
+			"city": "Bangkok",
+			"state": "Bangkok",
+			"country": "TH",
+			"postcode": "345678"
+		},
+		"organizationId": "THBANACIM"
+	},
+	"carrier": {
+		"name": "Maersk Line",
+		"organizationId": "MAEU"
+	},
+	"loadingSite": {
+		"name": "Recycling Facility Limited",
+		"address": {
+			"street": "1 Old Hall Street",
+			"city": "Liverpool",
+			"state": "Merseyside",
+			"country": "GB",
+			"postcode": "L3 9HG"
+		},
+		"organizationId": "GBLIVRFACL"
+	},
+	"Reference": {
+		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002"
+	},
+	"consignment": {
+		"portOfLoading": {
+			"UNLocode": "GBLGP"
+		},
+		"portOfDischarge": {
+			"UNLocode": "CNXMN"
+		}
+	},
+	"TransportEquipment": {
+		"Reference": {
+			"pickupReferenceNumber": "LR12345-1",
+			"carriersReferenceNumber": "MAEU12345678"
+		},
+		"Date": {
+			"ScheduledLoadingTransportEvent": "2020-03-27 09:00:00"
+		},
+	},
+	"TradeItem": {
+		"harmonizeSystemCode": "4712345",
+		"description": "OCC 90/10"
+	}
+}
