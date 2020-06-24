@@ -36,12 +36,12 @@
 		},
 		"organizationId": "GBLIVRFACL"
 	},
-	"reference": {
+	"references": {
 		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
 		"pickupReferenceNumber": "LR12345-1",
 		"carriersReferenceNumber": "MAEU12345678"
 	},
-	"date": {
+	"dates": {
 		"scheduledLoadingTransportEvent": "2020-03-27 09:00:00"
 	},
 	"portOfLoading": {
