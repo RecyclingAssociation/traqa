@@ -36,6 +36,10 @@
 		},
 		"organizationId": "GBLIVRFACL"
 	},
+	"haulier": {
+		"name": "Haulier Co Ltd",
+		"organizationId": "GBHAUL"
+	},
 	"references": {
 		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
 		"pickupReferenceNumber": "LR12345-1",
