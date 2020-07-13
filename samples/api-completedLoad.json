@@ -48,9 +48,11 @@
 		"carriersReferenceNumber": "MAEU12345678"
 	},
 	"dates": {
-		"scheduledLoadingTransportEvent": "2020-03-27 09:00:00",
-		"actualArrivalTransportEvent": "2020-03-27 09:05:49",
-		"actualDepartureTransportEvent": "2020-03-27 09:47:38"
+		"scheduledLoadingTransportEvent": "2020-03-27T09:00:00",
+		"actualArrivalTransportEvent": "2020-03-27T09:05:49",
+		"actualDepartureTransportEvent": "2020-03-27T09:47:38",
+		"vermasMessageSentEvent": "2020-03-27T15:02:17",
+            	"vermasMessageAcceptedEvent": "2020-03-27T15:02:18"
 	},
 	"portOfLoading": {
 		"UNLocode": "GBLGP"
@@ -69,7 +71,7 @@
 			"value": "28500.000",
 			"unit": "KGM",
 			"weightVerificationMethod": "1",
-			"weighingDate": "2018-06-11"
+			"weighingDate": "20202-03-27T12:00:00"
 		},
 		"equipmentTareWeight": {
 			"value": "3000.000",
