@@ -42,7 +42,7 @@
 		"carriersReferenceNumber": "MAEU12345678"
 	},
 	"dates": {
-		"scheduledLoadingTransportEvent": "2020-03-27 09:00:00"
+		"scheduledLoadingTransportEvent": "2020-03-27T09:00:00"
 	},
 	"portOfLoading": {
 		"UNLocode": "GBLGP"
