@@ -36,7 +36,6 @@
 		"vehicleIdentificationNumber": "NV18NLD"
 	},
 	"dates": {
-		"scheduledLoadingTransportEvent": "2020-03-27T09:00:00",
 		"actualArrivalTransportEvent": "2020-03-27T09:05:49",
 		"actualDepartureTransportEvent": "2020-03-27T09:47:38"
 	},
