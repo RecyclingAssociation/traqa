@@ -38,4 +38,31 @@ The weighbridge software will need to capture from the loading site the followin
 * Haulier 
 * Vehicle Registration
 
+# Codes and Identifiers
+
+The correct identification of a party in the supply chain is key for compliance and also the correct allocation of data, to facilitate this we promote the use of identity that is in use for the domain and the region or from an international code list.
+
+## EORI Number to Identify the Shipper or Exporter
+
+Traqa use this to identify the **Exporter** of the material, in the absence of this you will use a Traqa assigned id prefixed with TQ.  EORI is in use throughout the UK and Europe to identify a company in relation to customs.
+
+An EORI number – which stands for an Economic Operator Registration and Identification Number – is a unique ID code used to track and register customs information.
+
+UK EORI must start with 'GB', currently no online checker 
+EU EORI Checker https://ec.europa.eu/taxation_customs/dds2/eos/eori_validation.jsp?Lang=en
+
+## Load Sites will use the BIC Facility Code
+
+Any facility which can accept containers for purposes of loading, unloading, repair or storage are eligable to use the Bureau International des Container (BIC) Facility Code, further details can be found on this global code list at https://www.bic-code.org/locodes/
+
+Each **Load Site** will be assigned a BIC Facility code which will be used to identify where the loads will take place.
+
+## Carrier - Haulier or Shipping Line 
+
+The Haulier's will be identified using the **Waste Carrier License** as this is known to all parties and mandatory for the movement of green list waste.  These codes will be validated on receipt.
+
+The Shipping Line when moving by ocean will use the carrier **SCAC code** and this is available under the 'codes' sub folder.
+
+
+
 
