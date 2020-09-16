@@ -44,11 +44,12 @@ The correct identification of a party in the supply chain is key for compliance 
 
 ## EORI Number to Identify the Shipper or Exporter
 
-Traqa use this to identify the **Exporter** of the material, in the absence of this you will use a Traqa assigned id prefixed with TQ.  EORI is in use throughout the UK and Europe to identify a company in relation to customs.
-
 An EORI number – which stands for an Economic Operator Registration and Identification Number – is a unique ID code used to track and register customs information.
 
+Traqa use this to identify the **Exporter** of the material, in the absence of this you will use a Traqa assigned id prefixed with TQ.
+
 UK EORI must start with 'GB', currently no online checker 
+
 EU EORI Checker https://ec.europa.eu/taxation_customs/dds2/eos/eori_validation.jsp?Lang=en
 
 ## Load Sites will use the BIC Facility Code
