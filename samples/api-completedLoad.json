@@ -38,14 +38,15 @@
 	},
 	"haulier": {
 		"name": "Haulier Co Ltd",
-		"organizationId": "GBHAUL"
+		"organizationId": "CBDU209018"
 	},
 	"references": {
 		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
 		"pickupReferenceNumber": "LR12345-1",
 		"despatchNoteNumber": "211449",
 		"vehicleIdentificationNumber": "NV18NLD",
-		"carriersReferenceNumber": "MAEU12345678"
+		"carriersReferenceNumber": "MAEU12345678",
+		"driverName": "STEVEN"
 	},
 	"dates": {
 		"scheduledLoadingTransportEvent": "2020-03-27T09:00:00",
