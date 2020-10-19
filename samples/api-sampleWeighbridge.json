@@ -16,7 +16,7 @@
 	},
 	"haulier": {
 		"name": "Haulier Co Ltd",
-		"organizationId": "GBHAUL"
+		"organizationId": "CBDU209018"
 	},
 	"loadingSite": {
 		"name": "Recycling Facility Limited",
@@ -33,7 +33,8 @@
 		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
 		"pickupReferenceNumber": "LR12345-1",
 		"despatchNoteNumber": "211449",
-		"vehicleIdentificationNumber": "NV18NLD"
+		"vehicleIdentificationNumber": "NV18NLD",
+		"driverName": "STEVEN"
 	},
 	"dates": {
 		"actualArrivalTransportEvent": "2020-03-27T09:05:49",
