@@ -48,7 +48,7 @@ An EORI number – which stands for an Economic Operator Registration and Identi
 
 Traqa use this to identify the **Exporter** of the material, in the absence of this you will use a Traqa assigned id prefixed with TQ.
 
-UK EORI must start with 'GB', currently no online checker 
+UK EORI must start with 'GB', https://www.gov.uk/check-eori-number
 
 EU EORI Checker https://ec.europa.eu/taxation_customs/dds2/eos/eori_validation.jsp?Lang=en
 
