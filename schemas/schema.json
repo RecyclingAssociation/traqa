@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
         "title": "prod-api",
-        "version": "2022-07-21T09:26:38Z"
+        "version": "2022-07-25T09:26:38Z"
     },
     "servers": [
         {
