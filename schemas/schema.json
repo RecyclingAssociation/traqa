@@ -2207,32 +2207,27 @@
                     "street": {
                         "title": "The street schema",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string",
-                        "description": "An explanation about the purpose of this instance."
+                        "type": "string"
                     },
                     "city": {
                         "title": "The city schema",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string",
-                        "description": "An explanation about the purpose of this instance."
+                        "type": "string"
                     },
                     "state": {
                         "title": "The state schema",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string",
-                        "description": "An explanation about the purpose of this instance."
+                        "type": "string"
                     },
                     "postcode": {
                         "title": "The postcode schema",
                         "pattern": "^[a-zA-Z0-9\\ ]+$",
-                        "type": "string",
-                        "description": "An explanation about the purpose of this instance."
+                        "type": "string"
                     },
                     "country": {
                         "title": "The country schema",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string",
-                        "description": "An explanation about the purpose of this instance."
+                        "type": "string"
                     }
                 }
             },
