@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
         "title": "prod-api",
-        "version": "2022-07-21T09:26:38Z"
+        "version": "2022-07-25T09:26:38Z"
     },
     "servers": [
         {
@@ -2199,519 +2199,202 @@
                 "title": "Empty Schema",
                 "type": "object"
             },
-            "Weights": {
-                "title": "The root schema",
+            "Address": {
+                "title": "The Address schema",
+                "description": "The provided structured address for a given party",
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "title": "The street schema",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "An explanation about the purpose of this instance."
+                    },
+                    "city": {
+                        "title": "The city schema",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "An explanation about the purpose of this instance."
+                    },
+                    "state": {
+                        "title": "The state schema",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "An explanation about the purpose of this instance."
+                    },
+                    "postcode": {
+                        "title": "The postcode schema",
+                        "pattern": "^[a-zA-Z0-9\\ ]+$",
+                        "type": "string",
+                        "description": "An explanation about the purpose of this instance."
+                    },
+                    "country": {
+                        "title": "The country schema",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "An explanation about the purpose of this instance."
+                    }
+                }
+            },
+            "Carrier": {
+                "title": "The Carrier schema",
+                "description": "The Ocean Carrier for use when containerised freight is moving by sea",
+                "minProperties": 1,
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded Identifier for Ocean Carriers",
+                        "type": "string",
+                        "description": "Ocean Carriers use an identifying code known as SCAC",
+                        "enum": [
+                            "ACLU",
+                            "ANRM",
+                            "AKMR",
+                            "ANNU",
+                            "APLU",
+                            "ARKU",
+                            "AROF",
+                            "NSAU",
+                            "BCLU",
+                            "CEGL",
+                            "CNIU",
+                            "CPJQ",
+                            "CMDU",
+                            "11DX",
+                            "COSU",
+                            "CMCU",
+                            "CHIW",
+                            "NSLU",
+                            "CHNJ",
+                            "DAAE",
+                            "DOLQ",
+                            "EQLI",
+                            "EIMU",
+                            "ESPU",
+                            "EUKO",
+                            "EGLV",
+                            "FESO",
+                            "GFAL",
+                            "ACSU",
+                            "GRIU",
+                            "GSLU",
+                            "UBCU",
+                            "GESC",
+                            "SUDU",
+                            "HLCU",
+                            "HDMU",
+                            "HUAU",
+                            "HRZU",
+                            "HYDU",
+                            "IILU",
+                            "IDMC",
+                            "INOC",
+                            "KKLU",
+                            "KOSL",
+                            "KMTU",
+                            "CLIB",
+                            "LGLT",
+                            "LMCU",
+                            "MAEU",
+                            "MFTU",
+                            "MRUB",
+                            "MATS",
+                            "MCCQ",
+                            "MISC",
+                            "MSCU",
+                            "NIDU",
+                            "NOSU",
+                            "NODA",
+                            "ONEY",
+                            "OOLU",
+                            "PSHI",
+                            "PCIU",
+                            "PMOL",
+                            "PLLU",
+                            "RCKI",
+                            "SAFM",
+                            "SLAQ",
+                            "SKII",
+                            "SCIU",
+                            "SMLU",
+                            "SEFN",
+                            "SEJJ",
+                            "SCYE",
+                            "SKLU",
+                            "CHVW",
+                            "THZS",
+                            "TOHO",
+                            "TOTE",
+                            "TRKU",
+                            "UALC",
+                            "USLU",
+                            "WECU",
+                            "WWSU",
+                            "22AA",
+                            "WDLS",
+                            "WLWH",
+                            "YMLU",
+                            "ZIMU"
+                        ]
+                    },
+                    "name": {
+                        "title": "The Name of the Carrier",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "The Name of the carrier in freetext"
+                    }
+                }
+            },
+            "Consignee": {
+                "title": "The Consignee schema",
+                "minProperties": 1,
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded identifier for the Consignee",
+                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "type": "string",
+                        "description": "A coded value for the Consignee, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa."
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "name": {
+                        "title": "Consignee Name",
+                        "type": "string",
+                        "description": "Free Text Name of the Consignee"
+                    }
+                },
+                "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination"
+            },
+            "LoadingSite": {
+                "title": "The loadingSite schema",
+                "minProperties": 1,
                 "required": [
-                    "dates",
-                    "haulier",
-                    "references",
-                    "shipper",
-                    "tradeItem",
-                    "transportEquipment"
+                    "organizationId"
                 ],
                 "type": "object",
                 "properties": {
-                    "shipper": {
-                        "title": "The shipper schema",
-                        "minProperties": 1,
-                        "required": [
-                            "organizationId"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organizationId schema",
-                                "pattern": "^[a-zA-Z0-9]{9,15}$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "address": {
-                                "title": "The address schema",
-                                "type": "object",
-                                "properties": {
-                                    "country": {
-                                        "title": "The country schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "city": {
-                                        "title": "The city schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "street": {
-                                        "title": "The street schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "postcode": {
-                                        "title": "The postcode schema",
-                                        "pattern": "^[a-zA-Z0-9\\ ]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "state": {
-                                        "title": "The state schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
-                            },
-                            "name": {
-                                "title": "The name schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                    "organizationId": {
+                        "title": "Loading Site Code",
+                        "pattern": "^[A-Z]{9}$",
+                        "type": "string",
+                        "description": "A registered BIC Facility Code to identify the facility the material is being loaded at"
                     },
-                    "carrier": {
-                        "title": "The carrier schema",
-                        "minProperties": 1,
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organizationId schema",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "enum": [
-                                    "ACLU",
-                                    "ANRM",
-                                    "AKMR",
-                                    "ANNU",
-                                    "APLU",
-                                    "ARKU",
-                                    "AROF",
-                                    "NSAU",
-                                    "BCLU",
-                                    "CEGL",
-                                    "CNIU",
-                                    "CPJQ",
-                                    "CMDU",
-                                    "11DX",
-                                    "COSU",
-                                    "CMCU",
-                                    "CHIW",
-                                    "NSLU",
-                                    "CHNJ",
-                                    "DAAE",
-                                    "DOLQ",
-                                    "EQLI",
-                                    "EIMU",
-                                    "ESPU",
-                                    "EUKO",
-                                    "EGLV",
-                                    "FESO",
-                                    "GFAL",
-                                    "ACSU",
-                                    "GRIU",
-                                    "GSLU",
-                                    "UBCU",
-                                    "GESC",
-                                    "SUDU",
-                                    "HLCU",
-                                    "HDMU",
-                                    "HUAU",
-                                    "HRZU",
-                                    "HYDU",
-                                    "IILU",
-                                    "IDMC",
-                                    "INOC",
-                                    "KKLU",
-                                    "KOSL",
-                                    "KMTU",
-                                    "CLIB",
-                                    "LGLT",
-                                    "LMCU",
-                                    "MAEU",
-                                    "MFTU",
-                                    "MRUB",
-                                    "MATS",
-                                    "MCCQ",
-                                    "MISC",
-                                    "MSCU",
-                                    "NIDU",
-                                    "NOSU",
-                                    "NODA",
-                                    "ONEY",
-                                    "OOLU",
-                                    "PSHI",
-                                    "PCIU",
-                                    "PMOL",
-                                    "PLLU",
-                                    "RCKI",
-                                    "SAFM",
-                                    "SLAQ",
-                                    "SKII",
-                                    "SCIU",
-                                    "SMLU",
-                                    "SEFN",
-                                    "SEJJ",
-                                    "SCYE",
-                                    "SKLU",
-                                    "CHVW",
-                                    "THZS",
-                                    "TOHO",
-                                    "TOTE",
-                                    "TRKU",
-                                    "UALC",
-                                    "USLU",
-                                    "WECU",
-                                    "WWSU",
-                                    "22AA",
-                                    "WDLS",
-                                    "WLWH",
-                                    "YMLU",
-                                    "ZIMU"
-                                ]
-                            },
-                            "name": {
-                                "title": "The name schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": ""
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
                     },
-                    "references": {
-                        "title": "The references schema",
-                        "required": [
-                            "pickupReferenceNumber"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "despatchNoteNumber": {
-                                "title": "The despatchNoteNumber schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "shippersIdentifyingNumberForShipment": {
-                                "title": "The shippersIdentifyingNumberForShipment schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "vehicleIdentificationNumber": {
-                                "title": "The vehicleIdentificationNumber schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "The registration number of the vehicle"
-                            },
-                            "pickupReferenceNumber": {
-                                "title": "The pickupReferenceNumber schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": ""
-                            },
-                            "driverName": {
-                                "title": "The driverName schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "Name of the driver.",
-                                "default": ""
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
-                    },
-                    "transportEquipment": {
-                        "title": "The transportEquipment schema",
-                        "required": [
-                            "equipmentNumber",
-                            "seal",
-                            "verifiedWeight"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "verifiedWeight": {
-                                "title": "The verifiedWeight schema",
-                                "required": [
-                                    "unit",
-                                    "value",
-                                    "weighingDate",
-                                    "weightVerificationMethod"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "weightVerificationMethod": {
-                                        "title": "The weightVerificationMethod schema",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "enum": [
-                                            "1",
-                                            "2"
-                                        ]
-                                    },
-                                    "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "weighingDate": {
-                                        "title": "The weighingDate schema",
-                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "value": {
-                                        "title": "The value schema",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
-                            },
-                            "equipmentTareWeight": {
-                                "title": "The equipmentTareWeight schema",
-                                "required": [
-                                    "unit",
-                                    "value"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "value": {
-                                        "title": "The value schema",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
-                            },
-                            "seal": {
-                                "title": "The seal schema",
-                                "type": "array",
-                                "description": "An explanation about the purpose of this instance.",
-                                "items": {
-                                    "anyOf": [
-                                        {
-                                            "title": "The first anyOf schema",
-                                            "required": [
-                                                "identifier"
-                                            ],
-                                            "type": "object",
-                                            "properties": {
-                                                "identifier": {
-                                                    "title": "The identifier schema",
-                                                    "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                                    "type": "string",
-                                                    "description": "An explanation about the purpose of this instance."
-                                                }
-                                            },
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": {}
-                                        }
-                                    ]
-                                }
-                            },
-                            "equipmentNumber": {
-                                "title": "The equipmentNumber schema",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "equipmentType": {
-                                "title": "The equipmentType schema",
-                                "pattern": "^[a-zA-Z0-9]{4}$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
-                    },
-                    "haulier": {
-                        "title": "The haulier schema",
-                        "required": [
-                            "name",
-                            "organizationId"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organizationId schema",
-                                "pattern": "^[a-zA-Z0-9]{7,13}$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "name": {
-                                "title": "The name schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
-                    },
-                    "dates": {
-                        "title": "The dates schema",
-                        "required": [
-                            "actualArrivalTransportEvent",
-                            "actualDepartureTransportEvent"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "actualDepartureTransportEvent": {
-                                "title": "The actualDepartureTransportEvent schema",
-                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "actualArrivalTransportEvent": {
-                                "title": "The actualArrivalTransportEvent schema",
-                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
-                    },
-                    "tradeItem": {
-                        "title": "The tradeItem schema",
-                        "required": [
-                            "grossWeight"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "grossWeight": {
-                                "title": "The grossWeight schema",
-                                "required": [
-                                    "unit",
-                                    "value"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "value": {
-                                        "title": "The value schema",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
-                            },
-                            "quantity": {
-                                "title": "The quantity schema",
-                                "minimum": 1,
-                                "type": "number",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "harmonizeSystemCode": {
-                                "title": "The harmonizeSystemCode schema",
-                                "pattern": "^[0-9]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": ""
-                            },
-                            "description": {
-                                "title": "The description schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
-                    },
-                    "loadingSite": {
-                        "title": "The loadingSite schema",
-                        "minProperties": 1,
-                        "required": [
-                            "organizationId"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organizationId schema",
-                                "pattern": "^[A-Z]{9}$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "address": {
-                                "title": "The address schema",
-                                "type": "object",
-                                "properties": {
-                                    "country": {
-                                        "title": "The country schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "city": {
-                                        "title": "The city schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "street": {
-                                        "title": "The street schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "postcode": {
-                                        "title": "The postcode schema",
-                                        "pattern": "^[a-zA-Z0-9\\ ]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "state": {
-                                        "title": "The state schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
-                            },
-                            "name": {
-                                "title": "The name schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                    "name": {
+                        "title": "Loading Site Name",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "Loading Site Name in Freetext"
                     }
                 },
-                "description": "The root schema comprises the entire JSON document.",
-                "default": {}
+                "description": "The Loading Site of the Material which will provide weights to Traqa."
             },
             "Loadplan": {
-                "title": "The Root Schema",
+                "title": "The Load Plan Schema",
                 "required": [
                     "consignee",
                     "dates",
@@ -2724,248 +2407,16 @@
                 "type": "object",
                 "properties": {
                     "shipper": {
-                        "title": "The Shipper Schema",
-                        "minProperties": 1,
-                        "required": [
-                            "organizationId"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organization Unique Identifier",
-                                "type": "string",
-                                "description": "Shipper BIC Code"
-                            },
-                            "address": {
-                                "title": "Shipper Address Object",
-                                "type": "object",
-                                "properties": {
-                                    "country": {
-                                        "title": "Shipper Country Name Abbreviated",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "city": {
-                                        "title": "Shipper City Name",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "formatted": {
-                                        "title": "Shipper full formatted address",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "street": {
-                                        "title": "Shipper Street Name",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "postcode": {
-                                        "title": "Shipper Postcode",
-                                        "pattern": "^[a-zA-Z0-9\\ ]+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "state": {
-                                        "title": "Shipper State Name",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    }
-                                },
-                                "description": "",
-                                "default": {}
-                            },
-                            "name": {
-                                "title": "Shipper Name",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": ""
-                            }
-                        },
-                        "description": "Details of the Shipper",
-                        "default": {}
+                        "$ref": "#/components/schemas/Shipper"
                     },
                     "carrier": {
-                        "title": "The Carrier Schema",
-                        "minProperties": 1,
-                        "required": [
-                            "organizationId"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organizationId schema",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "enum": [
-                                    "ACLU",
-                                    "ANRM",
-                                    "AKMR",
-                                    "ANNU",
-                                    "APLU",
-                                    "ARKU",
-                                    "AROF",
-                                    "NSAU",
-                                    "BCLU",
-                                    "CEGL",
-                                    "CNIU",
-                                    "CPJQ",
-                                    "CMDU",
-                                    "11DX",
-                                    "COSU",
-                                    "CMCU",
-                                    "CHIW",
-                                    "NSLU",
-                                    "CHNJ",
-                                    "DAAE",
-                                    "DOLQ",
-                                    "EQLI",
-                                    "EIMU",
-                                    "ESPU",
-                                    "EUKO",
-                                    "EGLV",
-                                    "FESO",
-                                    "GFAL",
-                                    "ACSU",
-                                    "GRIU",
-                                    "GSLU",
-                                    "UBCU",
-                                    "GESC",
-                                    "SUDU",
-                                    "HLCU",
-                                    "HDMU",
-                                    "HUAU",
-                                    "HRZU",
-                                    "HYDU",
-                                    "IILU",
-                                    "IDMC",
-                                    "INOC",
-                                    "KKLU",
-                                    "KOSL",
-                                    "KMTU",
-                                    "CLIB",
-                                    "LGLT",
-                                    "LMCU",
-                                    "MAEU",
-                                    "MFTU",
-                                    "MRUB",
-                                    "MATS",
-                                    "MCCQ",
-                                    "MISC",
-                                    "MSCU",
-                                    "NIDU",
-                                    "NOSU",
-                                    "NODA",
-                                    "ONEY",
-                                    "OOLU",
-                                    "PSHI",
-                                    "PCIU",
-                                    "PMOL",
-                                    "PLLU",
-                                    "RCKI",
-                                    "SAFM",
-                                    "SLAQ",
-                                    "SKII",
-                                    "SCIU",
-                                    "SMLU",
-                                    "SEFN",
-                                    "SEJJ",
-                                    "SCYE",
-                                    "SKLU",
-                                    "CHVW",
-                                    "THZS",
-                                    "TOHO",
-                                    "TOTE",
-                                    "TRKU",
-                                    "UALC",
-                                    "USLU",
-                                    "WECU",
-                                    "WWSU",
-                                    "22AA",
-                                    "WDLS",
-                                    "WLWH",
-                                    "YMLU",
-                                    "ZIMU"
-                                ]
-                            },
-                            "name": {
-                                "title": "The name schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                        "$ref": "#/components/schemas/Carrier"
                     },
                     "consignee": {
-                        "title": "The Consignee schema",
-                        "minProperties": 1,
-                        "type": "object",
-                        "properties": {
-                            "organizationId": {
-                                "title": "The organization Unique Identifier",
-                                "pattern": "^[a-zA-Z0-9]{9,15}$",
-                                "type": "string",
-                                "description": "Consignee BIC Code"
-                            },
-                            "address": {
-                                "title": "Consignee Address Object",
-                                "type": "object",
-                                "properties": {
-                                    "country": {
-                                        "title": "Consignee Country",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "city": {
-                                        "title": "Consignee City",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "formatted": {
-                                        "title": "Consignee full formatted address",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "street": {
-                                        "title": "Consignee Street",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "postcode": {
-                                        "title": "Consignee Postcode",
-                                        "pattern": "^[a-zA-Z0-9\\ ]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "state": {
-                                        "title": "Consignee State",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "",
-                                "default": {}
-                            },
-                            "name": {
-                                "title": "Consignee Name",
-                                "type": "string",
-                                "description": ""
-                            }
-                        },
-                        "description": "Consignee Details",
-                        "default": {}
+                        "$ref": "#/components/schemas/Consignee"
+                    },
+                    "recoveryFacility": {
+                        "$ref": "#/components/schemas/RecoveryFacility"
                     },
                     "references": {
                         "title": "The references schema",
@@ -2980,23 +2431,21 @@
                                 "title": "The carriersReferenceNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "The Ocean Carrier Booking Number used for tracking containers"
                             },
                             "shippersIdentifyingNumberForShipment": {
                                 "title": "The shippersIdentifyingNumberForShipment schema",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "A purchase order number for the shipment, could be from shipper or consignee"
                             },
                             "pickupReferenceNumber": {
                                 "title": "The pickupReferenceNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "The loading reference the driver will provide to site on arrival, must be unique per load."
                             }
-                        },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                        }
                     },
                     "transportEquipment": {
                         "title": "The transportEquipment schema",
@@ -3015,11 +2464,10 @@
                                 "title": "The UNLocode schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "A coded reference to the location provided by the UN"
                             }
                         },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                        "description": "A coded reference to the location for the port of discharge, used in transport provided by the UN"
                     },
                     "dates": {
                         "title": "The Datetimes related to the Loadplan",
@@ -3032,7 +2480,7 @@
                                 "title": "The scheduledLoadingTransportEvent ",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "The planned date time of the loading at site."
                             }
                         },
                         "description": "Must conform to yyyy-mm-ddThh:mm:ss",
@@ -3086,82 +2534,356 @@
                                 "title": "The UNLocode schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
+                                "description": "A coded reference to the location provided by the UN"
+                            }
+                        },
+                        "description": "A coded reference to the location for the port of loading, used in transport provided by the UN"
+                    },
+                    "loadingSite": {
+                        "$ref": "#components/schemas/LoadingSite"
+                    }
+                },
+                "description": "The Load Plan schema provided by the shipper to initiate the Traqa process"
+            },
+            "PERN": {
+                "title": "Packaging Export Recovery Note (PERN)",
+                "description": "Information about a PERN thats required to appear on the Annex VII",
+                "type": "object",
+                "properties": {
+                    "pernIssued": {
+                        "title": "PERN Issued",
+                        "description": "Indicates if a PERN is issued for this shipment",
+                        "type": "string",
+                        "enum": [
+                            "YES",
+                            "NO"
+                        ]
+                    },
+                    "percentage": {
+                        "title": "Percentage of MT",
+                        "description": "Percentage of MT to be issued for PERN"
+                    }
+                }
+            },
+            "RecoveryFacility": {
+                "title": "The Recovery Facility schema",
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded identifier for the Recovery Facility",
+                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "type": "string",
+                        "description": "A coded value for the Recovery Facility, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa."
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "name": {
+                        "title": "Recovery Facility Name",
+                        "type": "string",
+                        "description": "Free Text Name of the Recovery Facility"
+                    }
+                },
+                "description": "The Recovery Facility should be provided when different to Box 22 (Consignee) if not provided it will default to Consignee."
+            },
+            "Shipper": {
+                "title": "The Shipper schema",
+                "description": "The Shipper is the party who is exporting, and is the commercial contact for the loading site.",
+                "minProperties": 1,
+                "required": [
+                    "organizationId"
+                ],
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded Identifer for the Shipper",
+                        "description": "The shipper Organisation Id is usually an EORI number assigned by a government, it can in place of this be a Traqa specific reference.",
+                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "name": {
+                        "title": "Shipper Name",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "The Name of the Shipper"
+                    }
+                }
+            },
+            "Weights": {
+                "title": "The Complete Weight Schema",
+                "required": [
+                    "dates",
+                    "haulier",
+                    "references",
+                    "shipper",
+                    "tradeItem",
+                    "transportEquipment"
+                ],
+                "type": "object",
+                "properties": {
+                    "shipper": {
+                        "$ref": "#/components/schemas/Shipper"
+                    },
+                    "carrier": {
+                        "$ref": "#/components/schemas/Carrier"
+                    },
+                    "references": {
+                        "title": "The references schema",
+                        "required": [
+                            "pickupReferenceNumber"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "despatchNoteNumber": {
+                                "title": "The despatchNoteNumber schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                "type": "string",
+                                "description": "The weighbridge ticket number from the loading site."
+                            },
+                            "shippersIdentifyingNumberForShipment": {
+                                "title": "The shippersIdentifyingNumberForShipment schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                "type": "string",
                                 "description": "An explanation about the purpose of this instance."
+                            },
+                            "vehicleIdentificationNumber": {
+                                "title": "The vehicleIdentificationNumber schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                "type": "string",
+                                "description": "The registration number of the vehicle"
+                            },
+                            "pickupReferenceNumber": {
+                                "title": "The pickupReferenceNumber schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                "type": "string",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "driverName": {
+                                "title": "The driverName schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                "type": "string",
+                                "description": "Name of the driver.",
+                                "default": ""
                             }
                         },
                         "description": "An explanation about the purpose of this instance.",
                         "default": {}
                     },
-                    "loadingSite": {
-                        "title": "The Loading Site Schema",
-                        "minProperties": 1,
+                    "transportEquipment": {
+                        "title": "The transportEquipment schema",
                         "required": [
+                            "equipmentNumber",
+                            "seal",
+                            "verifiedWeight"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "verifiedWeight": {
+                                "title": "The verifiedWeight schema",
+                                "required": [
+                                    "unit",
+                                    "value",
+                                    "weighingDate",
+                                    "weightVerificationMethod"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "weightVerificationMethod": {
+                                        "title": "The weightVerificationMethod schema",
+                                        "type": "string",
+                                        "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
+                                        "enum": [
+                                            "1",
+                                            "2"
+                                        ]
+                                    },
+                                    "unit": {
+                                        "title": "The unit schema",
+                                        "pattern": "^[a-zA-Z]+$",
+                                        "type": "string",
+                                        "description": "Units of measure"
+                                    },
+                                    "weighingDate": {
+                                        "title": "The weighingDate schema",
+                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                        "type": "string",
+                                        "description": "Date of the weighing of container"
+                                    },
+                                    "value": {
+                                        "title": "The value schema",
+                                        "minimum": 1,
+                                        "type": "number",
+                                        "description": "The weight of the laden container including the tare weight of a container if appropriate"
+                                    }
+                                },
+                                "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
+                            },
+                            "equipmentTareWeight": {
+                                "title": "The equipmentTareWeight schema",
+                                "required": [
+                                    "unit",
+                                    "value"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "unit": {
+                                        "title": "The unit schema",
+                                        "pattern": "^[a-zA-Z]+$",
+                                        "type": "string",
+                                        "description": "Units of Measure"
+                                    },
+                                    "value": {
+                                        "title": "The value schema",
+                                        "minimum": 1,
+                                        "type": "number",
+                                        "description": "The Tare weight of a container (empty weight)"
+                                    }
+                                },
+                                "description": "The tare weight is required for containerised movements to calculate the VGM."
+                            },
+                            "seal": {
+                                "title": "The seal schema",
+                                "type": "array",
+                                "description": "The seal numbers used to seal the container or trailer",
+                                "items": {
+                                    "anyOf": [
+                                        {
+                                            "title": "Seal Number",
+                                            "required": [
+                                                "identifier"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "identifier": {
+                                                    "title": "The identifier schema",
+                                                    "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                                    "type": "string",
+                                                    "description": "An explanation about the purpose of this instance."
+                                                }
+                                            },
+                                            "description": "The seal number used on the transport equipment"
+                                        }
+                                    ]
+                                }
+                            },
+                            "equipmentNumber": {
+                                "title": "The equipmentNumber schema",
+                                "type": "string",
+                                "description": "The Container Number OR the Trailer number that the goods have been loaded onto"
+                            },
+                            "equipmentType": {
+                                "title": "The equipmentType schema",
+                                "pattern": "^[a-zA-Z0-9]{4}$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "haulier": {
+                        "title": "The haulier schema",
+                        "required": [
+                            "name",
                             "organizationId"
                         ],
                         "type": "object",
                         "properties": {
                             "organizationId": {
-                                "title": "The organizationId schema",
-                                "pattern": "^[A-Z]{9}$",
+                                "title": "A coded Identifier for the haulier who arrives at site",
+                                "pattern": "^[a-zA-Z0-9]{7,13}$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "address": {
-                                "title": "The address schema",
-                                "type": "object",
-                                "properties": {
-                                    "country": {
-                                        "title": "The country schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "city": {
-                                        "title": "The city schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "formatted": {
-                                        "title": "loadingSite full formatted address",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": ""
-                                    },
-                                    "street": {
-                                        "title": "The street schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "postcode": {
-                                        "title": "The postcode schema",
-                                        "pattern": "^[a-zA-Z0-9\\ ]+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    },
-                                    "state": {
-                                        "title": "The state schema",
-                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                        "type": "string",
-                                        "description": "An explanation about the purpose of this instance."
-                                    }
-                                },
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {}
+                                "description": "The haulier identifier is the waste carrier license number, mandated by the EA."
                             },
                             "name": {
-                                "title": "The name schema",
+                                "title": "Name of Haulier",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "Freetext for Haulier Name"
                             }
                         },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                        "description": "The Haulier who arrives at site to trasport the goods."
+                    },
+                    "dates": {
+                        "title": "The dates schema",
+                        "required": [
+                            "actualArrivalTransportEvent",
+                            "actualDepartureTransportEvent"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "actualDepartureTransportEvent": {
+                                "title": "The actualDepartureTransportEvent schema",
+                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                "type": "string",
+                                "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh"
+                            },
+                            "actualArrivalTransportEvent": {
+                                "title": "The actualArrivalTransportEvent schema",
+                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                "type": "string",
+                                "description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh"
+                            }
+                        },
+                        "description": "Dates relevant to the movement of material."
+                    },
+                    "tradeItem": {
+                        "title": "The tradeItem schema",
+                        "required": [
+                            "grossWeight"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "grossWeight": {
+                                "title": "The grossWeight schema",
+                                "required": [
+                                    "unit",
+                                    "value"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "unit": {
+                                        "title": "The unit schema",
+                                        "pattern": "^[a-zA-Z]+$",
+                                        "type": "string",
+                                        "description": "Unit of Measure"
+                                    },
+                                    "value": {
+                                        "title": "The value schema",
+                                        "minimum": 1,
+                                        "type": "number",
+                                        "description": "The weight of the material without any equipment (Product Weight)"
+                                    }
+                                },
+                                "description": "Weight of the Product loaded for movement"
+                            },
+                            "quantity": {
+                                "title": "The quantity schema",
+                                "minimum": 1,
+                                "type": "number",
+                                "description": "Number of Bales or other"
+                            },
+                            "harmonizeSystemCode": {
+                                "title": "The harmonizeSystemCode schema",
+                                "pattern": "^[0-9]+$",
+                                "type": "string",
+                                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes",
+                                "default": ""
+                            },
+                            "description": {
+                                "title": "The description schema",
+                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                                "type": "string",
+                                "description": "The Name of material that is loaded."
+                            }
+                        }
+                    },
+                    "loadingSite": {
+                        "$ref": "#components/schemas/LoadingSite"
                     }
                 },
-                "description": "The root schema comprises the entire JSON document.",
+                "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads.",
                 "default": {}
             },
             "ErrorModel": {
