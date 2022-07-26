@@ -1694,26 +1694,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "key",
-									"value": "Authorization",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "<API Key>",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1723,11 +1703,16 @@
 							{
 								"key": "Accept",
 								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{}",
+							"raw": "{\n    \"shipper\": {\n        \"name\": \"Acme Exporter Limited\",\n        \"address\": {\n            \"street\": \"1 Old Hall Street\",\n            \"city\": \"Liverpool\",\n            \"state\": \"Merseyside\",\n            \"country\": \"GB\",\n            \"postcode\": \"L3 9HG\"\n        },\n        \"organizationId\": \"TQGBACMEL\"\n    },\n    \"consignee\": {\n        \"name\": \"Acme Importer\",\n        \"address\": {\n            \"street\": \"5329 Industrial Zone\",\n            \"city\": \"Bangkok\",\n            \"state\": \"Bangkok\",\n            \"country\": \"TH\",\n            \"postcode\": \"345678\"\n        },\n        \"organizationId\": \"THBANACIM\"\n    },\n    \"carrier\": {\n        \"name\": \"Maersk Line\",\n        \"organizationId\": \"MAEU\"\n    },\n    \"loadingSite\": {\n        \"name\": \"Recycling Facility Limited\",\n        \"address\": {\n            \"street\": \"1 Old Hall Street\",\n            \"city\": \"Liverpool\",\n            \"state\": \"Merseyside\",\n            \"country\": \"GB\",\n            \"postcode\": \"L3 9HG\"\n        },\n        \"organizationId\": \"GBLIVRFAC\"\n    },\n    \"references\": {\n        \"shippersIdentifyingNumberForShipment\": \"UK1807325EOCC-002\",\n        \"pickupReferenceNumber\": \"{{LoadingReference}}\",\n        \"carriersReferenceNumber\": \"MAEU12345678\"\n    },\n    \"dates\": {\n        \"scheduledLoadingTransportEvent\": \"2020-03-27T09:05:49\"\n    },\n    \"portOfLoading\": {\n        \"UNLocode\": \"GBLGP\"\n    },\n    \"portOfDischarge\": {\n        \"UNLocode\": \"CNXMN\"\n    },\n    \"tradeItem\": {\n        \"harmonizeSystemCode\": \"47071000\",\n        \"description\": \"OCC 90/10\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2071,26 +2056,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "key",
-									"value": "Authorization",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "<API Key>",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -2100,11 +2065,16 @@
 							{
 								"key": "Accept",
 								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{}",
+							"raw": "{\n    \"shipper\": {\n        \"name\": \"Acme Exporter Limited\",\n        \"address\": {\n            \"street\": \"1 Old Hall Street\",\n            \"city\": \"Liverpool\",\n            \"state\": \"Merseyside\",\n            \"country\": \"GB\",\n            \"postcode\": \"L3 9HG\"\n        },\n        \"organizationId\": \"TQGBACMEL\"\n    },\n    \"carrier\": {\n        \"name\": \"Mediterranean Shipping Company S.A.\",\n        \"organizationId\": \"MSCU\"\n    },\n    \"haulier\": {\n        \"name\": \"Haulier Co Ltd\",\n        \"organizationId\": \"CBDU209018\"\n    },\n    \"loadingSite\": {\n        \"name\": \"Recycling Facility Limited\",\n        \"address\": {\n            \"street\": \"1 Old Hall Street\",\n            \"city\": \"Liverpool\",\n            \"state\": \"Merseyside\",\n            \"country\": \"GB\",\n            \"postcode\": \"L3 9HG\"\n        },\n        \"organizationId\": \"GBLIVRFACL\"\n    },\n    \"references\": {\n        \"shippersIdentifyingNumberForShipment\": \"UK1807325EOCC-002\",\n        \"pickupReferenceNumber\": \"{{LoadingReference}}\",\n        \"despatchNoteNumber\": \"211449\",\n        \"vehicleIdentificationNumber\": \"NV18NLD\",\n        \"driverName\": \"STEVEN\"\n    },\n    \"dates\": {\n        \"actualArrivalTransportEvent\": \"2020-10-27T09:05:49\",\n        \"actualDepartureTransportEvent\": \"2020-10-27T09:47:38\"\n    },\n    \"transportEquipment\": {\n        \"equipmentNumber\": \"{{ContainerNumber}}\",\n        \"equipmentType\": \"42G0\",\n        \"seal\": [\n            {\n                \"identifier\": \"0859498\"\n            }\n        ],\n        \"verifiedWeight\": {\n            \"value\": 28500,\n            \"unit\": \"KGM\",\n            \"weightVerificationMethod\": \"1\",\n            \"weighingDate\": \"2020-10-27T09:47:38\"\n        },\n        \"equipmentTareWeight\": {\n            \"value\": 3000,\n            \"unit\": \"KGM\"\n        }\n    },\n    \"tradeItem\": {\n        \"quantity\": 25,\n        \"harmonizeSystemCode\": \"47071000\",\n        \"description\": \"OCC 90/10\",\n        \"grossWeight\": {\n            \"value\": 25500,\n            \"unit\": \"KGM\"\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
