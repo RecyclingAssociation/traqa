@@ -2529,6 +2529,9 @@
                     "consignee": {
                         "$ref": "#/components/schemas/Consignee"
                     },
+                    "customs": {
+                        "$ref": "#/components/schemas/Customs"
+                    },
                     "recoveryFacility": {
                         "$ref": "#/components/schemas/RecoveryFacility"
                     },
