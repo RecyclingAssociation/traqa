@@ -2387,48 +2387,7 @@
             },
             "Customs": {
                 "type": "object",
-                "required": [
-                    "borderTransportMeans",
-                    "container",
-                    "customsOfficeExit",
-                    "exportClearance",
-                    "goodsLocation",
-                    "invoiceAmount",
-                    "invoiceCurrency",
-                    "procedureCode"
-                ],
                 "properties": {
-                    "borderTransportMeans": {
-                        "description": "Enter the mode of transport corresponding to the active means of transport which it is expected will be used on exit from the customs territory of the Union. DE 7/4 CDS",
-                        "type": "object",
-                        "properties": {
-                            "modeCode": {
-                                "description": "Mode of Transport at the Border as described in DE 7/4 you should indicate the active mode of transport expected when leaving the customs territory.  \n * 1 = Sea/Maritime \n * 6 = RoRo ",
-                                "type": "integer",
-                                "enum": [
-                                    1,
-                                    6
-                                ]
-                            },
-                            "identity": {
-                                "description": "If moving by modeCode = 1 (sea) enter the name of the vessel OR its IMO to identify the vessel the containers are being loaded onto.  If moving by Road (modeCode = 6) the vehicle registration is automatically populated so can be omitted"
-                            }
-                        }
-                    },
-                    "container": {
-                        "type": "integer",
-                        "description": "Enter the appropriate Union code to indicate if the goods will be in a shipping container when crossing the external border of the Union. DE 7/2 for CDS.  \n * 0 for goods not in containers \n * 1 for goods in container",
-                        "enum": [
-                            0,
-                            1
-                        ]
-                    },
-                    "customsOfficeExit": {
-                        "type": "string",
-                        "maxLength": 8,
-                        "description": "Using the relevant Union code, enter the customs office by which it is intended that the goods should leave the customs territory.  DE 5/4 CDS",
-                        "example": "GB000290"
-                    },
                     "exportClearance": {
                         "description": "Indicate if Traqa should submit the Export Customs Clearance Declaration on your behalf to Authorities, if not the commercial invoice will be created and no declaration made.",
                         "type": "string",
@@ -2437,45 +2396,107 @@
                             "NO"
                         ]
                     },
-                    "goodsLocation": {
-                        "description": "Using the relevant codes, enter the location where the goods are located at the time they are declared and available for examination purposes.  The Goods Location Code must be precise enough to allow Customs to carry out physical controls on the goods. DE 5/23 CDS, note use of CDS codes over CHIEF Codes as they are different.  https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-5-dates-times-periods-places-countries-and-regions#de-523-location-of-goods-box-30-location-of-goods",
-                        "type": "string",
-                        "maxLength": 42,
-                        "example": "GBAUIMMIMMIMM"
-                    },
-                    "invoiceAmount": {
-                        "description": "Value of the invoice in the currency declared in invoiceCurrency",
-                        "type": "number",
-                        "format": "decimal(12,2)",
-                        "example": 345.25
-                    },
-                    "invoiceCurrency": {
-                        "description": "Currency code as defined by ISO 4217",
-                        "type": "string",
-                        "example": "GBP"
-                    },
-                    "procedureCode": {
+                    "invoice": {
+                        "required": [
+                            "pricing",
+                            "amount",
+                            "currency"
+                        ],
+                        "type": "object",
+                        "description": "Details required for the Commercial Invoice and Customs Declaration",
+                        "properties": {
+                            "pricing": {
+                                "type": "string",
+                                "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is",
+                                "enum": [
+                                    "tonne",
+                                    "total"
+                                ]
+                            }, 
+                            "amount": {
+                                "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator, this should be in the currency provided.",
+                                "type": "number",
+                                "format": "decimal(12,2)",
+                                "example": 345.25
+                            },
+                            "currency": {
+                                "description": "Currency code as defined by ISO 4217",
+                                "type": "string",
+                                "example": "GBP"
+                            }
+                        }
+                    }, 
+                    "declaration": {
                         "type": "object",
                         "required": [
-                            "procedure",
-                            "additionalProcedure"
+                            "borderTransportMeans",
+                            "container",
+                            "customsOfficeExit",
+                            "goodsLocation",
+                            "procedureCode"
                         ],
                         "properties": {
-                            "procedure": {
-                                "type": "string",
-                                "maxLength": 4,
-                                "description": "Enter the appropriate (4-digit) Procedure Code from those detailed in Appendix 1: DE 1/10: Requested and Previous Procedure Codes. NOTE: Traqa only supports one procedure per load due to the nature of the process, this will apply to all items in the customs declaration.",
+                            "borderTransportMeans": {
+                                "description": "Enter the mode of transport corresponding to the active means of transport which it is expected will be used on exit from the customs territory of the Union. DE 7/4 CDS",
+                                "type": "object",
+                                "properties": {
+                                    "modeCode": {
+                                        "description": "Mode of Transport at the Border as described in DE 7/4 you should indicate the active mode of transport expected when leaving the customs territory.  \n * 1 = Sea/Maritime \n * 6 = RoRo ",
+                                        "type": "integer",
+                                        "enum": [
+                                            1,
+                                            6
+                                        ]
+                                    },
+                                    "identity": {
+                                        "description": "If moving by modeCode = 1 (sea) enter the name of the vessel OR its IMO to identify the vessel the containers are being loaded onto.  If moving by Road (modeCode = 6) the vehicle registration is automatically populated so can be omitted"
+                                    }
+                                }
+                            },
+                            "container": {
+                                "type": "integer",
+                                "description": "Enter the appropriate Union code to indicate if the goods will be in a shipping container when crossing the external border of the Union. DE 7/2 for CDS.  \n * 0 for goods not in containers \n * 1 for goods in container",
                                 "enum": [
-                                    "1000",
-                                    "1100",
-                                    "2300",
-                                    "3100"
+                                    0,
+                                    1
                                 ]
                             },
-                            "additionalProcedure": {
+                            "customsOfficeExit": {
                                 "type": "string",
-                                "minLength": 3,
-                                "maxLength": 3
+                                "maxLength": 8,
+                                "description": "Using the relevant Union code, enter the customs office by which it is intended that the goods should leave the customs territory.  DE 5/4 CDS",
+                                "example": "GB000290"
+                            },
+                            "goodsLocation": {
+                                "description": "Using the relevant codes, enter the location where the goods are located at the time they are declared and available for examination purposes.  The Goods Location Code must be precise enough to allow Customs to carry out physical controls on the goods. DE 5/23 CDS, note use of CDS codes over CHIEF Codes as they are different.  https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-5-dates-times-periods-places-countries-and-regions#de-523-location-of-goods-box-30-location-of-goods",
+                                "type": "string",
+                                "maxLength": 42,
+                                "example": "GBAUIMMIMMIMM"
+                            },
+                            "procedureCode": {
+                                "type": "object",
+                                "required": [
+                                    "procedure",
+                                    "additionalProcedure"
+                                ],
+                                "properties": {
+                                    "procedure": {
+                                        "type": "string",
+                                        "maxLength": 4,
+                                        "description": "Enter the appropriate (4-digit) Procedure Code from those detailed in Appendix 1: DE 1/10: Requested and Previous Procedure Codes. NOTE: Traqa only supports one procedure per load due to the nature of the process, this will apply to all items in the customs declaration.",
+                                        "enum": [
+                                            "1000",
+                                            "1100",
+                                            "2300",
+                                            "3100"
+                                        ]
+                                    },
+                                    "additionalProcedure": {
+                                        "type": "string",
+                                        "minLength": 3,
+                                        "maxLength": 3
+                                    }
+                                }
                             }
                         }
                     }
