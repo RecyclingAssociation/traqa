@@ -2655,6 +2655,9 @@
                     },
                     "loadingSite": {
                         "$ref": "#components/schemas/LoadingSite"
+                    },
+                    "pern": {
+                        "$ref": "#components/schemas/PERN"
                     }
                 },
                 "description": "The Load Plan schema provided by the shipper to initiate the Traqa process"
