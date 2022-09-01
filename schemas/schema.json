@@ -2504,13 +2504,6 @@
                         "description": "Must conform to yyyy-mm-ddThh:mm:ss",
                         "default": {}
                     },
-                    "customsDeclaration": {
-                        "type": "boolean",
-                        "description": "Value should be true if user wants Traqa undertake the customs process",
-                        "enum": [
-                            true
-                        ]
-                    },
                     "tradeItem": {
                         "title": "The tradeItem schema",
                         "required": [
@@ -2559,6 +2552,9 @@
                     },
                     "loadingSite": {
                         "$ref": "#components/schemas/LoadingSite"
+                    },
+                    "pern": {
+                        "$ref": "#components/schemas/PERN"
                     }
                 },
                 "description": "The Load Plan schema provided by the shipper to initiate the Traqa process"
