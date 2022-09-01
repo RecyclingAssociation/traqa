@@ -2351,16 +2351,39 @@
                         "type": "string",
                         "description": "A coded value for the Consignee, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa."
                     },
-                    "address": {
-                        "$ref": "#/components/schemas/Address"
-                    },
                     "name": {
                         "title": "Consignee Name",
                         "type": "string",
                         "description": "Free Text Name of the Consignee"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "contact": {
+                        "$ref": "#/components/schemas/Contact"
                     }
                 },
                 "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination"
+            },
+            "Contact": {
+                "type": "object",
+                "properties": {
+                    "personName": {
+                        "title": "Person Name",
+                        "description": "The name, expressed as text, of this trade contact person.",
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "title": "Telephone",
+                        "description": "Telephone communication information for this trade contact.",
+                        "type": "string"
+                    },
+                    "emailAddress": {
+                        "title": "Email Address",
+                        "description": "The email address for this trade contact.",
+                        "type": "string"
+                    }
+                }
             },
             "LoadingSite": {
                 "title": "The loadingSite schema",
@@ -2570,16 +2593,19 @@
                         "type": "string",
                         "description": "A coded value for the Recovery Facility, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa."
                     },
-                    "address": {
-                        "$ref": "#/components/schemas/Address"
-                    },
                     "name": {
                         "title": "Recovery Facility Name",
                         "type": "string",
                         "description": "Free Text Name of the Recovery Facility"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "contact": {
+                        "$ref": "#/components/schemas/Contact"
                     }
                 },
-                "description": "The Recovery Facility should be provided when different to Box 22 (Consignee) if not provided it will default to Consignee."
+                "description": "The Recovery Facility should be provided when different to Box 2 (Consignee) if not provided it will default to Consignee."
             },
             "Shipper": {
                 "title": "The Shipper schema",
