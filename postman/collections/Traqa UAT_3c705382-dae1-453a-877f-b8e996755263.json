@@ -6150,17 +6150,39 @@
 			"description": "Containerised movements allow the tracking of containers at various given milestones in a supply chain. These endpoints allow you to retrieve the tracking where the ocean carrier provides the data via API."
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0dcc6e64-07bb-428d-afb3-81737225773f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bb8d5a48-3148-4567-9548-68911d559991",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "2f618af4-94d9-45a9-81de-b3c32d0fc033",
+			"id": "d23c4b1e-af86-4ce8-816a-a1f18053a2ef",
 			"key": "basePath",
 			"value": "/v1",
 			"type": "any"
 		},
 		{
-			"id": "32b012db-e90d-4f43-aace-6b38bee8bdf2",
+			"id": "de5df3b7-2054-4145-b1f3-1d60d2e81e9b",
 			"key": "baseUrl",
-			"value": "https://api.traqa.io/{{basePath}}",
+			"value": "https://api.traqa.io/v1",
 			"type": "string"
 		}
 	]

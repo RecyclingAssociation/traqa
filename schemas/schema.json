@@ -2660,12 +2660,6 @@
                                 "type": "string",
                                 "description": "The weighbridge ticket number from the loading site."
                             },
-                            "shippersIdentifyingNumberForShipment": {
-                                "title": "The shippersIdentifyingNumberForShipment schema",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
-                            },
                             "vehicleIdentificationNumber": {
                                 "title": "The vehicleIdentificationNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
