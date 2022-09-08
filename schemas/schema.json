@@ -2393,7 +2393,7 @@
             },
             "HarmonizeSystemCode": {
                 "title": "Harmonize System Code",
-                "pattern": "^[0-9]{8}$",
+                "pattern": "^[0-9]{4,10}$",
                 "type": "string",
                 "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
             },
