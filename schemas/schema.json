@@ -1,7 +1,14 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "version": "2022-07-25T09:26:38Z"
+        "title": "Traqa API",
+        "description": "Traqa API to enable communication between Shippers and Load Sites for efficient exchange of data in the recycling supply chain",
+        "version": "2022-07-25T09:26:38Z",
+        "contact":{
+            "name": "Traqa Integrations",
+            "url": "https://www.traqa.io",
+            "email": "integration@traqa.io"
+        }
     },
     "servers": [
         {
@@ -27,16 +34,6 @@
                     "required": true
                 },
                 "responses": {
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "200 response",
                         "headers": {
@@ -64,8 +61,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "500 response",
+                    "403": {
+                        "description": "403 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -74,8 +71,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "403 response",
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "500 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -373,16 +380,6 @@
         "/loads": {
             "get": {
                 "responses": {
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "200 response",
                         "headers": {
@@ -410,8 +407,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "500 response",
+                    "403": {
+                        "description": "403 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -420,8 +417,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "403 response",
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "500 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -452,16 +459,6 @@
                     "required": true
                 },
                 "responses": {
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "200 response",
                         "headers": {
@@ -489,8 +486,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "500 response",
+                    "403": {
+                        "description": "403 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -499,8 +496,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "403 response",
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "500 response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2199,45 +2206,45 @@
                 "type": "object"
             },
             "Address": {
-                "title": "The Address schema",
+                "title": "Address",
                 "description": "The provided structured address for a given party",
                 "type": "object",
                 "properties": {
                     "street": {
-                        "title": "The street schema",
+                        "title": "Street Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string"
                     },
                     "city": {
-                        "title": "The city schema",
+                        "title": "City",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string"
                     },
                     "state": {
-                        "title": "The state schema",
+                        "title": "State",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string"
                     },
                     "postcode": {
-                        "title": "The postcode schema",
+                        "title": "Post Code",
                         "pattern": "^[a-zA-Z0-9\\ ]+$",
                         "type": "string"
                     },
                     "country": {
-                        "title": "The country schema",
+                        "title": "Country",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string"
                     }
                 }
             },
             "Carrier": {
-                "title": "The Carrier schema",
-                "description": "The Ocean Carrier for use when containerised freight is moving by sea",
+                "title": "Ocean Carrier",
+                "description": "The Ocean Carrier for use when containerised freight is moving by deep sea, this will show in Box 5b on the Annex VII",
                 "type": "object",
                 "required": ["organizationId"],
                 "properties": {
                     "organizationId": {
-                        "title": "A coded Identifier for Ocean Carriers",
+                        "title": "A coded Identifier known as SCAC for Ocean Carriers",
                         "type": "string",
                         "description": "Ocean Carriers use an identifying code known as SCAC",
                         "enum": [
@@ -2332,7 +2339,7 @@
                         ]
                     },
                     "name": {
-                        "title": "The Name of the Carrier",
+                        "title": "The Name of the Ocean Carrier",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
                         "description": "The Name of the carrier in freetext"
@@ -2340,7 +2347,7 @@
                 }
             },
             "Consignee": {
-                "title": "The Consignee schema",
+                "title": "Consignee",
                 "minProperties": 1,
                 "type": "object",
                 "properties": {
@@ -2362,7 +2369,7 @@
                         "$ref": "#/components/schemas/Contact"
                     }
                 },
-                "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination"
+                "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination, this will show in Box 2 of the Annex VII"
             },
             "Contact": {
                 "type": "object",
@@ -2384,8 +2391,14 @@
                     }
                 }
             },
+            "HarmonizeSystemCode": {
+                "title": "Harmonize System Code",
+                "pattern": "^[0-9]{8}$",
+                "type": "string",
+                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+            },
             "LoadingSite": {
-                "title": "The loadingSite schema",
+                "title": "Loading Site",
                 "required": [
                     "organizationId"
                 ],
@@ -2407,10 +2420,10 @@
                         "description": "Loading Site Name in Freetext"
                     }
                 },
-                "description": "The Loading Site of the Material which will provide weights to Traqa."
+                "description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
             },
             "Loadplan": {
-                "title": "The Load Plan Schema",
+                "title": "Load Plan",
                 "required": [
                     "consignee",
                     "dates",
@@ -2435,7 +2448,8 @@
                         "$ref": "#/components/schemas/RecoveryFacility"
                     },
                     "references": {
-                        "title": "The references schema",
+                        "title": "References",
+                        "description": "References for the movements in Traqa to identify the load and weighbridge ticket along with other useful references as needed and agreed between parties",
                         "minProperties": 1,
                         "required": [
                             "pickupReferenceNumber"
@@ -2443,44 +2457,41 @@
                         "type": "object",
                         "properties": {
                             "carriersReferenceNumber": {
-                                "title": "The carriersReferenceNumber schema",
+                                "title": "Carriers Reference Number",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "The Ocean Carrier Booking Number used for tracking containers"
+                                "description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements"
                             },
                             "shippersIdentifyingNumberForShipment": {
-                                "title": "The shippersIdentifyingNumberForShipment schema",
+                                "title": "Shippers Identifying Number For Shipment",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
                                 "type": "string",
                                 "description": "A purchase order number for the shipment, could be from shipper or consignee"
                             },
                             "pickupReferenceNumber": {
-                                "title": "The pickupReferenceNumber schema",
+                                "title": "Pickup Reference Number",
                                 "minLength": 3,
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "The loading reference the driver will provide to site on arrival, must be unique per load."
+                                "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa"
                             }
                         }
                     },
                     "portOfDischarge": {
-                        "title": "The portOfDischarge schema",
+                        "title": "Port Of Discharge",
                         "required": [
                             "UNLocode"
                         ],
                         "type": "object",
                         "properties": {
                             "UNLocode": {
-                                "title": "The UNLocode schema",
-                                "pattern": "^[A-Z0-9]{5}$",
-                                "type": "string",
-                                "description": "A coded reference to the location provided by the UN"
+                                "$ref": "#/components/schemas/UNLocode"
                             }
                         },
-                        "description": "A coded reference to the location for the port of discharge, used in transport provided by the UN"
+                        "description": "A coded reference to the location for the port of discharge, used in transport provided by the UN.  This determines the routing in the Annex VII for Box 11"
                     },
                     "dates": {
-                        "title": "The Datetimes related to the Loadplan",
+                        "title": "Dates",
                         "required": [
                             "scheduledLoadingTransportEvent"
                         ],
@@ -2490,13 +2501,13 @@
                                 "title": "The scheduledLoadingTransportEvent ",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "The planned date time of the loading at site."
+                                "description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss"
                             }
                         },
-                        "description": "Must conform to yyyy-mm-ddThh:mm:ss"
+                        "description": "Dates that are relevent to the load plan, namely the planned date time of loading"
                     },
                     "tradeItem": {
-                        "title": "The tradeItem schema",
+                        "title": "Trade Item",
                         "required": [
                             "description",
                             "harmonizeSystemCode"
@@ -2504,35 +2515,29 @@
                         "type": "object",
                         "properties": {
                             "harmonizeSystemCode": {
-                                "title": "The harmonizeSystemCode schema",
-                                "pattern": "^[0-9]+$",
-                                "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "$ref": "#/components/schemas/HarmonizeSystemCode"
                             },
                             "description": {
-                                "title": "The description schema",
+                                "title": "Description of Goods",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance."
+                                "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
                             }
                         },
-                        "description": "An explanation about the purpose of this instance."
+                        "description": "The detail for the type of material that is being loaded/exported"
                     },
                     "portOfLoading": {
-                        "title": "The portOfLoading schema",
+                        "title": "Port Of Loading",
                         "required": [
                             "UNLocode"
                         ],
                         "type": "object",
                         "properties": {
                             "UNLocode": {
-                                "title": "The UNLocode schema",
-                                "pattern": "^[A-Z0-9]{5}$",
-                                "type": "string",
-                                "description": "A coded reference to the location provided by the UN"
+                                "$ref": "#/components/schemas/UNLocode"
                             }
                         },
-                        "description": "A coded reference to the location for the port of loading, used in transport provided by the UN"
+                        "description": "A coded reference to the location for the port of loading, used in transport provided by the UN, populates Box 11 on the Annex VII for origin country."
                     },
                     "loadingSite": {
                         "$ref": "#components/schemas/LoadingSite"
@@ -2541,11 +2546,11 @@
                         "$ref": "#components/schemas/PERN"
                     }
                 },
-                "description": "The Load Plan schema provided by the shipper to initiate the Traqa process"
+                "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
             },
             "PERN": {
                 "title": "Packaging Export Recovery Note (PERN)",
-                "description": "Information about a PERN thats required to appear on the Annex VII",
+                "description": "Information about a PERN thats required to appear on the Annex VII in Box 15, if not claiming a PERN omit from the load plan",
                 "type": "object",
                 "required": ["percentage"],
                 "properties": {
@@ -2556,7 +2561,7 @@
                 }
             },
             "RecoveryFacility": {
-                "title": "The Recovery Facility schema",
+                "title": "Recovery Facility",
                 "type": "object",
                 "properties": {
                     "organizationId": {
@@ -2577,11 +2582,11 @@
                         "$ref": "#/components/schemas/Contact"
                     }
                 },
-                "description": "The Recovery Facility should be provided when different to Box 2 (Consignee) if not provided it will default to Consignee."
+                "description": "The Recovery Facility should ONLY be provided when different to Box 2 (Consignee) if not provided it will default to Consignee.  This will populate Box 7 on the Annex VII"
             },
             "Shipper": {
-                "title": "The Shipper schema",
-                "description": "The Shipper is the party who is exporting, and is the commercial contact for the loading site.",
+                "title": "Shipper",
+                "description": "The Shipper is the party who is exporting the material and submitting the load plan into Traqa, populates Box 1 on the Annex VII",
                 "required": [
                     "organizationId"
                 ],
@@ -2604,8 +2609,20 @@
                     }
                 }
             },
+            "UnitOfMeasure": {
+                "title": "Unit of Measure",
+                "pattern": "^[a-zA-Z]+$",
+                "type": "string",
+                "description": "Units of measure"
+            },
+            "UNLocode": {
+                "title": "The UNLocode schema",
+                "pattern": "^[A-Z0-9]{5}$",
+                "type": "string",
+                "description": "A coded reference to the location provided by the UN"
+            },
             "Weights": {
-                "title": "The Complete Weight Schema",
+                "title": "Weights",
                 "required": [
                     "dates",
                     "haulier",
@@ -2620,7 +2637,7 @@
                         "$ref": "#/components/schemas/Shipper"
                     },
                     "references": {
-                        "title": "The references schema",
+                        "title": "References",
                         "required": [
                             "pickupReferenceNumber"
                         ],
@@ -2636,37 +2653,34 @@
                                 "title": "The vehicleIdentificationNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "The registration number of the vehicle"
+                                "description": "The registration number of the vehicle, populates box 5a on the Annex VII"
                             },
                             "pickupReferenceNumber": {
                                 "title": "The pickupReferenceNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": ""
+                                "description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa"
                             },
                             "driverName": {
                                 "title": "The driverName schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "Name of the driver.",
-                                "default": ""
+                                "description": "Name of the driver. Populates box 5a on the Annex VII"
                             }
                         },
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": {}
+                        "description": "References that are relevant to the Traqa loads and Shipper and Load Site to enable efficient exchange of loading data"
                     },
                     "transportEquipment": {
-                        "title": "The transportEquipment schema",
+                        "title": "Transport Equipment",
+                        "description": "The Trailier or Container that is loaded with the material from load site.",
                         "required": [
                             "equipmentNumber",
-                            "seal",
                             "verifiedWeight"
                         ],
                         "type": "object",
                         "properties": {
                             "verifiedWeight": {
-                                "title": "The verifiedWeight schema",
+                                "title": "Verified Weight",
                                 "required": [
                                     "unit",
                                     "value",
@@ -2676,7 +2690,7 @@
                                 "type": "object",
                                 "properties": {
                                     "weightVerificationMethod": {
-                                        "title": "The weightVerificationMethod schema",
+                                        "title": "Weight Verification Method",
                                         "type": "string",
                                         "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
                                         "enum": [
@@ -2685,28 +2699,25 @@
                                         ]
                                     },
                                     "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "Units of measure"
+                                        "$ref": "#/components/schemas/UnitOfMeasure"
                                     },
                                     "weighingDate": {
                                         "title": "The weighingDate schema",
                                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                         "type": "string",
-                                        "description": "Date of the weighing of container"
+                                        "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
                                     },
                                     "value": {
-                                        "title": "The value schema",
+                                        "title": "Value",
                                         "minimum": 1,
                                         "type": "number",
-                                        "description": "The weight of the laden container including the tare weight of a container if appropriate"
+                                        "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
                                     }
                                 },
                                 "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
                             },
                             "equipmentTareWeight": {
-                                "title": "The equipmentTareWeight schema",
+                                "title": "Equipment Tare Weight",
                                 "required": [
                                     "unit",
                                     "value"
@@ -2714,13 +2725,10 @@
                                 "type": "object",
                                 "properties": {
                                     "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "Units of Measure"
+                                        "$ref": "#/components/schemas/UnitOfMeasure"
                                     },
                                     "value": {
-                                        "title": "The value schema",
+                                        "title": "Value",
                                         "minimum": 1,
                                         "type": "number",
                                         "description": "The Tare weight of a container (empty weight)"
@@ -2729,44 +2737,43 @@
                                 "description": "The tare weight is required for containerised movements to calculate the VGM."
                             },
                             "seal": {
-                                "title": "The seal schema",
+                                "title": "Seal Number",
                                 "type": "array",
-                                "description": "The seal numbers used to seal the container or trailer",
+                                "description": "The seal number(s) used to seal the container or trailer after loading, multiple seal numbers can be present on a container, many only load with 1 or for trailers not always used.",
                                 "items": {
-                                    "anyOf": [
-                                        {
-                                            "title": "Seal Number",
-                                            "required": [
-                                                "identifier"
-                                            ],
-                                            "type": "object",
-                                            "properties": {
-                                                "identifier": {
-                                                    "title": "The identifier schema",
-                                                    "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
-                                                    "type": "string",
-                                                    "description": "An explanation about the purpose of this instance."
-                                                }
-                                            },
-                                            "description": "The seal number used on the transport equipment"
+                                    "title": "Seal Number",
+                                    "required": [
+                                        "identifier"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "identifier": {
+                                            "title": "Identifier",
+                                            "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                            "type": "string",
+                                            "description": "Seal Number used"
                                         }
-                                    ]
+                                    },
+                                    "description": "The seal number used on the transport equipment"
+                                   
                                 }
                             },
                             "equipmentNumber": {
-                                "title": "The equipmentNumber schema",
+                                "title": "Equipment Number",
                                 "type": "string",
                                 "description": "The Container Number OR the Trailer number that the goods have been loaded onto"
                             },
                             "equipmentType": {
-                                "title": "The equipmentType schema",
+                                "title": "Equipment Type",
                                 "pattern": "^[a-zA-Z0-9]{4}$",
-                                "type": "string"
+                                "type": "string",
+                                "description": "The ISO Size Type for Deep Sea Containers"
+
                             }
                         }
                     },
                     "haulier": {
-                        "title": "The haulier schema",
+                        "title": "Haulier",
                         "required": [
                             "name",
                             "organizationId"
@@ -2786,10 +2793,10 @@
                                 "description": "Freetext for Haulier Name"
                             }
                         },
-                        "description": "The Haulier who arrives at site to trasport the goods."
+                        "description": "The Haulier who arrives at site to trasport the goods.  Populates box 5a on the Annex VII and verified with the EA"
                     },
                     "dates": {
-                        "title": "The dates schema",
+                        "title": "Dates",
                         "required": [
                             "actualArrivalTransportEvent",
                             "actualDepartureTransportEvent"
@@ -2800,7 +2807,7 @@
                                 "title": "The actualDepartureTransportEvent schema",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh"
+                                "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time."
                             },
                             "actualArrivalTransportEvent": {
                                 "title": "The actualArrivalTransportEvent schema",
@@ -2809,17 +2816,17 @@
                                 "description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh"
                             }
                         },
-                        "description": "Dates relevant to the movement of material."
+                        "description": "Dates relevant to the actual movement of material provided by the loading site "
                     },
                     "tradeItem": {
-                        "title": "The tradeItem schema",
+                        "title": "Trade Item",
                         "required": [
                             "grossWeight"
                         ],
                         "type": "object",
                         "properties": {
                             "grossWeight": {
-                                "title": "The grossWeight schema",
+                                "title": "Gross Weight",
                                 "required": [
                                     "unit",
                                     "value"
@@ -2827,35 +2834,28 @@
                                 "type": "object",
                                 "properties": {
                                     "unit": {
-                                        "title": "The unit schema",
-                                        "pattern": "^[a-zA-Z]+$",
-                                        "type": "string",
-                                        "description": "Unit of Measure"
+                                        "$ref": "#/components/schemas/UnitOfMeasure"
                                     },
                                     "value": {
-                                        "title": "The value schema",
+                                        "title": "Value",
                                         "minimum": 1,
                                         "type": "number",
                                         "description": "The weight of the material without any equipment (Product Weight)"
                                     }
                                 },
-                                "description": "Weight of the Product loaded for movement"
+                                "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII"
                             },
                             "quantity": {
-                                "title": "The quantity schema",
+                                "title": "Quantity",
                                 "minimum": 1,
                                 "type": "number",
-                                "description": "Number of Bales or other"
+                                "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
                             },
                             "harmonizeSystemCode": {
-                                "title": "The harmonizeSystemCode schema",
-                                "pattern": "^[0-9]+$",
-                                "type": "string",
-                                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes",
-                                "default": ""
+                                "$ref": "#/components/schemas/HarmonizeSystemCode"
                             },
                             "description": {
-                                "title": "The description schema",
+                                "title": "Description",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
                                 "description": "The Name of material that is loaded."
@@ -2866,8 +2866,7 @@
                         "$ref": "#components/schemas/LoadingSite"
                     }
                 },
-                "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads.",
-                "default": {}
+                "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads, data comes from the weighbridge software. "
             },
             "ErrorModel": {
                 "title": "Error Schema Model",
