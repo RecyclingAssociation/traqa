@@ -2556,6 +2556,9 @@
                 "properties": {
                     "percentage": {
                         "title": "Percentage of MT",
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 100,
                         "description": "Percentage of MT to be issued for PERN"
                     }
                 }
