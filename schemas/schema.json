@@ -2227,7 +2227,7 @@
                     },
                     "postcode": {
                         "title": "Post Code",
-                        "pattern": "^[a-zA-Z0-9\\ ]+$",
+                        "pattern": "^[a-zA-Z0-9\\ \\-]+$",
                         "type": "string"
                     },
                     "country": {
