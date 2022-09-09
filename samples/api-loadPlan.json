@@ -1,58 +1,66 @@
 {
-	"shipper": {
-		"name": "Acme Exporter Limited",
-		"address": {
-			"street": "1 Old Hall Street",
-			"city": "Liverpool",
-			"state": "Merseyside",
-			"country": "GB",
-			"postcode": "L3 9HG"
-		},
-		"organizationId": "TQGBACMEL"
-	},
-	"consignee": {
-		"name": "Acme Importer",
-		"address": {
-			"street": "5329 Industrial Zone",
-			"city": "Bangkok",
-			"state": "Bangkok",
-			"country": "TH",
-			"postcode": "345678"
-		},
-		"organizationId": "THBANACIM"
-	},
-	"carrier": {
-		"name": "Maersk Line",
-		"organizationId": "MAEU"
-	},
-	"loadingSite": {
-		"name": "Recycling Facility Limited",
-		"address": {
-			"street": "1 Old Hall Street",
-			"city": "Liverpool",
-			"state": "Merseyside",
-			"country": "GB",
-			"postcode": "L3 9HG"
-		},
-		"organizationId": "GBLIVRFACL"
-	},
-	"references": {
-		"shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
-		"pickupReferenceNumber": "LR12345-1",
-		"carriersReferenceNumber": "MAEU12345678"
-	},
-	"dates": {
-		"scheduledLoadingTransportEvent": "2020-03-27T09:00:00"
-	},
-	"portOfLoading": {
-		"UNLocode": "GBLGP"
-	},
-	"portOfDischarge": {
-		"UNLocode": "CNXMN"
-	},
-	"transportEquipment": {},
-	"tradeItem": {
-		"harmonizeSystemCode": "4712345",
-		"description": "OCC 90/10"
-	}
+    
+    "carrier": {
+        "name": "Med Shipping Company S.A.",
+        "organizationId": "MSCU"
+    },
+    "consignee": {
+        "organizationId": "THBANACIM",
+        "name": "Acme Importer",
+        "address": {
+            "street": "5329 Industrial Zone",
+            "city": "Bangkok",
+            "state": "Bangkok",
+            "country": "TH",
+            "postcode": "345678"
+        },
+        "contact": {
+            "personName": "John Smith",
+            "telephone": "0123 456 7890",
+            "emailAddress": "person@domain.com"
+        }
+    },
+    "dates": {
+        "scheduledLoadingTransportEvent": "2020-03-27T09:05:49"
+    },
+    "pern": {
+        "percentage": "45"
+    },
+    "portOfLoading": {
+        "UNLocode": "GBLGP"
+    },
+    "portOfDischarge": {
+        "UNLocode": "CNXMN"
+    },
+    "recoveryFacility": {
+        "organizationId": "THBANACID",
+        "name": "Acme Facility",
+        "address": {
+            "street": "5329 Industrial Zone",
+            "city": "Bangkok",
+            "state": "Bangkok",
+            "country": "TH",
+            "postcode": "345678"
+        },
+        "contact": {
+            "personName": "John Smith",
+            "telephone": "0123 456 7890",
+            "emailAddress": "person@domain.com"
+        }
+    },
+    "references": {
+        "shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
+        "pickupReferenceNumber": "{{LoadingReference}}",
+        "carriersReferenceNumber": "MAEU12345678"
+    },
+    "shipper": {
+        "organizationId": "TQGBACMEL"
+    },
+    "tradeItem": {
+        "harmonizeSystemCode": "47071000",
+        "description": "OCC 90/10"
+    },
+    "loadingSite": {
+        "organizationId": "GBLIVRFAC"
+    }
 }
