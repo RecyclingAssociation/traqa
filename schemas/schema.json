@@ -3,7 +3,7 @@
     "info": {
         "title": "Traqa API",
         "description": "Traqa API to enable communication between Shippers and Load Sites for efficient exchange of data in the recycling supply chain",
-        "version": "2022-07-25T09:26:38Z",
+        "version": "1.1.0",
         "contact":{
             "name": "Traqa Integrations",
             "url": "https://www.traqa.io",
