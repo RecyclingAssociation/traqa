@@ -4283,6 +4283,271 @@
 									"body": "{\n  \"message\": \"consequat\"\n}"
 								}
 							]
+						},
+						{
+							"name": "/documents/preAnnexvii",
+							"id": "f2e68c2e-2b4e-4413-aee9-be5dc9f78548",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "Authorization",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "<API Key>",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/documents/preAnnexvii",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"documents",
+										"preAnnexvii"
+									]
+								},
+								"description": "Produce a copy of the Annex VII BEFORE the load is completed, this 'Pre Annex VII' and maybe used for checking the Annex VII prior to loading or as manual fallback for completion of the Annex VII if required."
+							},
+							"response": [
+								{
+									"id": "73b0cb50-eea8-4a3b-a388-1a698f9ae88d",
+									"name": "200 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"disabled": false,
+											"key": "Access-Control-Allow-Origin",
+											"value": "commodo est",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{}"
+								},
+								{
+									"id": "b46a60da-5f83-4053-92a8-e8bf10d20712",
+									"name": "400 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "b742f5b9-2ed4-4d7f-853a-89f710838a95",
+									"name": "403 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "cd21d488-0a84-4477-879f-8cc9ab9f72f0",
+									"name": "404 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "814c4378-91bf-4740-8245-55647f13f1c3",
+									"name": "500 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								}
+							]
 						}
 					],
 					"id": "9fa970cb-5aca-4043-831c-ea232c62f49c"
@@ -6178,13 +6443,13 @@
 	],
 	"variable": [
 		{
-			"id": "052aa395-f9f3-4215-9def-c0d08fb95c8a",
+			"id": "f6a723b1-6c0b-44c0-8aec-69c75cf9fe0b",
 			"key": "basePath",
 			"value": "/v1",
 			"type": "any"
 		},
 		{
-			"id": "af18780a-5d01-40c8-9a06-0dea65895cc2",
+			"id": "b9a00690-616e-4a69-963f-7dfb9adb30ed",
 			"key": "baseUrl",
 			"value": "https://api.traqa.io/v1",
 			"type": "string"
