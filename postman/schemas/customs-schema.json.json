@@ -2628,7 +2628,8 @@
                         "type": "boolean",
                         "description": "Value should be true if user wants Traqa undertake the customs process",
                         "enum": [
-                            true
+                            true,
+                            false
                         ]
                     },
                     "tradeItem": {
