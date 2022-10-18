@@ -2426,6 +2426,10 @@
                             }
                         }
                     }, 
+                    "incoterms": {
+                        "type": "string",
+                        "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                    },
                     "declaration": {
                         "type": "object",
                         "required": [
