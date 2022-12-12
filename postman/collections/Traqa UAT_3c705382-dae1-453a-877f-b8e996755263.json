@@ -63,12 +63,10 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "https://api.traqa.io/v1/getToken",
+									"raw": "{{baseUrl}}/getToken",
 									"protocol": "https",
 									"host": [
-										"api",
-										"traqa",
-										"io"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"v1",
