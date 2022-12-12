@@ -3,7 +3,7 @@
     "info": {
         "title": "Traqa API",
         "description": "Traqa API to enable communication between Shippers and Load Sites for efficient exchange of data in the recycling supply chain",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "contact":{
             "name": "Traqa Integrations",
             "url": "https://www.traqa.io",
@@ -2544,6 +2544,45 @@
                     },
                     "pern": {
                         "$ref": "#components/schemas/PERN"
+                    },
+                    "Customs": {
+                        "type": "object",
+                        "properties": {
+                            "invoice": {
+                                "required": [
+                                    "pricing",
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "description": "Details required for the Commercial Invoice and Customs Declaration",
+                                "properties": {
+                                    "pricing": {
+                                        "type": "string",
+                                        "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is",
+                                        "enum": [
+                                            "tonne",
+                                            "total"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator, this should be in the currency provided.",
+                                        "type": "number",
+                                        "format": "decimal(12,2)",
+                                        "example": 345.25
+                                    },
+                                    "currency": {
+                                        "description": "Currency code as defined by ISO 4217",
+                                        "type": "string",
+                                        "example": "GBP"
+                                    }
+                                }
+                            },
+                            "incoterms": {
+                                "type": "string",
+                                "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                            }
+                        }
                     }
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
@@ -2556,7 +2595,8 @@
                 "properties": {
                     "percentage": {
                         "title": "Percentage of MT",
-                        "type": "integer",
+                        "type": "number",
+                        "format": "float",
                         "minimum": 1,
                         "maximum": 100,
                         "description": "Percentage of MT to be issued for PERN"

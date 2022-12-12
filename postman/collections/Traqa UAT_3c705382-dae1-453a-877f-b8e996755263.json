@@ -53,7 +53,7 @@
 								}
 							]
 						},
-						"description": "The IdToken is used for Authorization & Authentication and will expire within one hour. The RefreshToken is used to retrieve another IdToken instead of passing credentials to the server, a refresh token will last one month.\n\nBasic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the Authorization header that contains the word Basic word followed by a space and a base64-encoded string username:password.\n\nFor example, to authorize as demo / p@55w0rd the client would send:\n\n`Authorization: Basic ZGVtbzpwQDU1dzByZA==`\n\nIf you are doing this in Postman selecting `Basic Auth` and entering your username and password will automatically generate this header."
+						"description": "The IdToken is used for Authorization & Authentication and will expire within one hour. The RefreshToken is used to retrieve another IdToken instead of passing credentials to the server, a refresh token will last one month.\n\nBasic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the Authorization header that contains the word Basic word followed by a space and a base64-encoded string username:password.\n\nFor example, to authorize as demo / p@55w0rd the client would send in {token} the value of `ZGVtbzpwQDU1dzByZA==`\n\n`Authorization: Basic {token}`\n\nIf you are doing this in Postman selecting `Basic Auth` and entering your username and password will automatically generate this header."
 					},
 					"response": [
 						{
@@ -64,16 +64,18 @@
 								"header": [],
 								"url": {
 									"raw": "{{baseUrl}}/getToken",
+									"protocol": "https",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"v1",
 										"getToken"
 									],
 									"variable": [
 										{
 											"key": "basePath",
-											"value": "{{basePath}}"
+											"value": "/v1"
 										}
 									]
 								}
@@ -95,7 +97,7 @@
 							],
 							"cookie": [],
 							"responseTime": null,
-							"body": "{\n    \"IdToken\": \"eyJraWQiOiJtVHZmZkV5YVlob2o0U1hqaGorSldNNWFUUGE5bkJ2czJNUkttbEtubEpRPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhOTNiZDsdasdnRydWUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzadsadsrGZq_5XTJvAKOwqA89BrVlCbd-FEyEZCIPmMLV6ucj_WGdGT3CXViTFCqk21y8Ul6ALFnQVINzeHbA3TE7ojyE124XA03Fxsf0Q8AQsC9Z48nNJ3mc7gt5d8S7B4SJlpGxyFSGAeE45weY94SElCh_JAZ0s1gSSRQQmkN0ggqugVJG5WNGLbqQ\",\n    \"RefreshToken\": \"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.EKcW6vYyNn5epcdZss4FYnWXcFdF5_fGg-YzJRlc1SynsT75RDa2wDd6hYQWzlsiu6Pzkx-Y875uwhl2xJ4G8tmRAgzmPobyojc_tCqW7ERG1PRoajEw_g2FF85mtkWknTUEMdsasd9jTs9Vsyba8D7L_y7ALZFwT2Gqjj97jsFu8jRbrSjNFzhaGeyqQMlMGijKv01n0VZxMcRRXu5ioq9P8rpolR-yo8LkMm-269Y_xQ.O6-S-AMoxx4fnUj_.f8nrVqVjzqBbqTxUkNdzg7Z_heSvvllqpi6P_qdfHR8KN4Q7tiFk6Gn1TnkFSqqZh_2XOhlki8DDSZ0Oys0RZrfpEhvGHmqQbHbPpK_k2yF8BgetLNXAGXV3GoQSYhIu4uRRoneW6KGGfTr7kbNqygjA9-FUUpcM3UsAKQP6SKX7MlVUNtwtRD1VjeyXdN-6_PF_D8PK3nbo5j2ypxClTSK6fc3ypi6rJAUR17iVeqadadsa2uw.p8a3VrKfb48QoFyOZFDkSw\"\n}"
+							"body": "{\n    \"IdToken\": \"eyJraWQiOiJtVHZmZkV5YV....\",\n    \"RefreshToken\": \"eyJjdHkiOiJKV1QiLCJlbm...\"\n}"
 						},
 						{
 							"id": "8f734b38-0b7d-4e16-9631-f6f123ae764d",
@@ -176,7 +178,7 @@
 				}
 			],
 			"id": "6fc17976-53b4-4d6f-9b83-c5b6639d66b7",
-			"description": "Before making requests you need to authorise and exchange your username and password for a token that can be passed in subsequent requests."
+			"description": "Before making requests you need to authorise and exchange your username and password for an `IdToken` that can be passed in subsequent requests, the token will expire after 60 minutes.\n\nYou can use the `RefreshToken` which expires after 1 month and to refresh send a POST request to the `getToken` endpoint with the header `refresh_token`"
 		},
 		{
 			"name": "Load Plans",
@@ -4279,6 +4281,271 @@
 									"body": "{\n  \"message\": \"consequat\"\n}"
 								}
 							]
+						},
+						{
+							"name": "/documents/preAnnexvii",
+							"id": "f2e68c2e-2b4e-4413-aee9-be5dc9f78548",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "Authorization",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "<API Key>",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/documents/preAnnexvii",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"documents",
+										"preAnnexvii"
+									]
+								},
+								"description": "Produce a copy of the Annex VII BEFORE the load is completed, this 'Pre Annex VII' and maybe used for checking the Annex VII prior to loading or as manual fallback for completion of the Annex VII if required."
+							},
+							"response": [
+								{
+									"id": "73b0cb50-eea8-4a3b-a388-1a698f9ae88d",
+									"name": "200 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"disabled": false,
+											"key": "Access-Control-Allow-Origin",
+											"value": "commodo est",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{}"
+								},
+								{
+									"id": "b46a60da-5f83-4053-92a8-e8bf10d20712",
+									"name": "400 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "b742f5b9-2ed4-4d7f-853a-89f710838a95",
+									"name": "403 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "cd21d488-0a84-4477-879f-8cc9ab9f72f0",
+									"name": "404 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								},
+								{
+									"id": "814c4378-91bf-4740-8245-55647f13f1c3",
+									"name": "500 response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "Authorization",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/documents/annexvii",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"documents",
+												"annexvii"
+											],
+											"variable": [
+												{
+													"key": "basePath",
+													"value": "{{basePath}}"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"consequat\"\n}"
+								}
+							]
 						}
 					],
 					"id": "9fa970cb-5aca-4043-831c-ea232c62f49c"
@@ -6174,13 +6441,13 @@
 	],
 	"variable": [
 		{
-			"id": "26efefb6-8ded-424d-9dbf-42eba38dee5f",
+			"id": "f6a723b1-6c0b-44c0-8aec-69c75cf9fe0b",
 			"key": "basePath",
 			"value": "/v1",
 			"type": "any"
 		},
 		{
-			"id": "1d5c52da-fe19-4004-85ff-ad7d97b74cb3",
+			"id": "b9a00690-616e-4a69-963f-7dfb9adb30ed",
 			"key": "baseUrl",
 			"value": "https://api.traqa.io/v1",
 			"type": "string"
