@@ -2544,6 +2544,45 @@
                     },
                     "pern": {
                         "$ref": "#components/schemas/PERN"
+                    },
+                    "Customs": {
+                        "type": "object",
+                        "properties": {
+                            "invoice": {
+                                "required": [
+                                    "pricing",
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "description": "Details required for the Commercial Invoice and Customs Declaration",
+                                "properties": {
+                                    "pricing": {
+                                        "type": "string",
+                                        "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is",
+                                        "enum": [
+                                            "tonne",
+                                            "total"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator, this should be in the currency provided.",
+                                        "type": "number",
+                                        "format": "decimal(12,2)",
+                                        "example": 345.25
+                                    },
+                                    "currency": {
+                                        "description": "Currency code as defined by ISO 4217",
+                                        "type": "string",
+                                        "example": "GBP"
+                                    }
+                                }
+                            },
+                            "incoterms": {
+                                "type": "string",
+                                "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                            }
+                        }
                     }
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
