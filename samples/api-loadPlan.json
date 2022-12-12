@@ -62,5 +62,14 @@
     },
     "loadingSite": {
         "organizationId": "GBLIVRFAC"
+    },
+    "customs": {
+        "invoice": {
+            "amount": 345.25,
+            "currency": "GBP",
+            "pricing": "tonne"
+        },
+        "incoterms": "CIP"
     }
+
 }
