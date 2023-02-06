@@ -2581,6 +2581,9 @@
                             "incoterms": {
                                 "type": "string",
                                 "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                            },
+                            "buyer": {
+                                "$ref": "#/components/schemas/Buyer"
                             }
                         }
                     }
@@ -2649,6 +2652,31 @@
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
                         "description": "The Name of the Shipper"
+                    }
+                }
+            },
+            "Buyer": {
+                "title": "Buyer",
+                "description": "Buyer/receiver of shipment. Overwrites the 'buyer' party shown on the commercial invoice",
+                "required": [
+                    "organizationId"
+                ],
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded Identifer for the Buyer",
+                        "description": "The buyer Organisation Id is usually an EORI number assigned by a government",
+                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "name": {
+                        "title": "Buyer Name",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "The Name of the Buyer"
                     }
                 }
             },
