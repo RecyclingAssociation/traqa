@@ -3143,6 +3143,11 @@
                                 "type": "number",
                                 "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
                             },
+                            "packageTypeCode": {
+                                "title": "Package",
+                                "type": "string",
+                                "description": "The package type code of the smallest external packing unit eg. BL or BN"
+                            },
                             "harmonizeSystemCode": {
                                 "$ref": "#/components/schemas/HarmonizeSystemCode"
                             },
