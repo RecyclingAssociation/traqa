@@ -2311,15 +2311,6 @@
         },
         "/documents/exportAccompanyingDocument": {
             "get": {
-                "parameters" : [ {
-                    "name" : "LoadingReference",
-                    "in" : "query",
-                    "required" : true,
-                    "schema" : {
-                    "type" : "string"
-                    },
-                    "description": "Loadplan reference"
-                } ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2787,12 +2778,12 @@
                                 "properties": {
                                     "goodsLocation": {
                                         "type": "string",
-                                        "description": "The route that goods will exit the UK: https://www.gov.uk/government/publications/uk-trade-tariff-freight-location-codes/freight-location-codes",
+                                        "description": "Using the relevant codes, enter the location where the goods are located at the time they are declared and available for examination purposes.  The Goods Location Code must be precise enough to allow Customs to carry out physical controls on the goods. DE 5/23 CDS, note use of CDS codes over CHIEF Codes as they are different.  https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-5-dates-times-periods-places-countries-and-regions#de-523-location-of-goods-box-30-location-of-goods",
                                         "enum": ["ABD", "ABZ", "ARD", "ASD", "AVO", "AVO", "AVO", "AYR", "AYR", "BAR", "BAR", "BCC", "BEL", "BEL", "BFS", "BHD", "BHX", "BLK", "BLY", "BLY", "BLY", "BOH", "BOS", "BQH", "BRS", "BZN", "CBG", "CDF", "CDF", "CLR", "CLR", "COL", "COL", "COL", "COL", "COL", "COL", "COL", "COW", "CVT", "CWL", "DAG", "DEU", "DGS", "DGS", "DGS", "DGS", "DON", "DOV", "DOV", "DSA", "DUN", "DUN", "DUN", "DUN", "DVY", "EDI", "ELL", "EMA", "ESH", "EUT", "EXE", "EXE", "EXE", "EXT", "FAB", "FAL", "FAL", "FAL", "FFD", "FIS", "FIS", "FLE", "FLT", "FOL", "FOY", "FOY", "FRB", "FRB", "FRB", "FXT", "FXT", "FZO", "GLA", "GLO", "GLW", "GLW", "GOO", "GOO", "GOO", "GRG", "GRG", "GRG", "GRG", "GRG", "GRI", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GRK", "GSY", "GTY", "HEY", "HEY", "HEY", "HEY", "HLD", "HLD", "HPT", "HRH", "HRH", "HRH", "HRH", "HTP", "HUL", "HUL", "HUL", "HUY", "IMM", "IMM", "IMM", "IMM", "IMM", "INV", "INV", "INV", "INV", "INV", "INV", "INV", "INV", "IPS", "IRV", "IVG", "JSY", "KEM", "KIL", "KKD", "KLN", "KMK", "KWL", "KWL", "LAS", "LBA", "LBK", "LCY", "LDY", "LEI", "LER", "LER", "LGP", "LGW", "LHR", "LIV", "LIV", "LIV", "LIV", "LKH", "LLA", "LLA", "LLA", "LON", "LON", "LON", "LON", "LON", "LON", "LON", "LON", "LOS", "LOW", "LPL", "LSA", "LSI", "LTN", "LYD", "LYH", "MAN", "MDH", "MED", "MED", "MED", "MED", "MED", "MED", "MID", "MID", "MID", "MIL", "MIL", "MIL", "MIL", "MIL", "MME", "MNC", "MNC", "MON", "MOS", "MOS", "MOS", "MSE", "MWH", "NCL", "NGO", "NHT", "NHV", "NHV", "NOR", "NOR", "NPT", "NPT", "NQY", "NTH", "NWI", "OAK", "PAR", "PEN", "PEN", "PHD", "PIK", "PLH", "PLY", "PLY", "PLY", "POO", "POO", "PTB", "PTB", "PTB", "PTL", "PTM", "PTM", "PUF", "RMG", "RMG", "ROS", "RUN", "RUN", "RWY", "SCA", "SCP", "SEN", "SHO", "SHO", "SIL", "SOU", "SSS", "SSS", "STN", "STN", "STO", "STY", "SUN", "SUN", "SWA", "SWA", "SYW", "TEP", "THP", "TNM", "TNM", "TNM", "TNM", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TRT", "TYN", "TYN", "TYN", "TYN", "TYN", "WAD", "WAR", "WAT", "WAT", "WAT", "WAT", "WDN", "WEY", "WEY", "WHV", "WIK", "WIS", "WOR", "WPT", "WTB", "WTS", "WTS", "YVL"]
                                     },
                                     "customsOfficeExit": {
                                         "type": "string",
-                                        "description": "Identify the customs office of export / exit",
+                                        "description": "Using the relevant Union code, enter the customs office by which it is intended that the goods should leave the customs territory.  DE 5/4 CDS",
                                         "enum": ["GB000001", "GB000002", "GB000003", "GB000011", "GB000014", "GB000029", "GB000033", "GB000040", "GB000041", "GB000045", "GB000047", "GB000049", "GB000051", "GB000052", "GB000053", "GB000054", "GB000055", "GB000057", "GB000058", "GB000059", "GB000060", "GB000062", "GB000063", "GB000067", "GB000070", "GB000072", "GB000073", "GB000074", "GB000080", "GB000081", "GB000084", "GB000085", "GB000087", "GB000091", "GB000093", "GB000098", "GB000099", "GB000102", "GB000108", "GB000119", "GB000120", "GB000121", "GB000122", "GB000123", "GB000124", "GB000125", "GB000126", "GB000128", "GB000130", "GB000140", "GB000142", "GB000149", "GB000150", "GB000155", "GB000170", "GB000191", "GB000218", "GB000219", "GB000244", "GB000245", "GB000246", "GB000250", "GB000290", "GB000291", "GB000292", "GB000297", "GB000328", "GB000383", "GB000411", "GB000416", "GB000434", "GB000450", "GB000461", "GB000465", "GB000480", "GB000500", "GB000501", "GB000921", "GB001016", "GB003010", "GB003020", "GB003030", "GB003040", "GB003050", "GB003060", "GB003070", "GB003080", "GB003090", "GB003100", "GB003110", "GB003120", "GB003130", "GB003140", "GB003150", "GB003160", "GB003170", "GB003180", "GB003190", "GB003200", "GB003210", "GB003220", "GB003230", "GB003240", "GB003250", "GB003260", "GB003270", "GB003280", "GB003290", "GB004098", "GB005010", "GB005020", "GB005030", "GB005040", "GB005050", "GB005060", "GB005070", "GB005080", "GB005090", "GB005100", "GB005110", "GB005120", "GB005130", "GB005140", "GB005160", "GB005170", "GB005180", "GB005190", "GB005200", "GB005210", "GB005211", "GBEORI01", "GBREX001", "GBREX002", "GBSOU001"]
                                     }
                                 }
@@ -2898,6 +2889,31 @@
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
                         "description": "The Name of the Shipper"
+                    }
+                }
+            },
+            "Buyer": {
+                "title": "Buyer",
+                "description": "Buyer/receiver of shipment. Overwrites the 'buyer' party shown on the commercial invoice",
+                "required": [
+                    "organizationId"
+                ],
+                "type": "object",
+                "properties": {
+                    "organizationId": {
+                        "title": "A coded Identifer for the Buyer",
+                        "description": "The buyer Organisation Id is usually an EORI number assigned by a government",
+                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "type": "string"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "name": {
+                        "title": "Buyer Name",
+                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                        "type": "string",
+                        "description": "The Name of the Buyer"
                     }
                 }
             },
