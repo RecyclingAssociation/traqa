@@ -2763,7 +2763,7 @@
                         "properties": {
                             "customsDeclaration": {
                                 "type": "boolean",
-                                "description": "Value should be true if user wants Traqa to undertake the customs process",
+                                "description": "Indicate if Traqa should submit the Export Customs Clearance Declaration on your behalf to Authorities, if not the commercial invoice will be created and no declaration made.",
                                 "enum": [
                                     true
                                 ]
@@ -2821,6 +2821,9 @@
                             "incoterms": {
                                 "type": "string",
                                 "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                            },
+                            "buyer": {
+                                "$ref": "#/components/schemas/Buyer"
                             }
                         }
                     }
