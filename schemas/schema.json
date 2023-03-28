@@ -2198,17 +2198,110 @@
                 }
             }
         },
+        "/documents/preAnnexvii": {
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "500 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "403 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "options": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/documents/commercialInvoice": {
             "get": {
-                "parameters" : [ {
-                    "name" : "LoadingReference",
-                    "in" : "query",
-                    "required" : true,
-                    "schema" : {
-                    "type" : "string"
-                    },
-                    "description": "Loadplan reference"
-                } ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2758,7 +2851,7 @@
                     "pern": {
                         "$ref": "#components/schemas/PERN"
                     },
-                    "Customs": {
+                    "customs": {
                         "type": "object",
                         "properties": {
                             "customsDeclaration": {
@@ -2769,12 +2862,12 @@
                                 ]
                             },
                             "declaration": {
+                                "type": "object",
                                 "description": "Details required for Customs Declaration",
                                 "required": [
                                     "goodsLocation",
                                     "customsOfficeExit"
                                 ],
-                                "type": "object",
                                 "properties": {
                                     "goodsLocation": {
                                         "type": "string",
@@ -2783,6 +2876,7 @@
                                     },
                                     "customsOfficeExit": {
                                         "type": "string",
+                                        "maxLength": 8,
                                         "description": "Using the relevant Union code, enter the customs office by which it is intended that the goods should leave the customs territory.  DE 5/4 CDS",
                                         "enum": ["GB000001", "GB000002", "GB000003", "GB000011", "GB000014", "GB000029", "GB000033", "GB000040", "GB000041", "GB000045", "GB000047", "GB000049", "GB000051", "GB000052", "GB000053", "GB000054", "GB000055", "GB000057", "GB000058", "GB000059", "GB000060", "GB000062", "GB000063", "GB000067", "GB000070", "GB000072", "GB000073", "GB000074", "GB000080", "GB000081", "GB000084", "GB000085", "GB000087", "GB000091", "GB000093", "GB000098", "GB000099", "GB000102", "GB000108", "GB000119", "GB000120", "GB000121", "GB000122", "GB000123", "GB000124", "GB000125", "GB000126", "GB000128", "GB000130", "GB000140", "GB000142", "GB000149", "GB000150", "GB000155", "GB000170", "GB000191", "GB000218", "GB000219", "GB000244", "GB000245", "GB000246", "GB000250", "GB000290", "GB000291", "GB000292", "GB000297", "GB000328", "GB000383", "GB000411", "GB000416", "GB000434", "GB000450", "GB000461", "GB000465", "GB000480", "GB000500", "GB000501", "GB000921", "GB001016", "GB003010", "GB003020", "GB003030", "GB003040", "GB003050", "GB003060", "GB003070", "GB003080", "GB003090", "GB003100", "GB003110", "GB003120", "GB003130", "GB003140", "GB003150", "GB003160", "GB003170", "GB003180", "GB003190", "GB003200", "GB003210", "GB003220", "GB003230", "GB003240", "GB003250", "GB003260", "GB003270", "GB003280", "GB003290", "GB004098", "GB005010", "GB005020", "GB005030", "GB005040", "GB005050", "GB005060", "GB005070", "GB005080", "GB005090", "GB005100", "GB005110", "GB005120", "GB005130", "GB005140", "GB005160", "GB005170", "GB005180", "GB005190", "GB005200", "GB005210", "GB005211", "GBEORI01", "GBREX001", "GBREX002", "GBSOU001"]
                                     }
@@ -2904,7 +2998,7 @@
                 "type": "object",
                 "properties": {
                     "organizationId": {
-                        "title": "A coded Identifer for the Buyer",
+                        "title": "A coded Identifier for the Buyer",
                         "description": "The buyer Organisation Id is usually an EORI number assigned by a government",
                         "pattern": "^[a-zA-Z0-9]{9,17}$",
                         "type": "string"
@@ -3079,7 +3173,6 @@
                                 "pattern": "^[a-zA-Z0-9]{4}$",
                                 "type": "string",
                                 "description": "The ISO Size Type for Deep Sea Containers"
-
                             }
                         }
                     },
