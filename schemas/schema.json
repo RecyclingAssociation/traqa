@@ -2673,6 +2673,9 @@
                     },
                     "contact": {
                         "$ref": "#/components/schemas/Contact"
+                    },
+                    "VATNumber": {
+                        "$ref": "#/components/schemas/VATNumber"
                     }
                 },
                 "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination, this will show in Box 2 of the Annex VII"
@@ -2702,6 +2705,10 @@
                 "pattern": "^[0-9]{4,10}$",
                 "type": "string",
                 "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+            },
+            "VATNumber": {
+                "title": "VAT Number",
+                "type": "string"
             },
             "LoadingSite": {
                 "title": "Loading Site",
@@ -3011,6 +3018,9 @@
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
                         "description": "The Name of the Buyer"
+                    },
+                    "VATNumber": {
+                        "$ref": "#/components/schemas/VATNumber"
                     }
                 }
             },
@@ -3160,7 +3170,6 @@
                                         }
                                     },
                                     "description": "The seal number used on the transport equipment"
-                                   
                                 }
                             },
                             "equipmentNumber": {
