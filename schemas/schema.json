@@ -2865,7 +2865,7 @@
                                 "type": "boolean",
                                 "description": "Indicate if Traqa should submit the Export Customs Clearance Declaration on your behalf to Authorities, if not the commercial invoice will be created and no declaration made.",
                                 "enum": [
-                                    true
+                                    true, false
                                 ]
                             },
                             "declaration": {
