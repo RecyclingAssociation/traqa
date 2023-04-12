@@ -2211,18 +2211,8 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
                     "200": {
-                        "description": "200 response",
+                        "description": "The request was successful. Will return empty JSON if commercial invoice does not exist for a valid load plan.",
                         "headers": {
                             "Access-Control-Allow-Origin": {
                                 "schema": {
@@ -2233,23 +2223,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/Document"
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
+                        "description": "The request could not be understood of was missing the required loading reference parameter",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2259,7 +2239,17 @@
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "User forbidden from accessing this resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2316,6 +2306,18 @@
             "Empty": {
                 "title": "Empty Schema",
                 "type": "object"
+            },
+            "Document": {
+                "title": "Document",
+                "type": "object",
+                "description": "A document retrieved for a specific load plan.",
+                "properties": {
+                    "document": {
+                        "title": "Document pre-signed URL",
+                        "type": "string",
+                        "pattern": "^https:\\/\\/\\w+\\.s3\\.amazonaws\\.com\\/[\\w-]+\\.pdf\\?AWSAccessKeyId=[\\w]+&Signature=[\\w%]+&x-amz-security-token=[\\w%]+&Expires=\\d+$\n"
+                    }
+                }
             },
             "Address": {
                 "title": "Address",
