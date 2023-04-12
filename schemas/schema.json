@@ -2664,7 +2664,7 @@
                 "type": "object",
                 "properties": {
                     "organizationId": {
-                        "title": "A coded Identifer for the Buyer",
+                        "title": "A coded Identifier for the Buyer",
                         "description": "The buyer Organisation Id is usually an EORI number assigned by a government",
                         "pattern": "^[a-zA-Z0-9]{9,17}$",
                         "type": "string"
@@ -2826,7 +2826,6 @@
                                         }
                                     },
                                     "description": "The seal number used on the transport equipment"
-                                   
                                 }
                             },
                             "equipmentNumber": {
@@ -2839,7 +2838,6 @@
                                 "pattern": "^[a-zA-Z0-9]{4}$",
                                 "type": "string",
                                 "description": "The ISO Size Type for Deep Sea Containers"
-
                             }
                         }
                     },
@@ -2921,6 +2919,11 @@
                                 "minimum": 1,
                                 "type": "number",
                                 "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
+                            },
+                            "packageTypeCode": {
+                                "title": "Package",
+                                "type": "string",
+                                "description": "The package type code of the smallest external packing unit eg. BL or BN"
                             },
                             "harmonizeSystemCode": {
                                 "$ref": "#/components/schemas/HarmonizeSystemCode"
