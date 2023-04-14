@@ -2628,7 +2628,8 @@
             },
             "VATNumber": {
                 "title": "VAT Number",
-                "type": "string"
+                "type": "string",
+                "pattern": "^[A-Z]{2}\\d{9}$"
             },
             "LoadingSite": {
                 "title": "Loading Site",
