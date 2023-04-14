@@ -2309,6 +2309,108 @@
                     }
                 }
             }
+        },
+        "/documents/commercialInvoice": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "LoadingReference",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful. Will return empty JSON if commercial invoice does not exist for a valid load plan.",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Document"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request could not be understood of was missing the required loading reference parameter",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User forbidden from accessing this resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "options": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2316,6 +2418,18 @@
             "Empty": {
                 "title": "Empty Schema",
                 "type": "object"
+            },
+            "Document": {
+                "title": "Document",
+                "type": "object",
+                "description": "A document retrieved for a specific load plan.",
+                "properties": {
+                    "document": {
+                        "title": "Document pre-signed URL",
+                        "type": "string",
+                        "pattern": "^https:\\/\\/\\w+\\.s3\\.amazonaws\\.com\\/[\\w-]+\\.pdf\\?AWSAccessKeyId=[\\w]+&Signature=[\\w%]+&x-amz-security-token=[\\w%]+&Expires=\\d+$\n"
+                    }
+                }
             },
             "Address": {
                 "title": "Address",
@@ -2479,6 +2593,9 @@
                     },
                     "contact": {
                         "$ref": "#/components/schemas/Contact"
+                    },
+                    "vatNumber": {
+                        "$ref": "#/components/schemas/VATNumber"
                     }
                 },
                 "description": "The Consignee is the person who will be receiving the consignment (material) they may not necessarily be the physical destination, this will show in Box 2 of the Annex VII"
@@ -2508,6 +2625,10 @@
                 "pattern": "^[0-9]{4,10}$",
                 "type": "string",
                 "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+            },
+            "VATNumber": {
+                "title": "VAT Number",
+                "type": "string"
             },
             "LoadingSite": {
                 "title": "Loading Site",
@@ -2776,7 +2897,7 @@
                 "type": "object",
                 "properties": {
                     "organizationId": {
-                        "title": "A coded Identifer for the Buyer",
+                        "title": "A coded Identifier for the Buyer",
                         "description": "The buyer Organisation Id is usually an EORI number assigned by a government",
                         "pattern": "^[a-zA-Z0-9]{9,17}$",
                         "type": "string"
@@ -2789,6 +2910,9 @@
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
                         "description": "The Name of the Buyer"
+                    },
+                    "vatNumber": {
+                        "$ref": "#/components/schemas/VATNumber"
                     }
                 }
             },
@@ -2938,7 +3062,6 @@
                                         }
                                     },
                                     "description": "The seal number used on the transport equipment"
-                                   
                                 }
                             },
                             "equipmentNumber": {
@@ -2951,7 +3074,6 @@
                                 "pattern": "^[a-zA-Z0-9]{4}$",
                                 "type": "string",
                                 "description": "The ISO Size Type for Deep Sea Containers"
-
                             }
                         }
                     },
@@ -3033,6 +3155,11 @@
                                 "minimum": 1,
                                 "type": "number",
                                 "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
+                            },
+                            "packageTypeCode": {
+                                "title": "Package",
+                                "type": "string",
+                                "description": "The package type code of the smallest external packing unit eg. BL or BN"
                             },
                             "harmonizeSystemCode": {
                                 "$ref": "#/components/schemas/HarmonizeSystemCode"
