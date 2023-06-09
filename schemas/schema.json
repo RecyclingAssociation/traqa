@@ -2411,6 +2411,332 @@
                     }
                 }
             }
+        },
+        "/notifications": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "Notification status",
+                            "type": "string",
+                            "enum": [
+                                "OPEN",
+                                "CLOSED"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "Notification type",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotificationsRetrieved"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "options": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "datetime",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Date-time of notification creation in ISO 8601 format",
+                            "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post was successful",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/task": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskRetrieved"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "options": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskPostModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "The post was successful",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An unexpected error occurred on the server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2418,6 +2744,77 @@
             "Empty": {
                 "title": "Empty Schema",
                 "type": "object"
+            },
+            "NotificationsRetrieved": {
+                "title": "Notifications Information",
+                "type": "object",
+                "description": "Information on a party's notifications",
+                "properties": {
+                    "Notifications": {
+                        "title": "Notifications",
+                        "type": "array",
+                        "description": "A list of notifications",
+                        "items": {
+                            "Notification": {
+                                "title": "Notification",
+                                "description": "A notification",
+                                "type": "object",
+                                "properties": {
+                                    "NotificationStatus": {
+                                        "type": "String",
+                                        "enum": [
+                                            "OPEN",
+                                            "CLOSED"
+                                        ]
+                                    },
+                                    "NotificationType": {
+                                        "type": "String"
+                                    },
+                                    "TaskId": {
+                                        "type": "String"
+                                    },
+                                    "LoadingReference": {
+                                        "type": "String"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Count": {
+                        "title": "Notifications Count",
+                        "description": "number of notifications retrieved",
+                        "type": "number"
+                    },
+                    "DateOfRequest": {
+                        "title": "Date Retrieved",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "type": "string",
+                        "description": "The date that the notifications information was requested in ISO 8601 format"
+                    }
+                }
+            },
+            "TaskRetrieved": {
+                "title": "Task Information",
+                "type": "object",
+                "description": "Information on a particular party's task",
+                "properties": {
+                    "Task": {
+                        "title": "Task",
+                        "description": "A task",
+                        "type": "object"
+                    },
+                    "TaskType": {
+                        "title": "Task type",
+                        "description": "Type of the task retrieved",
+                        "type": "string"
+                    },
+                    "DateOfRequest": {
+                        "title": "Date Retrieved",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "type": "string",
+                        "description": "The date that the task information was requested in ISO 8601 format"
+                    }
+                }
             },
             "Document": {
                 "title": "Document",
@@ -3178,6 +3575,207 @@
                     }
                 },
                 "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads, data comes from the weighbridge software. "
+            },
+            "TaskPostModel": {
+                "title": "Task Post Model",
+                "description": "Model for posting data against a particular task",
+                "type": "object",
+                "properties": {
+                    "weighbridgeCertificateName": {
+                        "title": "Weighbridge Certificate Name"
+                    },
+                    "weighbridgeData": {
+                        "description": "The Weight payload for a NILS to complete the weighing of planned Traqa loads, data comes from the weighbridge software and is verified manually by the Shipper.",
+                        "properties": {
+                            "references": {
+                                "title": "References",
+                                "description": "References that are relevant to the Traqa loads and Shipper and NILS to enable efficient exchange of loading data",
+                                "required": [
+                                    "pickupReferenceNumber"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "despatchNoteNumber": {
+                                        "title": "The despatchNoteNumber schema",
+                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                        "type": "string",
+                                        "description": "The weighbridge ticket number from the loading site."
+                                    },
+                                    "vehicleIdentificationNumber": {
+                                        "title": "The vehicleIdentificationNumber schema",
+                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                        "type": "string",
+                                        "description": "The registration number of the vehicle, populates box 5a on the Annex VII"
+                                    },
+                                    "pickupReferenceNumber": {
+                                        "title": "The pickupReferenceNumber schema",
+                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                        "type": "string",
+                                        "description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa"
+                                    }
+                                }
+                            },
+                            "transportEquipment": {
+                                "title": "Transport Equipment",
+                                "description": "The Trailer or Container that is loaded with the material from load site.",
+                                "required": [
+                                    "equipmentNumber",
+                                    "verifiedWeight",
+                                    "equipmentTareWeight"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "verifiedWeight": {
+                                        "title": "Verified Weight",
+                                        "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety.",
+                                        "required": [
+                                            "value",
+                                            "weighingDate"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "weighingDate": {
+                                                "title": "The weighingDate schema",
+                                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                                "type": "string",
+                                                "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
+                                            },
+                                            "value": {
+                                                "title": "Value",
+                                                "minimum": 1,
+                                                "type": "number",
+                                                "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
+                                            }
+                                        }
+                                    },
+                                    "equipmentTareWeight": {
+                                        "title": "Equipment Tare Weight",
+                                        "description": "The tare weight is required for containerised movements to calculate the VGM.",
+                                        "required": [
+                                            "value"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "value": {
+                                                "title": "Value",
+                                                "minimum": 1,
+                                                "type": "number",
+                                                "description": "The Tare weight of a container (empty weight)"
+                                            }
+                                        }
+                                    },
+                                    "seal": {
+                                        "title": "Seal Number",
+                                        "description": "The seal number(s) used to seal the container or trailer after loading, multiple seal numbers can be present on a container, many only load with 1 or for trailers not always used.",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "Seal Number",
+                                            "description": "The seal number used on the transport equipment",
+                                            "required": [
+                                                "identifier"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "identifier": {
+                                                    "title": "Identifier",
+                                                    "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
+                                                    "type": "string",
+                                                    "description": "Seal Number used"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "equipmentNumber": {
+                                        "title": "Equipment Number",
+                                        "type": "string",
+                                        "description": "The Container Number OR the Trailer number that the goods have been loaded onto"
+                                    }
+                                }
+                            },
+                            "haulier": {
+                                "title": "Haulier",
+                                "description": "The Haulier who arrives at site to trasport the goods.  Populates box 5a on the Annex VII and verified with the EA",
+                                "required": [
+                                    "name",
+                                    "organizationId"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "organizationId": {
+                                        "title": "A coded Identifier for the haulier who arrives at site",
+                                        "pattern": "^[a-zA-Z0-9]{7,13}$",
+                                        "type": "string",
+                                        "description": "The haulier identifier is the waste carrier license number, mandated by the EA."
+                                    },
+                                    "name": {
+                                        "title": "Name of Haulier",
+                                        "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                                        "type": "string",
+                                        "description": "Freetext for Haulier Name"
+                                    }
+                                }
+                            },
+                            "dates": {
+                                "title": "Dates",
+                                "required": [
+                                    "actualArrivalTransportEvent",
+                                    "actualDepartureTransportEvent"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "actualDepartureTransportEvent": {
+                                        "title": "The actualDepartureTransportEvent schema",
+                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                        "type": "string",
+                                        "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time."
+                                    },
+                                    "actualArrivalTransportEvent": {
+                                        "title": "The actualArrivalTransportEvent schema",
+                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                        "type": "string",
+                                        "description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh"
+                                    }
+                                },
+                                "description": "Dates relevant to the actual movement of material provided by the loading site "
+                            },
+                            "tradeItem": {
+                                "title": "Trade Item",
+                                "required": [
+                                    "grossWeight",
+                                    "quantity"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "grossWeight": {
+                                        "title": "Gross Weight",
+                                        "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII",
+                                        "required": [
+                                            "value"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "unit": {
+                                                "$ref": "#/components/schemas/UnitOfMeasure"
+                                            },
+                                            "value": {
+                                                "title": "Value",
+                                                "minimum": 1,
+                                                "type": "number",
+                                                "description": "The weight of the material without any equipment (Product Weight)"
+                                            }
+                                        }
+                                    },
+                                    "quantity": {
+                                        "title": "Quantity",
+                                        "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII",
+                                        "minimum": 1,
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "ErrorModel": {
                 "title": "Error Schema Model",
