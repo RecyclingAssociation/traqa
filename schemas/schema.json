@@ -2335,7 +2335,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Document"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2437,7 +2437,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Document"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2521,7 +2521,7 @@
                 "title": "Empty Schema",
                 "type": "object"
             },
-            "Document": {
+            "DocumentRetrieved": {
                 "title": "Document",
                 "type": "object",
                 "description": "A document retrieved for a specific load plan.",
