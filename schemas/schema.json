@@ -3296,9 +3296,6 @@
                                 "type": "string",
                                 "description": "The package type code of the smallest external packing unit eg. BL or BN"
                             },
-                            "harmonizeSystemCode": {
-                                "$ref": "#/components/schemas/HarmonizeSystemCode"
-                            },
                             "description": {
                                 "title": "Description",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
