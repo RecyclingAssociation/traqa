@@ -2680,7 +2680,10 @@
             },
             "Consignee": {
                 "title": "Consignee",
-                "minProperties": 1,
+                "required": [
+                    "address",
+                    "name"
+                ],
                 "type": "object",
                 "properties": {
                     "organizationId": {
@@ -3027,7 +3030,8 @@
                 "title": "Buyer",
                 "description": "Buyer/receiver of shipment. Overwrites the 'buyer' party shown on the commercial invoice",
                 "required": [
-                    "organizationId"
+                    "address",
+                    "name"
                 ],
                 "type": "object",
                 "properties": {
