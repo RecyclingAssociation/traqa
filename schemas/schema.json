@@ -2897,11 +2897,11 @@
                             },
                             "declaration": {
                                 "type": "object",
-                                    "description": "Details required for Customs Declaration",
-                                    "required": [
-                                        "goodsLocation",
-                                        "customsOfficeExit"
-                                    ],
+                                "description": "Details required for Customs Declaration",
+                                "required": [
+                                    "goodsLocation",
+                                    "customsOfficeExit"
+                                ],
                                 "properties": {
                                     "goodsLocation": {
                                         "type": "string",
