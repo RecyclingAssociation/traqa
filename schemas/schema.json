@@ -2233,7 +2233,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
