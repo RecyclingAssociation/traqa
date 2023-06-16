@@ -2842,10 +2842,10 @@
                                 "description": "A group permissions",
                                 "type": "object",
                                 "properties": {
-                                    "Name": {
+                                    "name": {
                                         "type": "String"
                                     },
-                                    "Code": {
+                                    "code": {
                                         "type": "String"
                                     }
                                 }
