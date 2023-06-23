@@ -4,7 +4,7 @@
         "title": "Traqa API",
         "description": "Traqa API to enable communication between Shippers and Load Sites for efficient exchange of data in the recycling supply chain",
         "version": "1.1.1",
-        "contact":{
+        "contact": {
             "name": "Traqa Integrations",
             "url": "https://www.traqa.io",
             "email": "integration@traqa.io"
@@ -265,6 +265,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -282,6 +290,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -379,11 +398,32 @@
         },
         "/loads": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -688,7 +728,39 @@
                         "in": "path",
                         "required": true,
                         "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 52
+                        }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "OPEN",
+                                "COMPLETED"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 2000,
+                            "maximum": 2100
                         }
                     }
                 ],
@@ -707,6 +779,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1084,6 +1167,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1101,6 +1192,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1206,6 +1308,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1223,6 +1333,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1732,6 +1853,16 @@
         },
         "/documents/annexvii": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2098,6 +2229,16 @@
         },
         "/documents/weighbridgeCertificate": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2203,8 +2344,16 @@
                 "parameters": [
                     {
                         "name": "LoadingReference",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -2233,7 +2382,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2315,8 +2464,16 @@
                 "parameters": [
                     {
                         "name": "LoadingReference",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -2335,7 +2492,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Document"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2417,7 +2574,7 @@
                 "parameters": [
                     {
                         "name": "status",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "description": "Notification status",
@@ -2430,7 +2587,7 @@
                     },
                     {
                         "name": "type",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "description": "Notification type",
@@ -2511,7 +2668,7 @@
                 "parameters": [
                     {
                         "name": "organizationId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2519,7 +2676,7 @@
                     },
                     {
                         "name": "datetime",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -2582,7 +2739,7 @@
                 "parameters": [
                     {
                         "name": "taskId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2672,7 +2829,7 @@
                 "parameters": [
                     {
                         "name": "taskId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2842,8 +2999,8 @@
                                 "description": "A group permissions",
                                 "type": "object",
                                 "properties": {
-                                    "name": {
-                                        "type": "String"
+                                    "Name": {
+                                        "type": "string"
                                     },
                                     "code": {
                                         "type": "String"
@@ -2881,20 +3038,20 @@
                                 "type": "object",
                                 "properties": {
                                     "NotificationStatus": {
-                                        "type": "String",
+                                        "type": "string",
                                         "enum": [
                                             "OPEN",
                                             "CLOSED"
                                         ]
                                     },
                                     "NotificationType": {
-                                        "type": "String"
+                                        "type": "string"
                                     },
                                     "TaskId": {
-                                        "type": "String"
+                                        "type": "string"
                                     },
                                     "LoadingReference": {
-                                        "type": "String"
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -2936,7 +3093,7 @@
                     }
                 }
             },
-            "Document": {
+            "DocumentRetrieved": {
                 "title": "Document",
                 "type": "object",
                 "description": "A document retrieved for a specific load plan.",
@@ -2984,7 +3141,9 @@
                 "title": "Ocean Carrier",
                 "description": "The Ocean Carrier for use when containerised freight is moving by deep sea, this will show in Box 5b on the Annex VII",
                 "type": "object",
-                "required": ["organizationId"],
+                "required": [
+                    "organizationId"
+                ],
                 "properties": {
                     "organizationId": {
                         "title": "A coded Identifier known as SCAC for Ocean Carriers",
@@ -3296,7 +3455,7 @@
                     "pern": {
                         "$ref": "#components/schemas/PERN"
                     },
-                    "Customs": {
+                    "customs": {
                         "type": "object",
                         "properties": {
                             "invoice": {
@@ -3331,7 +3490,24 @@
                             },
                             "incoterms": {
                                 "type": "string",
-                                "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                                "enum": [
+                                    "CFR",
+                                    "CIF",
+                                    "CIP",
+                                    "CPT",
+                                    "DAF",
+                                    "DAP",
+                                    "DAT",
+                                    "DDP",
+                                    "DDU",
+                                    "DEQ",
+                                    "DES",
+                                    "EXW",
+                                    "FAS",
+                                    "FCA",
+                                    "FOB",
+                                    "XXX"
+                                ]
                             },
                             "buyer": {
                                 "$ref": "#/components/schemas/Buyer"
@@ -3345,7 +3521,9 @@
                 "title": "Packaging Export Recovery Note (PERN)",
                 "description": "Information about a PERN thats required to appear on the Annex VII in Box 15, if not claiming a PERN omit from the load plan",
                 "type": "object",
-                "required": ["percentage"],
+                "required": [
+                    "percentage"
+                ],
                 "properties": {
                     "percentage": {
                         "title": "Percentage of MT",
