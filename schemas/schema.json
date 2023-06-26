@@ -3113,17 +3113,20 @@
                     "street": {
                         "title": "Street Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "123 Main Street"
                     },
                     "city": {
                         "title": "City",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "Liverpool"
                     },
                     "state": {
                         "title": "State",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "Merseyside"
                     },
                     "postcode": {
                         "title": "Post Code",
@@ -3244,7 +3247,8 @@
                         "title": "The Name of the Ocean Carrier",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "The Name of the carrier in freetext"
+                        "description": "The Name of the carrier in freetext",
+                        "example": "Mediterranean Shipping Company S.A."
                     }
                 }
             },
@@ -3463,10 +3467,10 @@
                         "description": "A coded reference to the location for the port of loading, used in transport provided by the UN, populates Box 11 on the Annex VII for origin country."
                     },
                     "loadingSite": {
-                        "$ref": "#components/schemas/LoadingSite"
+                        "$ref": "#/components/schemas/LoadingSite"
                     },
                     "pern": {
-                        "$ref": "#components/schemas/PERN"
+                        "$ref": "#/components/schemas/PERN"
                     },
                     "customs": {
                         "type": "object",
@@ -3643,8 +3647,27 @@
                 "description": "A coded reference to the location provided by the UN",
                 "example": "GBLIV"
             },
-            "Weights": {
-                "title": "Weights",
+            "Weight": {
+                "required": [
+                    "unit",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "unit": {
+                        "$ref": "#/components/schemas/UnitOfMeasure"
+                    },
+                    "value": {
+                        "title": "Weight Value",
+                        "minimum": 1,
+                        "type": "number",
+                        "description": "The weight of the equipment, product or other",
+                        "example": 26350
+                    }
+                }
+            },
+            "WeighingRecord": {
+                "title": "Weighing Record from Weighbridge to complete load",
                 "required": [
                     "dates",
                     "haulier",
@@ -3745,25 +3768,11 @@
                                 "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
                             },
                             "equipmentTareWeight": {
+                                "allOf": [{
+                                    "$ref": "#/components/schemas/Weight"
+                                }],
                                 "title": "Equipment Tare Weight",
-                                "required": [
-                                    "unit",
-                                    "value"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The Tare weight of a container (empty weight)",
-                                        "example": 3850
-                                    }
-                                },
-                                "description": "The tare weight is required for containerised movements to calculate the VGM."
+                                "description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."
                             },
                             "seal": {
                                 "title": "Seal Number",
@@ -3859,25 +3868,12 @@
                         "type": "object",
                         "properties": {
                             "grossWeight": {
-                                "title": "Gross Weight",
-                                "required": [
-                                    "unit",
-                                    "value"
+                                "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Weight"
+                                }
                                 ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The weight of the material without any equipment (Product Weight)",
-                                        "example": 22500
-                                    }
-                                },
-                                "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII"
+                                "description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
                             },
                             "quantity": {
                                 "title": "Quantity",
@@ -3895,7 +3891,7 @@
                         }
                     },
                     "loadingSite": {
-                        "$ref": "#components/schemas/LoadingSite"
+                        "$ref": "#/components/schemas/LoadingSite"
                     }
                 },
                 "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads, data comes from the weighbridge software. "
@@ -3975,21 +3971,11 @@
                                         }
                                     },
                                     "equipmentTareWeight": {
+                                        "allOf": [{
+                                            "$ref": "#/components/schemas/Weight"
+                                        }],
                                         "title": "Equipment Tare Weight",
-                                        "description": "The tare weight is required for containerised movements to calculate the VGM.",
-                                        "required": [
-                                            "value"
-                                        ],
-                                        "type": "object",
-                                        "properties": {
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The Tare weight of a container (empty weight)",
-                                                "example": 3850
-                                            }
-                                        }
+                                        "description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."
                                     },
                                     "seal": {
                                         "title": "Seal Number",
@@ -4074,24 +4060,12 @@
                                 "type": "object",
                                 "properties": {
                                     "grossWeight": {
-                                        "title": "Gross Weight",
-                                        "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII",
-                                        "required": [
-                                            "value"
-                                        ],
-                                        "type": "object",
-                                        "properties": {
-                                            "unit": {
-                                                "$ref": "#/components/schemas/UnitOfMeasure"
-                                            },
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The weight of the material without any equipment (Product Weight)",
-                                                "example": 22500
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Weight"
                                             }
-                                        }
+                                        ],
+                                        "description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
                                     },
                                     "quantity": {
                                         "title": "Quantity",
