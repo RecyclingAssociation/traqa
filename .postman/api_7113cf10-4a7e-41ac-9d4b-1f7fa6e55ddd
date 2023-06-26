@@ -16,7 +16,9 @@ files[] = {"id":"5836352-abd716bf-1e8e-4d6e-b6f0-4b49a6308732","path":"Traqa.jso
 
 [config.relations.apiDefinition]
 rootDirectory = schemas
+files[] = {"path":"index.json","metaData":{}}
 files[] = {"path":"schema.json","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
-type = openapi:3_1
+type = openapi:3
+rootFiles[] = schema.json
