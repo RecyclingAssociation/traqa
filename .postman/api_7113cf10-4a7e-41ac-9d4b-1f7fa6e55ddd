@@ -9,7 +9,8 @@ id = 7113cf10-4a7e-41ac-9d4b-1f7fa6e55ddd
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"22330284-cfaf8074-f9ea-4998-82e1-11981a0e9355","path":"Traqa UAT_3c705382-dae1-453a-877f-b8e996755263.json","metaData":{}}
+files[] = {"id":"5836352-b5cf4f56-237f-4c5b-b660-3d0935284a42","path":"Traqa UAT_3c705382-dae1-453a-877f-b8e996755263.json","metaData":{}}
+files[] = {"id":"5836352-abd716bf-1e8e-4d6e-b6f0-4b49a6308732","path":"Traqa.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
