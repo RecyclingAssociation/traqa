@@ -3212,7 +3212,8 @@
 						"title": "The Name of the Ocean Carrier",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 						"type": "string",
-						"description": "The Name of the carrier in freetext"
+						"description": "The Name of the carrier in freetext",
+						"example": "Mediterranean Shipping Company S.A."
 					}
 				}
 			},
@@ -3233,7 +3234,8 @@
 					"name": {
 						"title": "Consignee Name",
 						"type": "string",
-						"description": "Free Text Name of the Consignee"
+						"description": "Free Text Name of the Consignee",
+						"example": "Acme Importer"
 					},
 					"address": {
 						"$ref": "#/components/schemas/Address"
@@ -3253,17 +3255,20 @@
 					"personName": {
 						"title": "Person Name",
 						"description": "The name, expressed as text, of this trade contact person.",
-						"type": "string"
+						"type": "string",
+						"example": "Joe Smith"
 					},
 					"telephone": {
 						"title": "Telephone",
 						"description": "Telephone communication information for this trade contact.",
-						"type": "string"
+						"type": "string",
+						"example": "0800 000 0000"
 					},
 					"emailAddress": {
 						"title": "Email Address",
 						"description": "The email address for this trade contact.",
-						"type": "string"
+						"type": "string",
+						"example": "joe@domain.com"
 					}
 				}
 			},
@@ -3271,12 +3276,14 @@
 				"title": "Harmonize System Code",
 				"pattern": "^[0-9]{4,10}$",
 				"type": "string",
-				"description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+				"description": "The Harmonised Commodity Code of the material for Customs reporting purposes",
+				"example": "4707100000"
 			},
 			"VATNumber": {
 				"title": "VAT Number",
 				"type": "string",
-				"pattern": "^[A-Z]{2}\\d{9}$"
+				"pattern": "^[A-Z]{2}\\d{9}$",
+				"example": "GB367877431"
 			},
 			"LoadingSite": {
 				"title": "Loading Site",
@@ -3289,7 +3296,8 @@
 						"title": "Loading Site Code",
 						"pattern": "^[A-Z]{9}$",
 						"type": "string",
-						"description": "A registered BIC Facility Code to identify the facility the material is being loaded at"
+						"description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
+						"example": "GBEDMBIFA"
 					},
 					"address": {
 						"$ref": "#/components/schemas/Address"
@@ -3298,7 +3306,8 @@
 						"title": "Loading Site Name",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 						"type": "string",
-						"description": "Loading Site Name in Freetext"
+						"description": "Loading Site Name in Freetext",
+						"example": "Acme Loading Site Ltd"
 					}
 				},
 				"description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
@@ -3341,20 +3350,23 @@
 								"title": "Carriers Reference Number",
 								"pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
 								"type": "string",
-								"description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements"
+								"description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements",
+								"example": "ONEY12345667"
 							},
 							"shippersIdentifyingNumberForShipment": {
 								"title": "Shippers Identifying Number For Shipment",
 								"pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
 								"type": "string",
-								"description": "A purchase order number for the shipment, could be from shipper or consignee"
+								"description": "A purchase order number for the shipment, could be from shipper or consignee",
+								"example": "400126253"
 							},
 							"pickupReferenceNumber": {
 								"title": "Pickup Reference Number",
 								"minLength": 3,
 								"pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
 								"type": "string",
-								"description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa"
+								"description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa",
+								"example": "OCC-2456-1"
 							}
 						}
 					},
@@ -3382,7 +3394,8 @@
 								"title": "The scheduledLoadingTransportEvent ",
 								"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
 								"type": "string",
-								"description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss"
+								"description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss",
+								"example": "2023-07-01T09:05:49"
 							}
 						},
 						"description": "Dates that are relevent to the load plan, namely the planned date time of loading"
@@ -3402,7 +3415,8 @@
 								"title": "Description of Goods",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 								"type": "string",
-								"description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+								"description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII",
+								"example": "OCC 80/20"
 							}
 						},
 						"description": "The detail for the type of material that is being loaded/exported"
@@ -3511,7 +3525,8 @@
 						"format": "float",
 						"minimum": 1,
 						"maximum": 100,
-						"description": "Percentage of MT to be issued for PERN"
+						"description": "Percentage of MT to be issued for PERN",
+						"example": 65.5
 					}
 				}
 			},
@@ -3528,7 +3543,8 @@
 					"name": {
 						"title": "Recovery Facility Name",
 						"type": "string",
-						"description": "Free Text Name of the Recovery Facility"
+						"description": "Free Text Name of the Recovery Facility",
+						"example": "ACME Recovery Site Ltd"
 					},
 					"address": {
 						"$ref": "#/components/schemas/Address"
@@ -3560,7 +3576,8 @@
 						"title": "Shipper Name",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 						"type": "string",
-						"description": "The Name of the Shipper"
+						"description": "The Name of the Shipper",
+						"example": "ACME Trader Ltd"
 					}
 				}
 			},
@@ -3586,7 +3603,8 @@
 						"title": "Buyer Name",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 						"type": "string",
-						"description": "The Name of the Buyer"
+						"description": "The Name of the Buyer",
+						"example": "ACME Buyer Co"
 					},
 					"vatNumber": {
 						"$ref": "#/components/schemas/VATNumber"
@@ -3597,13 +3615,15 @@
 				"title": "Unit of Measure",
 				"pattern": "^[a-zA-Z]+$",
 				"type": "string",
-				"description": "Units of measure"
+				"description": "Units of measure",
+				"example": "KGM"
 			},
 			"UNLocode": {
 				"title": "The UNLocode schema",
 				"pattern": "^[A-Z0-9]{5}$",
 				"type": "string",
-				"description": "A coded reference to the location provided by the UN"
+				"description": "A coded reference to the location provided by the UN",
+				"example": "GBLIV"
 			},
 			"Weights": {
 				"title": "Weights",
@@ -3631,25 +3651,29 @@
 								"title": "The despatchNoteNumber schema",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
 								"type": "string",
-								"description": "The weighbridge ticket number from the loading site."
+								"description": "The weighbridge ticket number from the loading site.",
+								"example": "40012"
 							},
 							"vehicleIdentificationNumber": {
 								"title": "The vehicleIdentificationNumber schema",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
 								"type": "string",
-								"description": "The registration number of the vehicle, populates box 5a on the Annex VII"
+								"description": "The registration number of the vehicle, populates box 5a on the Annex VII",
+								"example": "NV18 NLD"
 							},
 							"pickupReferenceNumber": {
 								"title": "The pickupReferenceNumber schema",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
 								"type": "string",
-								"description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa"
+								"description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa",
+								"example": "OCC-2456-1"
 							},
 							"driverName": {
 								"title": "The driverName schema",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
 								"type": "string",
-								"description": "Name of the driver. Populates box 5a on the Annex VII"
+								"description": "Name of the driver. Populates box 5a on the Annex VII",
+								"example": "Lee"
 							}
 						},
 						"description": "References that are relevant to the Traqa loads and Shipper and Load Site to enable efficient exchange of loading data"
@@ -3689,13 +3713,15 @@
 										"title": "The weighingDate schema",
 										"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
 										"type": "string",
-										"description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
+										"description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+										"example": "2023-07-01T09:47:38"
 									},
 									"value": {
 										"title": "Value",
 										"minimum": 1,
 										"type": "number",
-										"description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
+										"description": "The weight of the laden trailer or container including the tare weight of a container if appropriate",
+										"example": 26350
 									}
 								},
 								"description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
@@ -3715,7 +3741,8 @@
 										"title": "Value",
 										"minimum": 1,
 										"type": "number",
-										"description": "The Tare weight of a container (empty weight)"
+										"description": "The Tare weight of a container (empty weight)",
+										"example": 3850
 									}
 								},
 								"description": "The tare weight is required for containerised movements to calculate the VGM."
@@ -3744,13 +3771,15 @@
 							"equipmentNumber": {
 								"title": "Equipment Number",
 								"type": "string",
-								"description": "The Container Number OR the Trailer number that the goods have been loaded onto"
+								"description": "The Container Number OR the Trailer number that the goods have been loaded onto",
+								"example": "MAEU1234567"
 							},
 							"equipmentType": {
 								"title": "Equipment Type",
 								"pattern": "^[a-zA-Z0-9]{4}$",
 								"type": "string",
-								"description": "The ISO Size Type for Deep Sea Containers"
+								"description": "The ISO Size Type for Deep Sea Containers",
+								"example": "45G1"
 							}
 						}
 					},
@@ -3766,13 +3795,15 @@
 								"title": "A coded Identifier for the haulier who arrives at site",
 								"pattern": "^[a-zA-Z0-9]{7,13}$",
 								"type": "string",
-								"description": "The haulier identifier is the waste carrier license number, mandated by the EA."
+								"description": "The haulier identifier is the waste carrier license number, mandated by the EA.",
+								"example": "CBDU1234567"
 							},
 							"name": {
 								"title": "Name of Haulier",
 								"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
 								"type": "string",
-								"description": "Freetext for Haulier Name"
+								"description": "Freetext for Haulier Name",
+								"example": "Acme Haulage Co"
 							}
 						},
 						"description": "The Haulier who arrives at site to trasport the goods.  Populates box 5a on the Annex VII and verified with the EA"
@@ -3789,13 +3820,15 @@
 								"title": "The actualDepartureTransportEvent schema",
 								"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
 								"type": "string",
-								"description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time."
+								"description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time.",
+								"example": "2023-07-01T09:47:38"
 							},
 							"actualArrivalTransportEvent": {
 								"title": "The actualArrivalTransportEvent schema",
 								"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
 								"type": "string",
-								"description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh"
+								"description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh",
+								"example": "2023-07-01T08:30:38"
 							}
 						},
 						"description": "Dates relevant to the actual movement of material provided by the loading site "
@@ -3822,7 +3855,8 @@
 										"title": "Value",
 										"minimum": 1,
 										"type": "number",
-										"description": "The weight of the material without any equipment (Product Weight)"
+										"description": "The weight of the material without any equipment (Product Weight)",
+										"example": 22500
 									}
 								},
 								"description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII"
@@ -3831,12 +3865,14 @@
 								"title": "Quantity",
 								"minimum": 1,
 								"type": "number",
-								"description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
+								"description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII",
+								"example": 22
 							},
 							"packageTypeCode": {
 								"title": "Package",
 								"type": "string",
-								"description": "The package type code of the smallest external packing unit eg. BL or BN"
+								"description": "The package type code of the smallest external packing unit eg. BL or BN",
+								"example": "BN"
 							}
 						}
 					},
@@ -3908,13 +3944,15 @@
 												"title": "The weighingDate schema",
 												"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
 												"type": "string",
-												"description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
+												"description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+												"example": "2023-07-01T09:47:38"
 											},
 											"value": {
 												"title": "Value",
 												"minimum": 1,
 												"type": "number",
-												"description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
+												"description": "The weight of the laden trailer or container including the tare weight of a container if appropriate",
+												"example": 26350
 											}
 										}
 									},
@@ -3930,7 +3968,8 @@
 												"title": "Value",
 												"minimum": 1,
 												"type": "number",
-												"description": "The Tare weight of a container (empty weight)"
+												"description": "The Tare weight of a container (empty weight)",
+												"example": 3850
 											}
 										}
 									},
@@ -4031,7 +4070,8 @@
 												"title": "Value",
 												"minimum": 1,
 												"type": "number",
-												"description": "The weight of the material without any equipment (Product Weight)"
+												"description": "The weight of the material without any equipment (Product Weight)",
+												"example": 22500
 											}
 										}
 									},
