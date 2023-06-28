@@ -3037,25 +3037,25 @@
                         "items": {
                             "type": "object",
                             "properties": {
-                                "Notification": {
+                                "notification": {
                                     "title": "Notification",
                                     "description": "A notification",
                                     "type": "object",
                                     "properties": {
-                                        "NotificationStatus": {
+                                        "notificationStatus": {
                                             "type": "string",
                                             "enum": [
                                                 "OPEN",
                                                 "CLOSED"
                                             ]
                                         },
-                                        "NotificationType": {
+                                        "notificationType": {
                                             "type": "string"
                                         },
-                                        "TaskId": {
+                                        "taskId": {
                                             "type": "string"
                                         },
-                                        "LoadingReference": {
+                                        "loadingReference": {
                                             "type": "string"
                                         }
                                     }
@@ -3081,17 +3081,17 @@
                 "type": "object",
                 "description": "Information on a particular party's task",
                 "properties": {
-                    "Task": {
+                    "task": {
                         "title": "Task",
                         "description": "A task",
                         "type": "object"
                     },
-                    "TaskType": {
+                    "taskType": {
                         "title": "Task type",
                         "description": "Type of the task retrieved",
                         "type": "string"
                     },
-                    "DateOfRequest": {
+                    "dateOfRequest": {
                         "title": "Date Retrieved",
                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                         "type": "string",
