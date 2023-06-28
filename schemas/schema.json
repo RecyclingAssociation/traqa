@@ -2343,7 +2343,7 @@
             "get": {
                 "parameters": [
                     {
-                        "name": "LoadingReference",
+                        "name": "loadingReference",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -2463,7 +2463,7 @@
             "get": {
                 "parameters": [
                     {
-                        "name": "LoadingReference",
+                        "name": "loadingReference",
                         "in": "query",
                         "required": true,
                         "schema": {
