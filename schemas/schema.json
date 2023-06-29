@@ -27,7 +27,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Weights"
+                                "$ref": "#/components/schemas/WeighingRecord"
                             }
                         }
                     },
@@ -2989,36 +2989,39 @@
                 "type": "object",
                 "description": "Information on a user's available permissions groups",
                 "properties": {
-                    "Groups": {
+                    "groups": {
                         "title": "Groups",
                         "type": "array",
                         "description": "A list of permission groups",
                         "items": {
-                            "Group": {
-                                "title": "Group",
-                                "description": "A group permissions",
-                                "type": "object",
-                                "properties": {
-                                    "Name": {
-                                        "type": "string"
-                                    },
-                                    "Code": {
-                                        "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "group": {
+                                    "title": "Group",
+                                    "description": "A group permissions",
+                                    "type": "object",
+                                    "properties": {
+                                        "Name": {
+                                            "type": "string"
+                                        },
+                                        "Code": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
-                        },
-                        "Count": {
-                            "title": "Groups Count",
-                            "description": "number of groups retrieved",
-                            "type": "number"
-                        },
-                        "DateOfRequest": {
-                            "title": "Date Retrieved",
-                            "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                            "type": "string",
-                            "description": "The date that the permissions information was requested in ISO 8601 format"
                         }
+                    },
+                    "count": {
+                        "title": "Groups Count",
+                        "description": "number of groups retrieved",
+                        "type": "number"
+                    },
+                    "dateOfRequest": {
+                        "title": "Date Retrieved",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "type": "string",
+                        "description": "The date that the permissions information was requested in ISO 8601 format"
                     }
                 }
             },
@@ -3027,42 +3030,45 @@
                 "type": "object",
                 "description": "Information on a party's notifications",
                 "properties": {
-                    "Notifications": {
+                    "notifications": {
                         "title": "Notifications",
                         "type": "array",
                         "description": "A list of notifications",
                         "items": {
-                            "Notification": {
-                                "title": "Notification",
-                                "description": "A notification",
-                                "type": "object",
-                                "properties": {
-                                    "NotificationStatus": {
-                                        "type": "string",
-                                        "enum": [
-                                            "OPEN",
-                                            "CLOSED"
-                                        ]
-                                    },
-                                    "NotificationType": {
-                                        "type": "string"
-                                    },
-                                    "TaskId": {
-                                        "type": "string"
-                                    },
-                                    "LoadingReference": {
-                                        "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "notification": {
+                                    "title": "Notification",
+                                    "description": "A notification",
+                                    "type": "object",
+                                    "properties": {
+                                        "notificationStatus": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OPEN",
+                                                "CLOSED"
+                                            ]
+                                        },
+                                        "notificationType": {
+                                            "type": "string"
+                                        },
+                                        "taskId": {
+                                            "type": "string"
+                                        },
+                                        "loadingReference": {
+                                            "type": "string"
+                                        }
                                     }
-                                }
                             }
+                            } 
                         }
                     },
-                    "Count": {
+                    "count": {
                         "title": "Notifications Count",
                         "description": "number of notifications retrieved",
                         "type": "number"
                     },
-                    "DateOfRequest": {
+                    "dateOfRequest": {
                         "title": "Date Retrieved",
                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                         "type": "string",
@@ -3075,17 +3081,17 @@
                 "type": "object",
                 "description": "Information on a particular party's task",
                 "properties": {
-                    "Task": {
+                    "task": {
                         "title": "Task",
                         "description": "A task",
                         "type": "object"
                     },
-                    "TaskType": {
+                    "taskType": {
                         "title": "Task type",
                         "description": "Type of the task retrieved",
                         "type": "string"
                     },
-                    "DateOfRequest": {
+                    "dateOfRequest": {
                         "title": "Date Retrieved",
                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                         "type": "string",
@@ -3736,36 +3742,31 @@
                                     "weighingDate",
                                     "weightVerificationMethod"
                                 ],
-                                "type": "object",
-                                "properties": {
-                                    "weightVerificationMethod": {
-                                        "title": "Weight Verification Method",
-                                        "type": "string",
-                                        "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
-                                        "enum": [
-                                            "1",
-                                            "2"
-                                        ]
+                                "allOf": [
+                                { "$ref": "#/components/schemas/Weight"},
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "weightVerificationMethod": {
+                                            "title": "Weight Verification Method",
+                                            "type": "string",
+                                            "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
+                                            "enum": [
+                                                "1",
+                                                "2"
+                                            ]
+                                        },
+                                        "weighingDate": {
+                                            "title": "The weighingDate schema",
+                                            "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                            "type": "string",
+                                            "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+                                            "example": "2023-07-01T09:47:38"
+                                        }
                                     },
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "weighingDate": {
-                                        "title": "The weighingDate schema",
-                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                        "type": "string",
-                                        "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
-                                        "example": "2023-07-01T09:47:38"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate",
-                                        "example": 26350
-                                    }
-                                },
-                                "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
+                                    "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
+                                }
+                                ]
                             },
                             "equipmentTareWeight": {
                                 "allOf": [{
@@ -3949,26 +3950,35 @@
                                         "title": "Verified Weight",
                                         "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety.",
                                         "required": [
+                                            "unit",
                                             "value",
                                             "weighingDate"
                                         ],
-                                        "type": "object",
-                                        "properties": {
-                                            "weighingDate": {
-                                                "title": "The weighingDate schema",
-                                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                                "type": "string",
-                                                "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
-                                                "example": "2023-07-01T09:47:38"
+                                        "allOf": [
+                                        { "$ref": "#/components/schemas/Weight"},
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "weightVerificationMethod": {
+                                                    "title": "Weight Verification Method",
+                                                    "type": "string",
+                                                    "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
+                                                    "enum": [
+                                                        "1",
+                                                        "2"
+                                                    ]
+                                                },
+                                                "weighingDate": {
+                                                    "title": "The weighingDate schema",
+                                                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                                    "type": "string",
+                                                    "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+                                                    "example": "2023-07-01T09:47:38"
+                                                }
                                             },
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate",
-                                                "example": 26350
-                                            }
+                                            "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
                                         }
+                                        ]
                                     },
                                     "equipmentTareWeight": {
                                         "allOf": [{
