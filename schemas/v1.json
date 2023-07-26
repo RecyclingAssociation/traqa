@@ -2230,8 +2230,17 @@
             "Buyer": {
                 "title": "Buyer",
                 "description": "Buyer/receiver of shipment. Overwrites the 'buyer' party shown on the commercial invoice",
-                "required": [
-                    "organizationId"
+                "anyOf": [
+                    {
+                        "required": [
+                            "organizationId"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "name"
+                        ]
+                    }
                 ],
                 "type": "object",
                 "properties": {
