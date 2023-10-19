@@ -31,6 +31,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful token response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -92,6 +99,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful permissions response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -179,6 +193,11 @@
                     "200": {
                         "description": "Successful loads retrieval response",
                         "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
                             "pagination-token": {
                                 "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
@@ -278,6 +297,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful loads post response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -399,6 +425,11 @@
                     "200": {
                         "description": "200 response",
                         "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
                             "pagination-token": {
                                 "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
@@ -511,6 +542,11 @@
                     "200": {
                         "description": "200 response",
                         "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
                             "pagination-token": {
                                 "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
@@ -626,6 +662,11 @@
                     "200": {
                         "description": "200 response",
                         "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
                             "pagination-token": {
                                 "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
@@ -727,6 +768,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful weights post response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -835,6 +883,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful pre-Annex VII retrieval response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -942,6 +997,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful Annex VII retrieval response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1067,6 +1129,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful document post response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1144,6 +1213,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful Weighbridge Certificate retrieval response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1269,6 +1345,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful document post response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1346,6 +1429,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful Commercial Invoice retrieval response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1458,6 +1548,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful photos retrieval response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1553,6 +1650,13 @@
                 "responses": {
                     "200": {
                         "description": "Successful document post response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
