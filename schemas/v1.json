@@ -21,75 +21,121 @@
         }
     ],
     "paths": {
-        "/weights": {
+        "/getToken": {
             "post": {
+                "summary": "Obtain an access token",
                 "tags": [
-                    "Weights"
+                    "Authentication"
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/WeighingRecord"
-                            }
-                        }
-                    },
-                    "required": true
-                },
+                "description": "Before making requests you need to authorise and exchange your username and password for an IdToken that can be passed in subsequent requests.\nThe token will expire after 60 minutes.\nYou can use the RefreshToken (which expires after 1 month).\nTo refresh: send a POST request to the getToken endpoint with the header refresh_token.",
                 "responses": {
                     "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful token response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/Response200Token"
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions": {
+            "get": {
+                "summary": "Retrieve all permissions",
+                "tags": [
+                    "Authentication"
+                ],
+                "description": "Retrieve the identifiers of every party which the requestor has the permission to make requests on behalf of.",
+                "responses": {
+                    "200": {
+                        "description": "Successful permissions response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionsRetrieved"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -107,79 +153,98 @@
         },
         "/loads": {
             "get": {
+                "summary": "Retrieve loadplan(s) details",
                 "tags": [
                     "Load Plans"
                 ],
+                "description": "Retrieve details for a particular loadplan, or set of loadplans.",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/PaginationToken"
+                        "$ref": "#/components/parameters/PaginationTokenRequestHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanOrderQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanStatusQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanLimitQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "200 response",
+                        "description": "Successful loads retrieval response",
                         "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            },
                             "pagination-token": {
-                                "schema": {
-                                    "type": "string",
-                                    "description": "Last load-plan key retrieved"
-                                }
-                            },
-                            "Access-Control-Expose-Headers": {
-                                "schema": {
-                                    "type": "string"
-                                }
+                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Loadplan"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/LoadplanCompleted"
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -195,9 +260,11 @@
                 ]
             },
             "post": {
+                "summary": "Post or update loadplan details",
                 "tags": [
                     "Load Plans"
                 ],
+                "description": "Post or update the details for a particular loadplan that has yet to be loaded.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -210,14 +277,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful loads post response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -227,41 +287,72 @@
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "missingProperty": {
+                                        "value": {
+                                            "errorType": "BAD_REQUEST_BODY",
+                                            "ErrorMessage": "[object has missing required properties ([\"loadingSite\"])]",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post loadplan details without specifying the relevant loading site's identifier."
+                                    }
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "alreadyCompleted": {
+                                        "value": {
+                                            "errorType": "BadRequest",
+                                            "errorMessage": "Load Has Already Been Completed",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post loadplan details for a load which has already been 'completed' (loaded)."
+                                    },
+                                    "lackOfPermission": {
+                                        "value": {
+                                            "errorType": "Forbidden",
+                                            "errorMessage": "",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post loadplan details and specified a shipper which they do not have the permissions to act on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -275,375 +366,105 @@
                         "api_key": []
                     }
                 ]
-            }
-        },
-        "/loads/byWeekNo/{weekNo}": {
-            "get": {
-                "tags": [
-                    "Load Plans"
-                ],
-                "parameters": [
-                    {
-                        "name": "weekNo",
-                        "in": "path",
-                        "required": true,
-                        "description": "ISO Week number of the year",
-                        "schema": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 53
-                        }
-                    },
-                    {
-                        "$ref": "#/components/parameters/PaginationToken"
-                    },
-                    {
-                        "name": "status",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "OPEN",
-                                "COMPLETED"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "year",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "minimum": 2000,
-                            "maximum": 2100
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            },
-                            "pagination-token": {
-                                "schema": {
-                                    "type": "string",
-                                    "description": "Last load-plan key retrieved"
-                                }
-                            },
-                            "Access-Control-Expose-Headers": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
-        "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
-            "post": {
-                "tags": [
-                    "Photos"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    },
-                    {
-                        "$ref": "#/components/parameters/ShipperOrganizationId"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/documents/weighbridgeCertificate/{loadingReference}": {
-            "post": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
             }
         },
         "/loads/byDate/{date}": {
             "get": {
+                "summary": "Retrieve loadplan(s) details by scheduled loading date",
                 "tags": [
                     "Load Plans"
                 ],
+                "description": "Retrieve details for a particular loadplan, or set of loadplans that are scheduled to be loaded at a particular date (or time).",
                 "parameters": [
                     {
-                        "name": "date",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "$ref": "#/components/parameters/ScheduledLoadingDatePathParameter"
                     },
                     {
-                        "$ref": "#/components/parameters/PaginationToken"
+                        "$ref": "#/components/parameters/PaginationTokenRequestHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanOrderQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanStatusQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanLimitQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "200 response",
                         "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            },
                             "pagination-token": {
-                                "schema": {
-                                    "type": "string",
-                                    "description": "Last load-plan key retrieved"
-                                }
-                            },
-                            "Access-Control-Expose-Headers": {
-                                "schema": {
-                                    "type": "string"
-                                }
+                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Loadplan"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/LoadplanCompleted"
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -661,82 +482,101 @@
         },
         "/loads/byLoadingReference/{loadingReference}": {
             "get": {
+                "summary": "Retrieve loadplan(s) details by loading reference",
                 "tags": [
                     "Load Plans"
                 ],
+                "description": "Retrieve details for a particular loadplan, or set of loadplans that have a particular identifying reference.",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
+                        "$ref": "#/components/parameters/LoadingReferencePathParameter"
                     },
                     {
-                        "$ref": "#/components/parameters/PaginationToken"
+                        "$ref": "#/components/parameters/PaginationTokenRequestHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanOrderQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanStatusQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanLimitQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "200 response",
                         "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            },
                             "pagination-token": {
-                                "schema": {
-                                    "type": "string",
-                                    "description": "Last load-plan key retrieved"
-                                }
-                            },
-                            "Access-Control-Expose-Headers": {
-                                "schema": {
-                                    "type": "string"
-                                }
+                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Loadplan"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/LoadplanCompleted"
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -752,308 +592,106 @@
                 ]
             }
         },
-        "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
-            "post": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    },
-                    {
-                        "$ref": "#/components/parameters/ShipperOrganizationId"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/photos/byLoadingReference/{loadingReference}": {
+        "/loads/byWeekNo/{weekNo}": {
             "get": {
+                "summary": "Retrieve loadplan(s) details by scheduled loading date week number",
                 "tags": [
-                    "Photos"
+                    "Load Plans"
                 ],
+                "description": "Retrieve details for a particular loadplan, or set of loadplans that are scheduled to be loaded in a particular week.",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
+                        "$ref": "#/components/parameters/WeekNumberPathParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/YearPathParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/PaginationTokenRequestHeader"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanOrderQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanStatusQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/LoadplanLimitQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "200 response",
                         "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
+                            "pagination-token": {
+                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Loadplan"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/LoadplanCompleted"
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Photos"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/documents/annexvii": {
-            "get": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/OrganizationId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -1069,21 +707,26 @@
                 ]
             }
         },
-        "/getToken": {
+        "/weights": {
             "post": {
+                "summary": "Post the weighing record details for a load",
                 "tags": [
-                    "Authentication"
+                    "Weights"
                 ],
+                "description": "Post the weighing record details for a particular loadplan that has yet to be loaded.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WeighingRecord"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful weights post response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1093,273 +736,72 @@
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "missingProperty": {
+                                        "value": {
+                                            "errorType": "BAD_REQUEST_BODY",
+                                            "ErrorMessage": "[object has missing required properties ([\"loadingSite\"])]",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post weighing record details without specifying the relevant loading site's identifier."
+                                    }
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "alreadyCompleted": {
+                                        "value": {
+                                            "errorType": "BadRequest",
+                                            "errorMessage": "Load Has Already Been Completed",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post weighing record details for a load which has already been 'completed' (loaded)."
+                                    },
+                                    "lackOfPermission": {
+                                        "value": {
+                                            "errorType": "Forbidden",
+                                            "errorMessage": "",
+                                            "requestId": "886f4d53-f256-43c6-85da-944a3d1cde71",
+                                            "requestTime": "29/Sep/2023:08:42:49 +0000"
+                                        },
+                                        "summary": "Error message when requestor has attempted to post weighing record details and specified a loading site which they do not have the permissions to act on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/documents/annexvii/{loadingReference}": {
-            "post": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
-            "post": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/LoadingReferencePath"
-                    },
-                    {
-                        "$ref": "#/components/parameters/ShipperOrganizationId"
-                    }
-                ],
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/documents/weighbridgeCertificate": {
-            "get": {
-                "tags": [
-                    "Documents"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/OrganizationId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Empty"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "400 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "403 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "404 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "500 response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -1377,71 +819,500 @@
         },
         "/documents/preAnnexvii": {
             "get": {
+                "summary": "Retrieve the pre-Annex VII of a loadplan",
                 "tags": [
                     "Documents"
                 ],
+                "description": "Retrieve a loadplan's Annex VII with placeholders in the instance where it has yet to be loaded.",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/LoadingReferenceQuery"
+                        "$ref": "#/components/parameters/LoadingReferenceQueryParameter"
                     },
                     {
-                        "$ref": "#/components/parameters/OrganizationId"
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful pre-Annex VII retrieval response",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/DocumentRetrieved"
+                                },
+                                "examples": {
+                                    "retrievedPreAnnexVII": {
+                                        "value": {
+                                            "document": "https://dev-traqa-application-preannexviioutputbucket-..."
+                                        },
+                                        "summary": "Successfully retrieved the pre-Annex VII for a loadplan."
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId query parameter"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a pre-Annex VII document but has multiple permissions, making the specified loading reference ambiguous as to which organisation it belongs to."
+                                    },
+                                    "invalidLoadref": {
+                                        "value": {
+                                            "message": "Invalid Loading Reference Provided"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a pre-Annex VII document but has specified a loading reference which is not on record for the given organisation."
+                                    }
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "403 response",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "404 response",
+                        "description": "Requested resource not found response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/annexvii": {
+            "get": {
+                "summary": "Retrieve the Annex VII of a loadplan",
+                "tags": [
+                    "Documents"
+                ],
+                "description": "Retrieve a loadplan's Annex VII.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferenceQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Annex VII retrieval response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
+                                },
+                                "examples": {
+                                    "retrievedAnnexVII": {
+                                        "value": {
+                                            "document": "https://dev-traqa-application-annexviioutputbucket-..."
+                                        },
+                                        "summary": "Successfully retrieved the Annex VII for a loadplan."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId query parameter"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Annex VII document but has multiple permissions, making the specified loading reference ambiguous as to which organisation it belongs to."
+                                    },
+                                    "invalidLoadref": {
+                                        "value": {
+                                            "message": "Invalid Loading Reference Provided"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Annex VII document but has specified a loading reference which is not on record for the given organisation."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                },
+                                "examples": {
+                                    "notFound": {
+                                        "value": {
+                                            "message": "Document Not Found"
+                                        },
+                                        "summary": "Document not found for the loadplan as it doesn't exist."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
+            "post": {
+                "summary": "Add the Annex VII of a loadplan",
+                "tags": [
+                    "Documents"
+                ],
+                "description": "Add the Annex VII document for a loadplan. This can be a scan/image/pdf file",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferencePathParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ShipperOrganizationIdPathParameter"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FilePostRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful document post response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/weighbridgeCertificate": {
+            "get": {
+                "summary": "Retrieve the Weighbridge Certificate of a loadplan",
+                "tags": [
+                    "Documents"
+                ],
+                "description": "Retrieve a loadplan's Weighbridge Certificate.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferenceQueryParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Weighbridge Certificate retrieval response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
+                                },
+                                "examples": {
+                                    "retrievedAnnexVII": {
+                                        "value": {
+                                            "document": "https://dev-traqa-application-weighbridgeticketoutputbuck-..."
+                                        },
+                                        "summary": "Successfully retrieved the Weighbridge Certificate for a loadplan."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId query parameter"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Weighbridge Certificate document but has multiple permissions, making the specified loading reference ambiguous as to which organisation it belongs to."
+                                    },
+                                    "invalidLoadref": {
+                                        "value": {
+                                            "message": "Invalid Loading Reference Provided"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Weighbridge Certificate document but has specified a loading reference which is not on record for the given organisation."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                },
+                                "examples": {
+                                    "notFound": {
+                                        "value": {
+                                            "message": "Document Not Found"
+                                        },
+                                        "summary": "Document not found for the loadplan as it doesn't exist."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
+            "post": {
+                "summary": "Add the Weighbridge Certificate of a loadplan",
+                "tags": [
+                    "Documents"
+                ],
+                "description": "Add the Weighbridge Certificate document for a loadplan. This can be a scan/image/pdf file",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferencePathParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ShipperOrganizationIdPathParameter"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FilePostRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful document post response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -1459,61 +1330,104 @@
         },
         "/documents/commercialInvoice": {
             "get": {
+                "summary": "Retrieve the Commercial Invoice of a loadplan",
                 "tags": [
                     "Documents"
                 ],
+                "description": "Retrieve a loadplan's Commercial Invoice.",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/LoadingReferenceQuery"
+                        "$ref": "#/components/parameters/LoadingReferenceQueryParameter"
                     },
                     {
-                        "$ref": "#/components/parameters/OrganizationId"
+                        "$ref": "#/components/parameters/OrganizationIdQueryParameter"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "The request was successful. Will return empty JSON if commercial invoice does not exist for a valid load plan.",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful Commercial Invoice retrieval response",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/DocumentRetrieved"
+                                },
+                                "examples": {
+                                    "retrievedAnnexVII": {
+                                        "value": {
+                                            "document": "https://dev-traqa-application-commercialinvoicebuck-..."
+                                        },
+                                        "summary": "Successfully retrieved the Commercial Invoice for a loadplan."
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "The request could not be understood of was missing the required loading reference parameter",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId query parameter"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Commercial Invoice document but has multiple permissions, making the specified loading reference ambiguous as to which organisation it belongs to."
+                                    },
+                                    "invalidLoadref": {
+                                        "value": {
+                                            "message": "Invalid Loading Reference Provided"
+                                        },
+                                        "summary": "Error message when requestor has attempted to retrieve a Commercial Invoice document but has specified a loading reference which is not on record for the given organisation."
+                                    }
                                 }
                             }
                         }
                     },
                     "403": {
-                        "description": "User forbidden from accessing this resource",
+                        "description": "Forbidden request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response403"
+                                },
+                                "examples": {
+                                    "multiplePermissions": {
+                                        "value": {
+                                            "message": "Missing organizationId Query String"
+                                        },
+                                        "summary": "Error message when requestor has multiple permissions but has not specified which one they are acting on behalf of."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                },
+                                "examples": {
+                                    "notFound": {
+                                        "value": {
+                                            "message": "Document Not Found"
+                                        },
+                                        "summary": "Document not found for the loadplan as it doesn't exist."
+                                    }
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "An unexpected error occurred on the server",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -1529,45 +1443,160 @@
                 ]
             }
         },
-        "/permissions": {
+        "/photos/byLoadingReference/{loadingReference}": {
             "get": {
+                "summary": "Retrieve the photos of a loadplan",
                 "tags": [
-                    "Authentication"
+                    "Photos"
+                ],
+                "description": "Retrieve photos associated with a loadplan. Such as container, equipment and trailer images.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferencePathParameter"
+                    }
                 ],
                 "responses": {
                     "200": {
-                        "description": "200 response",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
+                        "description": "Successful photos retrieval response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PermissionsRetrieved"
+                                    "$ref": "#/components/schemas/PhotosRetrieved"
+                                },
+                                "examples": {
+                                    "noPhotos": {
+                                        "value": {
+                                            "photos": []
+                                        },
+                                        "summary": "If the loading reference is unrecognised or there are no photos associated with the loadplan, then an empty list is returned."
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "400 response",
+                        "description": "Bad request response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response400"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
                                 }
                             }
                         }
                     },
                     "500": {
-                        "description": "500 response",
+                        "description": "Unexpected server error response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorModel"
+                                    "$ref": "#/components/schemas/Response500"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
+            "post": {
+                "summary": "Post photos for a loadplan",
+                "tags": [
+                    "Photos"
+                ],
+                "description": "Post photos of containers/equipment/trailers etc. associated with the loading of a loadplan.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/LoadingReferencePathParameter"
+                    },
+                    {
+                        "$ref": "#/components/parameters/ShipperOrganizationIdPathParameter"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FilePostRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful document post response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response400"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden request response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response403"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Requested resource not found response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected server error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response500"
                                 }
                             }
                         }
@@ -1585,109 +1614,7 @@
         }
     },
     "components": {
-        "parameters": {
-            "OrganizationId": {
-                "name": "organizationId",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "shipperEORI": {
-                        "value": "GB123456789000",
-                        "summary": "EORI Number for Shipper",
-                        "description": "This format represents an EORI number. It starts with 'GB' followed by a 12 digit number."
-                    },
-                    "shipperTraqaCode": {
-                        "value": "TQGBACMEL",
-                        "summary": "Traqa Code for Shipper",
-                        "description": "This format represents a Traqa code. It starts with 'TQ'."
-                    },
-                    "loadingSite": {
-                        "value": "GBLIVRFAC",
-                        "summary": "BIC Facility Code Identifier",
-                        "description": "This represents a BIC Facility Code Identifier."
-                    }
-                }
-            },
-            "ShipperOrganizationId": {
-                "name": "shipperOrganizationId",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "shipperEORI": {
-                        "value": "GB123456789000",
-                        "summary": "EORI Number for Shipper",
-                        "description": "This format represents an EORI number. It starts with 'GB' followed by a 12 digit number."
-                    },
-                    "shipperTraqaCode": {
-                        "value": "TQGBACMEL",
-                        "summary": "Traqa Code for Shipper",
-                        "description": "This format represents a Traqa code. It starts with 'TQ'."
-                    }
-                }
-            },
-            "PaginationToken": {
-                "name": "pagination-token",
-                "in": "header",
-                "required": false,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "paginationTokenExample": {
-                        "value": "ZXhhbXBsZQo=",
-                        "summary": "Header that enables pagination."
-                    }
-                }
-            },
-            "ContainerNumber": {
-                "name": "containerNumber",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "containerNumber": {
-                        "value": "ABCU1234561",
-                        "summary": "Valid Equipment Number."
-                    }
-                }
-            },
-            "LoadingReferencePath": {
-                "name": "loadingReference",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "loadingReference": {
-                        "value": "LR12345-1",
-                        "summary": "Loading Reference to identify a load."
-                    }
-                }
-            },
-            "LoadingReferenceQuery": {
-                "name": "loadingReference",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "examples": {
-                    "loadingReference": {
-                        "value": "LR12345-1",
-                        "summary": "Loading Reference to identify a load."
-                    }
-                }
-            }
-        },
+        "parameters": {},
         "schemas": {
             "Empty": {
                 "title": "Empty Schema",
@@ -1714,6 +1641,20 @@
                             }
                         }
                     }
+                },
+                "example": {
+                    "Groups": [
+                        {
+                            "Name": "demo shipper 1",
+                            "Code": "TQGBDEMOA"
+                        },
+                        {
+                            "Name": "demo shipper 2",
+                            "Code": "TQGBTESTA"
+                        }
+                    ],
+                    "Count": 2,
+                    "DateOfRequest": "2023-09-28T16:44:08"
                 }
             },
             "DocumentRetrieved": {
@@ -1726,6 +1667,9 @@
                         "type": "string",
                         "pattern": "^https:\\/\\/\\w+\\.s3\\.amazonaws\\.com\\/[\\w-]+\\.pdf\\?AWSAccessKeyId=[\\w]+&Signature=[\\w%]+&x-amz-security-token=[\\w%]+&Expires=\\d+$\n"
                     }
+                },
+                "example": {
+                    "document": "https://prod-traqa-application-..."
                 }
             },
             "Address": {
