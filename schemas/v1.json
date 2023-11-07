@@ -1718,7 +1718,291 @@
         }
     },
     "components": {
-        "parameters": {},
+        "parameters": {
+            "AuthorizationRequestHeader": {
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "schema": {
+                    "title": "Basic authentication credentials",
+                    "description": "base64-encoded username:password prefixed with 'Basic'",
+                    "type": "string"
+                },
+                "examples": {
+                    "authorizationExample": {
+                        "value": "Basic YXNkZ...",
+                        "summary": "Header for authorization."
+                    }
+                }
+            },
+            "AuthorizationTokenRequestHeader": {
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "schema": {
+                    "title": "User-specific access token",
+                    "description": "Access token (following OAuth 2.0 standard) with no prefix",
+                    "type": "string"
+                },
+                "examples": {
+                    "authorizationTokenExample": {
+                        "value": "eyJraW...",
+                        "summary": "Header for authorization."
+                    }
+                }
+            },
+            "PaginationTokenRequestHeader": {
+                "name": "pagination-token",
+                "in": "header",
+                "required": false,
+                "schema": {
+                    "title": "Pagination token header",
+                    "description": "Allows pagination of response.",
+                    "type": "string"
+                },
+                "examples": {
+                    "paginationTokenExample": {
+                        "value": "ZXhhbXBsZQo=",
+                        "summary": "Header that enables pagination."
+                    }
+                }
+            },
+            "PaginationTokenResponseHeader": {
+                "name": "pagination-token",
+                "in": "header",
+                "required": false,
+                "schema": {
+                    "title": "Pagination token header",
+                    "description": "Allows pagination of response. Passing this value in to subsequent requests retrieves subsequent values from a set.",
+                    "type": "string"
+                },
+                "examples": {
+                    "paginationTokenExample": {
+                        "value": "ZXhhbXBsZQo=",
+                        "summary": "Header that enables pagination."
+                    }
+                }
+            },
+            "OrganizationIdQueryParameter": {
+                "name": "organizationId",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                },
+                "examples": {
+                    "shipperEORI": {
+                        "value": "GB123456789000",
+                        "summary": "EORI Number for Shipper",
+                        "description": "This format represents an EORI number. It starts with 'GB' followed by a 12 digit number."
+                    },
+                    "shipperTraqaCode": {
+                        "value": "TQGBACMEL",
+                        "summary": "Traqa Code for Shipper",
+                        "description": "This format represents a Traqa code. It starts with 'TQ'."
+                    },
+                    "loadingSite": {
+                        "value": "GBLIVRFAC",
+                        "summary": "BIC Facility Code Identifier",
+                        "description": "This represents a BIC Facility Code Identifier."
+                    }
+                }
+            },
+            "LoadplanOrderQueryParameter": {
+                "name": "order",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "title": "Order of loadplans",
+                    "description": "Orders retrieved loadplans by scheduled loading date. By default, in ascending order.",
+                    "type": "string",
+                    "enum": [
+                        "asc",
+                        "desc"
+                    ]
+                },
+                "examples": {
+                    "ascending": {
+                        "value": "asc",
+                        "summary": "Order loadplans in ascending order",
+                        "description": "This orders the retrieved loadplans in ascending scheduled load-date."
+                    },
+                    "descending": {
+                        "value": "desc",
+                        "summary": "Order loadplans in descending order",
+                        "description": "This orders the retrieved loadplans in descending scheduled load-date."
+                    }
+                }
+            },
+            "LoadplanStatusQueryParameter": {
+                "name": "status",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "title": "Status of loadplans",
+                    "description": "Filters retrieved loadplans by status. OPEN loads have yet to be loaded. COMPLETED loads are loaded. By default, retrieves loadplans of both statuses.",
+                    "type": "string",
+                    "enum": [
+                        "OPEN",
+                        "COMPLETED"
+                    ]
+                },
+                "examples": {
+                    "open": {
+                        "value": "OPEN",
+                        "summary": "Open loadplans only",
+                        "description": "This retrieves loadplans that are not yet loaded."
+                    },
+                    "completed": {
+                        "value": "COMPLETED",
+                        "summary": "Completed loadplans only",
+                        "description": "This retrieves loadplans that are loaded."
+                    }
+                }
+            },
+            "LoadplanLimitQueryParameter": {
+                "name": "limit",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "title": "Limit number of loadplans",
+                    "description": "Limits how many loadplans are retrieved. By default, at most 250 loadplans are retrieved",
+                    "type": "string"
+                },
+                "examples": {
+                    "smallLimit": {
+                        "value": 5,
+                        "summary": "Small number of loadplans retrieved",
+                        "description": "This limits the response to 5 loadplans at most."
+                    },
+                    "largeLimit": {
+                        "value": 100,
+                        "summary": "Large number of loadplans retrieved",
+                        "description": "This limits the response to 100 loadplans at most."
+                    }
+                }
+            },
+            "ContainerNumberPathParameter": {
+                "name": "containerNumber",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "examples": {
+                    "containerNumber": {
+                        "value": "ABCU1234561",
+                        "summary": "Valid Equipment Number",
+                        "description": "Container reference number used to transport load."
+                    }
+                }
+            },
+            "ScheduledLoadingDatePathParameter": {
+                "name": "date",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "title": "Scheduled loading date",
+                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                    "type": "string",
+                    "description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss",
+                    "example": "2023-07-01T09:05:49"
+                },
+                "examples": {
+                    "date": {
+                        "value": "2023-01-01",
+                        "summary": "Scheduled loading Date",
+                        "description": "The scheduled loading date of a load or loads."
+                    }
+                }
+            },
+            "LoadingReferencePathParameter": {
+                "name": "loadingReference",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "title": "Loading reference",
+                    "type": "string",
+                    "description": "The identifying reference of a loadplan."
+                },
+                "examples": {
+                    "loadingReference": {
+                        "value": "LR12345-1",
+                        "summary": "Loadplan with reference 'LR12345-1'",
+                        "description": "Retrieve the loadplan with reference 'LR12345-1'."
+                    }
+                }
+            },
+            "WeekNumberPathParameter": {
+                "name": "weekNo",
+                "in": "path",
+                "required": true,
+                "description": "ISO Week number of the year",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 53
+                },
+                "examples": {
+                    "weekNumber": {
+                        "value": 5,
+                        "summary": "Loads on 5th week of the year",
+                        "description": "Retrieve all loads scheduled to take-place on the 5th week of the year."
+                    }
+                }
+            },
+            "YearQueryParameter": {
+                "name": "year",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "minimum": 2000,
+                    "maximum": 2100
+                },
+                "examples": {
+                    "year": {
+                        "value": 2013,
+                        "summary": "Loads in 2013",
+                        "description": "Loads retrieved should be scheduled for 2013."
+                    }
+                }
+            },
+            "LoadingReferenceQueryParameter": {
+                "name": "loadingReference",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "examples": {
+                    "loadingReference": {
+                        "value": "LR12345-1",
+                        "summary": "Loading Reference to identify a load."
+                    }
+                }
+            },
+            "ShipperOrganizationIdPathParameter": {
+                "name": "shipperOrganizationId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "examples": {
+                    "shipperEORI": {
+                        "value": "GB123456789000",
+                        "summary": "EORI Number for Shipper",
+                        "description": "This format represents an EORI number. It starts with 'GB' followed by a 12 digit number."
+                    },
+                    "shipperTraqaCode": {
+                        "value": "TQGBACMEL",
+                        "summary": "Traqa Code for Shipper",
+                        "description": "This format represents a Traqa code. It starts with 'TQ'."
+                    }
+                }
+            }
+        },
         "schemas": {
             "Empty": {
                 "title": "Empty Schema",
