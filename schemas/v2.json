@@ -2320,7 +2320,8 @@
                                                     "weighingDate": "2023-10-30T08:56:00"
                                                 },
                                                 "equipmentTareWeight": {
-                                                    "value": 3700
+                                                    "value": 3700,
+                                                    "unit": "KGM"
                                                 }
                                             },
                                             "haulier": {
@@ -2458,7 +2459,8 @@
                                             "weighingDate": "2023-03-22T09:30:00"
                                         },
                                         "equipmentTareWeight": {
-                                            "value": 17040
+                                            "value": 17040,
+                                            "unit": "KGM"
                                         }
                                     },
                                     "haulier": {
@@ -2732,6 +2734,17 @@
                 },
                 "example": "LR12345-1"
             },
+            "DatetimeQueryParameter": {
+                "name": "datetime",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "description": "Date-time of notification creation in ISO 8601 format",
+                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$"
+                },
+                "example": "2024-01-01T12:00:00"
+            },
             "ShipperOrganizationIdPathParameter": {
                 "name": "shipperOrganizationId",
                 "in": "path",
@@ -2754,6 +2767,92 @@
             }
         },
         "schemas": {
+            "BadResponseCommonProperties": {
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "type": "string",
+                        "description": "A brief error message description."
+                    },
+                    "errorMessage": {
+                        "type": "string",
+                        "description": "A detailed error message providing more information about the error."
+                    },
+                    "requestId": {
+                        "type": "string",
+                        "description": "A unique identifier for the request.",
+                        "example": "2cc36855-202b-44fa-920b-0b2c7bdf8aa2"
+                    },
+                    "requestTime": {
+                        "type": "string",
+                        "description": "Date, time and timezone at which the relevant request was made.",
+                        "example": "28/Sep/2023:10:10:44 +0000"
+                    }
+                }
+            },
+            "Response400": {
+                "title": "400 Response",
+                "type": "object",
+                "description": "Server cannot or will not process the request due to client error",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BadResponseCommonProperties"
+                    }
+                ]
+            },
+            "Response403": {
+                "title": "403 Response",
+                "type": "object",
+                "description": "The server understood the request, but it refuses to authorize it due to insufficient permissions or authentication failure.",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BadResponseCommonProperties"
+                    }
+                ]
+            },
+            "Response404": {
+                "title": "404 Response",
+                "type": "object",
+                "description": "The requested resource could not be found on the server.",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BadResponseCommonProperties"
+                    }
+                ]
+            },
+            "Response500": {
+                "title": "500 Response",
+                "type": "object",
+                "description": "An internal server error occurred while processing the request.",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BadResponseCommonProperties"
+                    }
+                ]
+            },
+            "Response200Token": {
+                "title": "Access Token Response",
+                "type": "object",
+                "description": "Response to an access token request",
+                "properties": {
+                    "IdToken": {
+                        "title": "Access Token",
+                        "type": "string",
+                        "description": "Access token used to make subsequent requests",
+                        "example": "eyJraWQiOiJEeU..."
+                    },
+                    "RefreshToken": {
+                        "title": "Refresh Token",
+                        "type": "string",
+                        "description": "Refresh token used in subsequent access token requests",
+                        "example": "eyJjdHkiOiJKV1..."
+                    }
+                },
+                "example": {
+                    "IdToken": "eyJraW...",
+                    "RefreshToken": "eyJjdH..."
+                }
+            },
             "Empty": {
                 "title": "Empty Schema",
                 "type": "object"
@@ -2869,12 +2968,67 @@
                 "properties": {
                     "document": {
                         "title": "Document pre-signed URL",
-                        "type": "string",
-                        "pattern": "^https:\\/\\/\\w+\\.s3\\.amazonaws\\.com\\/[\\w-]+\\.pdf\\?AWSAccessKeyId=[\\w]+&Signature=[\\w%]+&x-amz-security-token=[\\w%]+&Expires=\\d+$\n"
+                        "type": "string"
                     }
                 },
                 "example": {
                     "document": "https://prod-traqa-application-..."
+                }
+            },
+            "FilePostRequestBody": {
+                "title": "File upload",
+                "type": "object",
+                "description": "Specify the path to file(s) to be uploaded.",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "PhotosRetrieved": {
+                "title": "Photos",
+                "type": "object",
+                "description": "An object containing a list of photos associated with a loadplan.",
+                "properties": {
+                    "photos": {
+                        "title": "Photos List",
+                        "type": "array",
+                        "description": "A list of photos associated with a loadplan.",
+                        "items": {
+                            "title": "Photo",
+                            "type": "object",
+                            "description": "A photo associated with a loadplan.",
+                            "properties": {
+                                "photo": {
+                                    "title": "Photo Link",
+                                    "type": "string",
+                                    "description": "Pre-signed URL for full-size photo."
+                                },
+                                "thumbnail": {
+                                    "title": "Thumbnail Link",
+                                    "type": "string",
+                                    "description": "Pre-signed URL for thumbnail-size photo."
+                                }
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "photos": [
+                        {
+                            "photo": "https://prod-transportid-images...",
+                            "thumbnail": "https://prod-transportid-images..."
+                        },
+                        {
+                            "photo": "https://prod-transportid-images...",
+                            "thumbnail": "https://prod-transportid-images..."
+                        },
+                        {
+                            "photo": "https://prod-transportid-images...",
+                            "thumbnail": "https://prod-transportid-images..."
+                        }
+                    ]
                 }
             },
             "Address": {
@@ -3361,6 +3515,19 @@
                     }
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
+            },
+            "LoadplanCompleted": {
+                "title": "Completed Load Plan",
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Loadplan"
+                    },
+                    {
+                        "$ref": "#/components/schemas/WeighingRecord"
+                    }
+                ],
+                "description": "The Load Plan that is provided by the shipper augmented with data provided by the loading site."
             },
             "PERN": {
                 "title": "Packaging Export Recovery Note (PERN)",
