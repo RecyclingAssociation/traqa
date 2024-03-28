@@ -3504,6 +3504,18 @@
                         },
                         "description": "A coded reference to the location for the port of loading, used in transport provided by the UN, populates Box 11 on the Annex VII for origin country."
                     },
+                    "countriesOfRouting": {
+                        "$ref": "#/components/schemas/CountriesOfRouting"
+                    },
+                    "countriesOfRoutingNames": {
+                        "$ref": "#/components/schemas/CountriesOfRoutingNames"
+                    },
+                    "photos": {
+                        "$ref": "#/components/schemas/LoadplanPhotosDetails"
+                    },
+                    "NILS": {
+                        "$ref": "#/components/schemas/LoadplanNILSDetails"
+                    },
                     "loadingSite": {
                         "$ref": "#/components/schemas/LoadingSite"
                     },
