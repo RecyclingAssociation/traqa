@@ -3510,9 +3510,6 @@
                     "countriesOfRoutingNames": {
                         "$ref": "#/components/schemas/CountriesOfRoutingNames"
                     },
-                    "photos": {
-                        "$ref": "#/components/schemas/LoadplanPhotosDetails"
-                    },
                     "NILS": {
                         "$ref": "#/components/schemas/LoadplanNILSDetails"
                     },
