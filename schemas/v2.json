@@ -651,7 +651,8 @@
                                             "customsDeclaration": true,
                                             "declaration": {
                                                 "goodsLocation": "GBABD",
-                                                "customsOfficeExit": "GB000001"
+                                                "customsOfficeExit": "GB000001",
+                                                "countryOfDestination": "GB"
                                             },
                                             "invoice": {
                                                 "pricing": "tonne",
@@ -3283,6 +3284,14 @@
                                 "maxLength": 8,
                                 "description": "Using the relevant Union code, enter the customs office by which it is intended that the goods should leave the customs territory. DE 5/4 CDS",
                                 "example": "GB000001"
+                            },
+                            "countryOfDestination": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Country"
+                                    }
+                                ],
+                                "description": "Destination country. If not provided, `POD` is considered destination for customs declarations."
                             }
                         }
                     },
@@ -3506,9 +3515,6 @@
                     },
                     "countriesOfRouting": {
                         "$ref": "#/components/schemas/CountriesOfRouting"
-                    },
-                    "countriesOfRoutingNames": {
-                        "$ref": "#/components/schemas/CountriesOfRoutingNames"
                     },
                     "NILS": {
                         "$ref": "#/components/schemas/LoadplanNILSDetails"
