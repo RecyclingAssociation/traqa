@@ -79,13 +79,21 @@
 			"unit": "KGM"
 		}
 	},
-	"tradeItem": {
-		"quantity": "25",
+	"tradeItem": [{
+		"quantity": "12",
 		"harmonizeSystemCode": "4712345",
 		"description": "OCC 90/10",
 		"grossWeight": {
-			"value": "25500",
+			"value": "11333",
 			"unit": "KGM"
 		}
-	}
+	},{
+		"quantity": "15",
+		"harmonizeSystemCode": "4712345",
+		"description": "OCC 90/10",
+		"grossWeight": {
+			"value": "14167",
+			"unit": "KGM"
+		}
+	}]
 }
