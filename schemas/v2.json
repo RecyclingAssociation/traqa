@@ -3249,6 +3249,35 @@
                 "type": "string",
                 "example": "GB"
             },
+            "CountriesOfRouting": {
+                "title": "Countries of Routing",
+                "type": "array",
+                "description": "Country of routing codes as an array of ISO 3166 Alpha-2 codes",
+                "items": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/Country"
+                        }
+                    ]
+                }
+            },
+            "LoadplanNILSDetails": {
+                "title": "Details of Loadplan NILS Flow",
+                "type": "object",
+                "description": "Details on state of NILS flow for load-plan. Automated field and should not be provided by shipper.",
+                "properties": {
+                    "emailSent": {
+                        "description": "Determines whether the loadsite has been emailed with Annex VII and load-plan details prior to loading",
+                        "type": "boolean",
+                        "enum": [
+                            true,
+                            false
+                        ],
+                        "default": false,
+                        "example": false
+                    }
+                }
+            },
             "Customs": {
                 "type": "object",
                 "properties": {
