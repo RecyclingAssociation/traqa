@@ -2203,9 +2203,10 @@
                         "api_key": []
                     }
                 ],
-                "description": "Fetch a list of `Notifications` from Traqa.  These could be as example;\n* Weighbridge ticket requiring validation for NILS sites.\n* VGM submissions that have been rejected and require attention"
+                "description": "Fetch a list of `Notifications` from Traqa. These could be as example;\n* Weighbridge ticket requiring validation for NILS sites.\n* VGM submissions that have been rejected and require attention"
             },
             "post": {
+                "description": "Close a notification from Traqa.",
                 "tags": [
                     "NILS"
                 ],
@@ -2263,8 +2264,7 @@
                     {
                         "api_key": []
                     }
-                ],
-                "description": ""
+                ]
             }
         },
         "/task": {
@@ -2299,7 +2299,7 @@
                                 },
                                 "example": {
                                     "Task": {
-                                        "WBTicketAnalysisText": {
+                                        "NILSAIAnalysis": {
                                             "shipper": {
                                                 "organizationId": "TQGBDEMOA"
                                             },
@@ -2942,12 +2942,51 @@
             "TaskRetrieved": {
                 "title": "Task Information",
                 "type": "object",
-                "description": "Information on a particular party's task",
+                "description": "Task Information",
                 "properties": {
                     "Task": {
                         "title": "Task",
-                        "description": "A task",
-                        "type": "object"
+                        "description": "Task Fields",
+                        "type": "object",
+                        "properties": {
+                            "WeighbridgeCertificateName": {
+                                "type": "string",
+                                "description": "Path to the predicted Weighbridge Certificate image"
+                            },
+                            "AnnexVIIName": {
+                                "type": "string",
+                                "description": "Path to the predicted Annex VII image"
+                            },
+                            "AttachmentURLs": {
+                                "type": "array",
+                                "description": "List of attachment URLs",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "URL of the attachment"
+                                        }
+                                    }
+                                }
+                            },
+                            "NILSAIAnalysis": {
+                                "$ref": "#/components/schemas/WeighingRecord",
+                                "description": "NILS AI Analysis"
+                            },
+                            "NILSEnhancedAnalysis": {
+                                "$ref": "#/components/schemas/WeighingRecord",
+                                "description": "NILS Enhanced Analysis"
+                            },
+                            "TaskStatus": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "CLOSED"
+                                ],
+                                "description": "Status of the task"
+                            }
+                        }
                     },
                     "TaskType": {
                         "title": "Task type",
