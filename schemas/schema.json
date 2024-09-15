@@ -25,7 +25,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Weights"
+								"$ref": "#/components/schemas/WeighingRecord"
 							}
 						}
 					},
@@ -206,37 +206,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/loads/byContainerNumber/{containerNumber}": {
@@ -335,37 +304,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/loads": {
@@ -642,37 +580,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/loads/byWeekNo/{weekNo}": {
@@ -792,37 +699,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1187,37 +1063,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/loads/byLoadingReference/{loadingReference}": {
@@ -1316,37 +1161,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1588,37 +1402,6 @@
 						}
 					}
 				}
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/tracking/byContainerNumber/{containerNumber}": {
@@ -1697,37 +1480,6 @@
 						"api_key": []
 					}
 				]
-			},
-			"options": {
-				"responses": {
-					"200": {
-						"description": "200 response",
-						"headers": {
-							"Access-Control-Allow-Origin": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Methods": {
-								"schema": {
-									"type": "string"
-								}
-							},
-							"Access-Control-Allow-Headers": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						},
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Empty"
-								}
-							}
-						}
-					}
-				}
 			}
 		},
 		"/documents/annexvii": {
@@ -3022,18 +2774,18 @@
 								}
 							}
 						}
+					},
+					"Count": {
+						"title": "Notifications Count",
+						"description": "number of notifications retrieved",
+						"type": "number"
+					},
+					"DateOfRequest": {
+						"title": "Date Retrieved",
+						"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+						"type": "string",
+						"description": "The date that the notifications information was requested in ISO 8601 format"
 					}
-				},
-				"Count": {
-					"title": "Notifications Count",
-					"description": "number of notifications retrieved",
-					"type": "number"
-				},
-				"DateOfRequest": {
-					"title": "Date Retrieved",
-					"pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-					"type": "string",
-					"description": "The date that the notifications information was requested in ISO 8601 format"
 				}
 			},
 			"TaskRetrieved": {
@@ -3079,22 +2831,26 @@
 					"street": {
 						"title": "Street Name",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-						"type": "string"
+						"type": "string",
+						"example": "123 Main Street"
 					},
 					"city": {
 						"title": "City",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-						"type": "string"
+						"type": "string",
+						"example": "Liverpool"
 					},
 					"state": {
 						"title": "State",
 						"pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-						"type": "string"
+						"type": "string",
+						"example": "Merseyside"
 					},
 					"postcode": {
 						"title": "Post Code",
 						"pattern": "^[a-zA-Z0-9\\ \\-]+$",
-						"type": "string"
+						"type": "string",
+						"example": "L3 9SG"
 					},
 					"country": {
 						"title": "Country",
@@ -3435,10 +3191,10 @@
 						"description": "A coded reference to the location for the port of loading, used in transport provided by the UN, populates Box 11 on the Annex VII for origin country."
 					},
 					"loadingSite": {
-						"$ref": "#components/schemas/LoadingSite"
+						"$ref": "#/components/schemas/LoadingSite"
 					},
 					"pern": {
-						"$ref": "#components/schemas/PERN"
+						"$ref": "#/components/schemas/PERN"
 					},
 					"customs": {
 						"type": "object",
@@ -3625,8 +3381,27 @@
 				"description": "A coded reference to the location provided by the UN",
 				"example": "GBLIV"
 			},
-			"Weights": {
-				"title": "Weights",
+			"Weight": {
+				"required": [
+					"unit",
+					"value"
+				],
+				"type": "object",
+				"properties": {
+					"unit": {
+						"$ref": "#/components/schemas/UnitOfMeasure"
+					},
+					"value": {
+						"title": "Weight Value",
+						"minimum": 1,
+						"type": "number",
+						"description": "The weight of the equipment, product or other",
+						"example": 26350
+					}
+				}
+			},
+			"WeighingRecord": {
+				"title": "Weighing Record from Weighbridge to complete load",
 				"required": [
 					"dates",
 					"haulier",
@@ -3727,25 +3502,11 @@
 								"description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
 							},
 							"equipmentTareWeight": {
+								"allOf": [{
+									"$ref": "#/components/schemas/Weight"
+								}],
 								"title": "Equipment Tare Weight",
-								"required": [
-									"unit",
-									"value"
-								],
-								"type": "object",
-								"properties": {
-									"unit": {
-										"$ref": "#/components/schemas/UnitOfMeasure"
-									},
-									"value": {
-										"title": "Value",
-										"minimum": 1,
-										"type": "number",
-										"description": "The Tare weight of a container (empty weight)",
-										"example": 3850
-									}
-								},
-								"description": "The tare weight is required for containerised movements to calculate the VGM."
+								"description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."								
 							},
 							"seal": {
 								"title": "Seal Number",
@@ -3841,25 +3602,12 @@
 						"type": "object",
 						"properties": {
 							"grossWeight": {
-								"title": "Gross Weight",
-								"required": [
-									"unit",
-									"value"
+								"allOf": [
+								{
+									"$ref": "#/components/schemas/Weight"
+								}
 								],
-								"type": "object",
-								"properties": {
-									"unit": {
-										"$ref": "#/components/schemas/UnitOfMeasure"
-									},
-									"value": {
-										"title": "Value",
-										"minimum": 1,
-										"type": "number",
-										"description": "The weight of the material without any equipment (Product Weight)",
-										"example": 22500
-									}
-								},
-								"description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII"
+								"description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
 							},
 							"quantity": {
 								"title": "Quantity",
@@ -3877,7 +3625,7 @@
 						}
 					},
 					"loadingSite": {
-						"$ref": "#components/schemas/LoadingSite"
+						"$ref": "#/components/schemas/LoadingSite"
 					}
 				},
 				"description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads, data comes from the weighbridge software. "
@@ -3957,21 +3705,11 @@
 										}
 									},
 									"equipmentTareWeight": {
+										"allOf": [{
+											"$ref": "#/components/schemas/Weight"
+										}],
 										"title": "Equipment Tare Weight",
-										"description": "The tare weight is required for containerised movements to calculate the VGM.",
-										"required": [
-											"value"
-										],
-										"type": "object",
-										"properties": {
-											"value": {
-												"title": "Value",
-												"minimum": 1,
-												"type": "number",
-												"description": "The Tare weight of a container (empty weight)",
-												"example": 3850
-											}
-										}
+										"description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."								
 									},
 									"seal": {
 										"title": "Seal Number",
@@ -4056,24 +3794,12 @@
 								"type": "object",
 								"properties": {
 									"grossWeight": {
-										"title": "Gross Weight",
-										"description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII",
-										"required": [
-											"value"
-										],
-										"type": "object",
-										"properties": {
-											"unit": {
-												"$ref": "#/components/schemas/UnitOfMeasure"
-											},
-											"value": {
-												"title": "Value",
-												"minimum": 1,
-												"type": "number",
-												"description": "The weight of the material without any equipment (Product Weight)",
-												"example": 22500
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/Weight"
 											}
-										}
+										],
+										"description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
 									},
 									"quantity": {
 										"title": "Quantity",
