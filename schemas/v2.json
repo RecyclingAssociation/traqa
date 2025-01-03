@@ -224,10 +224,12 @@
                                         "dates": {
                                             "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
                                         },
-                                        "tradeItem": {
-                                            "harmonizeSystemCode": "4707100000",
-                                            "description": "OCC 80/20"
-                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "description": "OCC 80/20"
+                                            }
+                                        ],
                                         "portOfLoading": {
                                             "UNLocode": "GBLIV"
                                         },
@@ -305,10 +307,12 @@
                                         "dates": {
                                             "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
                                         },
-                                        "tradeItem": {
-                                            "harmonizeSystemCode": "4707100000",
-                                            "description": "OCC 80/20"
-                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "description": "OCC 80/20"
+                                            }
+                                        ],
                                         "portOfLoading": {
                                             "UNLocode": "GBLIV"
                                         },
@@ -383,10 +387,12 @@
                                         "dates": {
                                             "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
                                         },
-                                        "tradeItem": {
-                                            "harmonizeSystemCode": "4707100000",
-                                            "description": "OCC 80/20"
-                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "description": "OCC 80/20"
+                                            }
+                                        ],
                                         "portOfLoading": {
                                             "UNLocode": "GBLIV"
                                         },
@@ -485,10 +491,12 @@
                                         "dates": {
                                             "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
                                         },
-                                        "tradeItem": {
-                                            "harmonizeSystemCode": "4707100000",
-                                            "description": "OCC 80/20"
-                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "description": "OCC 80/20"
+                                            }
+                                        ],
                                         "portOfLoading": {
                                             "UNLocode": "GBLIV"
                                         },
@@ -2239,7 +2247,6 @@
                             "street",
                             "city",
                             "state",
-                            "postcode",
                             "country"
                         ],
                         "properties": {
@@ -3198,25 +3205,34 @@
                         "description": "Dates that are relevent to the load plan, namely the planned date time of loading"
                     },
                     "tradeItem": {
-                        "title": "Trade Item",
-                        "description": "The detail for the type of material that is being loaded/exported",
-                        "required": [
-                            "description",
-                            "harmonizeSystemCode"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "harmonizeSystemCode": {
-                                "title": "Harmonize System Code",
-                                "pattern": "^[0-9]{4,10}$",
-                                "type": "string",
-                                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
-                            },
-                            "description": {
-                                "title": "Description of Goods",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+                        "title": "Trade Items",
+                        "description": "The details for the types of materials that are being loaded/exported",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "title": "Trade Item",
+                            "description": "The detail for the type of material that is being loaded/exported",
+                            "required": [
+                                "description",
+                                "harmonizeSystemCode"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "goodsItemNumber": {
+                                    "$ref": "#/components/schemas/IdentifierGoodsItemNumber"
+                                },
+                                "harmonizeSystemCode": {
+                                    "title": "Harmonize System Code",
+                                    "pattern": "^[0-9]{4,10}$",
+                                    "type": "string",
+                                    "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+                                },
+                                "description": {
+                                    "title": "Description of Goods",
+                                    "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
+                                    "type": "string",
+                                    "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+                                }
                             }
                         }
                     },
@@ -3301,6 +3317,21 @@
                         ],
                         "type": "object",
                         "properties": {
+                            "transportMeans": {
+                                "title": "Transport Means",
+                                "type": "string",
+                                "description": "The type of transport means used to move the material, either 'TRAILER' or 'CONTAINER'",
+                                "enum": [
+                                    "TRAILER",
+                                    "CONTAINER"
+                                ]
+                            },
+                            "accompanied": {
+                                "title": "Accompanied",
+                                "type": "boolean",
+                                "description": "Whether the transport equipment is accompanied by a driver",
+                                "example": true
+                            },
                             "verifiedWeight": {
                                 "$ref": "#/components/schemas/WeightVerifiedGrossMass"
                             },
@@ -3339,24 +3370,33 @@
                         "description": "Dates relevant to the actual movement of material provided by the loading site "
                     },
                     "tradeItem": {
-                        "title": "Trade Item",
-                        "required": [
-                            "grossWeight"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "grossWeight": {
-                                "$ref": "#/components/schemas/WeightGrossWeight"
-                            },
-                            "quantity": {
-                                "title": "Quantity",
-                                "minimum": 1,
-                                "type": "number",
-                                "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII",
-                                "example": 22
-                            },
-                            "packageTypeCode": {
-                                "$ref": "#/components/schemas/CodePackageType"
+                        "title": "Trade Items",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "title": "Trade Item",
+                            "required": [
+                                "grossWeight",
+                                "goodsItemNumber"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "goodsItemNumber": {
+                                    "$ref": "#/components/schemas/IdentifierGoodsItemNumber"
+                                },
+                                "grossWeight": {
+                                    "$ref": "#/components/schemas/WeightGrossWeight"
+                                },
+                                "quantity": {
+                                    "title": "Quantity",
+                                    "minimum": 1,
+                                    "type": "number",
+                                    "description": "Number of Bales or other that were loaded. Populates Box 3 on the Annex VII",
+                                    "example": 22
+                                },
+                                "packageTypeCode": {
+                                    "$ref": "#/components/schemas/CodePackageType"
+                                }
                             }
                         }
                     }
@@ -3367,6 +3407,70 @@
                 "type": "object",
                 "title": "Customs Model",
                 "properties": {
+                    "mrn": {
+                        "title": "MRN",
+                        "type": "string",
+                        "description": "The Movement Reference Number is a unique identifier for the customs declaration.",
+                        "example": "19GB123456789000"
+                    },
+                    "route": {
+                        "title": "Route",
+                        "type": "string",
+                        "description": "The route of the customs declaration.",
+                        "example": "02"
+                    },
+                    "status": {
+                        "title": "Customs Microservice Status",
+                        "type": "string",
+                        "enum": [
+                            "OPEN",
+                            "UPDATED",
+                            "COMPLETED",
+                            "TIMEOUT",
+                            "FAILED",
+                            "INTERNAL_ERROR"
+                        ],
+                        "example": "COMPLETED"
+                    },
+                    "errors": {
+                        "title": "Customs Errors",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "title": "Error Code",
+                                    "type": "string",
+                                    "description": "The error code returned by the customs microservice.",
+                                    "example": "CDS10001"
+                                },
+                                "description": {
+                                    "title": "Error Description",
+                                    "type": "string",
+                                    "description": "The error description returned by the customs microservice.",
+                                    "example": "Obligation error: Mandatory Data Element has not been provided."
+                                },
+                                "explanation": {
+                                    "title": "Error Explanation",
+                                    "type": "string",
+                                    "description": "The explanation of the error returned by the customs microservice.",
+                                    "example": "Required details are missing."
+                                },
+                                "details": {
+                                    "title": "Error Details",
+                                    "type": "string",
+                                    "description": "The details of the error returned by the customs microservice.",
+                                    "example": "Declaration. Consignment. Carrier. Address. Address. Country. Code"
+                                }
+                            }
+                        }
+                    },
+                    "lastUpdated": {
+                        "title": "Last Updated",
+                        "type": "string",
+                        "description": "The date and time the customs declaration was last updated.",
+                        "example": "2021-01-01T12:00:00"
+                    },
                     "customsDeclaration": {
                         "title": "Declare Customs",
                         "description": "Specify whether you would like Traqa to submit a customs declaration to HMRC on your behalf for the load. Default is 'false'.",
@@ -3410,24 +3514,24 @@
                             "currency"
                         ],
                         "type": "object",
-                        "description": "Details required for the Commercial Invoice and Customs Declaration",
+                        "description": "Details required for the Commercial Invoice and Customs Declaration.",
                         "properties": {
                             "pricing": {
                                 "type": "string",
-                                "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is",
+                                "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is.",
                                 "enum": [
                                     "tonne",
                                     "total"
                                 ]
                             },
                             "amount": {
-                                "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator, this should be in the currency provided.",
+                                "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator. This should be in the currency provided.",
                                 "type": "number",
                                 "format": "decimal(12,2)",
                                 "example": 345.25
                             },
                             "currency": {
-                                "description": "Currency code as defined by ISO 4217",
+                                "description": "Currency code as defined by ISO 4217.",
                                 "type": "string",
                                 "example": "GBP"
                             }
