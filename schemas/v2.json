@@ -3218,9 +3218,6 @@
                             ],
                             "type": "object",
                             "properties": {
-                                "goodsItemNumber": {
-                                    "$ref": "#/components/schemas/IdentifierGoodsItemNumber"
-                                },
                                 "harmonizeSystemCode": {
                                     "title": "Harmonize System Code",
                                     "pattern": "^[0-9]{4,10}$",
@@ -3234,6 +3231,17 @@
                                     "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
                                 }
                             }
+                        }
+                    },
+                    "transportEquipment": {
+                        "transportMeans": {
+                            "title": "Transport Means",
+                            "type": "string",
+                            "description": "The type of transport means used to move the material, either 'TRAILER' or 'CONTAINER'",
+                            "enum": [
+                                "TRAILER",
+                                "CONTAINER"
+                            ]
                         }
                     },
                     "countriesOfRouting": {
@@ -3464,12 +3472,6 @@
                                 }
                             }
                         }
-                    },
-                    "lastUpdated": {
-                        "title": "Last Updated",
-                        "type": "string",
-                        "description": "The date and time the customs declaration was last updated.",
-                        "example": "2021-01-01T12:00:00"
                     },
                     "customsDeclaration": {
                         "title": "Declare Customs",
