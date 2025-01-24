@@ -390,7 +390,8 @@
                                         "tradeItem": [
                                             {
                                                 "harmonizeSystemCode": "4707100000",
-                                                "description": "OCC 80/20"
+                                                "description": "OCC 80/20",
+                                                "pricePerTonne": 345.25
                                             }
                                         ],
                                         "portOfLoading": {
@@ -413,8 +414,6 @@
                                         "customs": {
                                             "customsDeclaration": false,
                                             "invoice": {
-                                                "pricing": "tonne",
-                                                "amount": 345.25,
                                                 "currency": "GBP"
                                             },
                                             "incoterms": "CFR",
@@ -494,7 +493,8 @@
                                         "tradeItem": [
                                             {
                                                 "harmonizeSystemCode": "4707100000",
-                                                "description": "OCC 80/20"
+                                                "description": "OCC 80/20",
+                                                "pricePerTonne": 345.25
                                             }
                                         ],
                                         "portOfLoading": {
@@ -522,8 +522,6 @@
                                                 "countryOfDestination": "GB"
                                             },
                                             "invoice": {
-                                                "pricing": "tonne",
-                                                "amount": 345.25,
                                                 "currency": "GBP"
                                             },
                                             "incoterms": "CFR",
@@ -3229,6 +3227,9 @@
                                     "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                     "type": "string",
                                     "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+                                },
+                                "pricePerTonne": {
+                                    "$ref": "#/components/schemas/CommonPricePerTonne"
                                 }
                             }
                         }
@@ -3518,20 +3519,6 @@
                         "type": "object",
                         "description": "Details required for the Commercial Invoice and Customs Declaration.",
                         "properties": {
-                            "pricing": {
-                                "type": "string",
-                                "description": "Select pricing, either per tonne in which case it is calculated from the weighed tonnage, or total in which case it will be used as is.",
-                                "enum": [
-                                    "tonne",
-                                    "total"
-                                ]
-                            },
-                            "amount": {
-                                "description": "Enter the Price per Tonne or Total Amount indicated in the pricing indicator. This should be in the currency provided.",
-                                "type": "number",
-                                "format": "decimal(12,2)",
-                                "example": 345.25
-                            },
                             "currency": {
                                 "description": "Currency code as defined by ISO 4217.",
                                 "type": "string",
