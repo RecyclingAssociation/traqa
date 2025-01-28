@@ -3512,8 +3512,6 @@
                     },
                     "invoice": {
                         "required": [
-                            "pricing",
-                            "amount",
                             "currency"
                         ],
                         "type": "object",
