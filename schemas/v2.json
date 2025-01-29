@@ -3027,7 +3027,7 @@
             "WeightEquipmentTareWeight": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/CommonZeroAllowedWeight"
+                        "$ref": "#/components/schemas/CommonWeight"
                     }
                 ],
                 "title": "Equipment Tare Weight",
