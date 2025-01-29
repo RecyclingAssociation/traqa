@@ -199,7 +199,7 @@
                                 }
                             },
                             "pagination-token": {
-                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
+                                "$ref": "#/components/parameters/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
@@ -307,7 +307,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/ModelEmpty"
                                 }
                             }
                         }
@@ -431,7 +431,7 @@
                                 }
                             },
                             "pagination-token": {
-                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
+                                "$ref": "#/components/parameters/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
@@ -548,7 +548,7 @@
                                 }
                             },
                             "pagination-token": {
-                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
+                                "$ref": "#/components/parameters/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
@@ -668,7 +668,7 @@
                                 }
                             },
                             "pagination-token": {
-                                "$ref": "#/components/schemas/PaginationTokenResponseHeader"
+                                "$ref": "#/components/parameters/PaginationTokenResponseHeader"
                             }
                         },
                         "content": {
@@ -778,7 +778,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/ModelEmpty"
                                 }
                             }
                         }
@@ -1139,7 +1139,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/ModelEmpty"
                                 }
                             }
                         }
@@ -1355,7 +1355,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/ModelEmpty"
                                 }
                             }
                         }
@@ -1660,7 +1660,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/ModelEmpty"
                                 }
                             }
                         }
@@ -1951,23 +1951,6 @@
                     }
                 }
             },
-            "YearQueryParameter": {
-                "name": "year",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "integer",
-                    "minimum": 2000,
-                    "maximum": 2100
-                },
-                "examples": {
-                    "year": {
-                        "value": 2013,
-                        "summary": "Loads in 2013",
-                        "description": "Loads retrieved should be scheduled for 2013."
-                    }
-                }
-            },
             "LoadingReferenceQueryParameter": {
                 "name": "loadingReference",
                 "in": "query",
@@ -2004,10 +1987,6 @@
             }
         },
         "schemas": {
-            "Empty": {
-                "title": "Empty Schema",
-                "type": "object"
-            },
             "PermissionsRetrieved": {
                 "title": "Permissions Information",
                 "type": "object",
@@ -2544,7 +2523,7 @@
                     "organizationId": {
                         "title": "A coded Identifer for the Shipper",
                         "description": "The shipper Organisation Id is usually an EORI number assigned by a government, it can in place of this be a Traqa specific reference.",
-                        "pattern": "^[a-zA-Z0-9]{9,17}$",
+                        "pattern": "^[a-zA-Z0-9]{7,17}$",
                         "type": "string"
                     },
                     "address": {
