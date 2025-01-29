@@ -390,8 +390,7 @@
                                         "tradeItem": [
                                             {
                                                 "harmonizeSystemCode": "4707100000",
-                                                "description": "OCC 80/20",
-                                                "pricePerTonne": 345.25
+                                                "description": "OCC 80/20"
                                             }
                                         ],
                                         "portOfLoading": {
@@ -2805,7 +2804,7 @@
             "LocationsCountriesOfRouting": {
                 "title": "Countries of Routing",
                 "type": "array",
-                "description": "Country of routing codes as an array of ISO 3166 Alpha-2 codes",
+                "description": "Country of routing codes as an array of ISO 3166 Alpha-2 codes this must include all countries from the country of origin to destination in order",
                 "items": {
                     "oneOf": [
                         {
@@ -2989,24 +2988,6 @@
                 "type": "string",
                 "description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
                 "example": "GBEDMBIFA"
-            },
-            "WeightNetWeight": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/CommonWeight"
-                    }
-                ],
-                "title": "Material Net Weight",
-                "description": "Weight of the Material loaded for movement, exc any pallet or packaging weight."
-            },
-            "WeightGrossWeight": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/CommonWeight"
-                    }
-                ],
-                "title": "Material Gross Weight",
-                "description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
             },
             "WeightVerifiedGrossMass": {
                 "title": "Verified Gross Weight",
@@ -3386,7 +3367,8 @@
                             "title": "Trade Item",
                             "required": [
                                 "grossWeight",
-                                "goodsItemNumber"
+                                "goodsItemNumber",
+                                "quantity"
                             ],
                             "type": "object",
                             "properties": {
@@ -3394,7 +3376,13 @@
                                     "$ref": "#/components/schemas/IdentifierGoodsItemNumber"
                                 },
                                 "grossWeight": {
-                                    "$ref": "#/components/schemas/WeightGrossWeight"
+                                    "$ref": "#/components/schemas/WeightTradeItemGross"
+                                },
+                                "tareWeight": {
+                                    "$ref": "#/components/schemas/WeightTradeItemTare"
+                                },
+                                "netWeight": {
+                                    "$ref": "#/components/schemas/WeightTradeItemNet"
                                 },
                                 "quantity": {
                                     "title": "Quantity",
