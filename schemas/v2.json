@@ -1411,7 +1411,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ModelTask"
+                                    "$ref": "#/components/schemas/ModelGetTask"
                                 }
                             }
                         }
@@ -2082,7 +2082,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "#/components/schemas/ModelTask"
+                            "$ref": "#/components/schemas/ModelPostTask"
                         }
                     }
                 }
