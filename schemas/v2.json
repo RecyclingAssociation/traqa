@@ -2844,7 +2844,7 @@
             },
             "CodeWasteCarrierLicense": {
                 "title": "A coded Identifier for the haulier who arrives at site",
-                "pattern": "^[a-zA-Z0-9]{7,13}$",
+                "pattern": "^[/a-zA-Z0-9]{7,14}$",
                 "type": "string",
                 "description": "The haulier identifier is the waste carrier license number, mandated by the EA.",
                 "example": "CBDU1234567"
