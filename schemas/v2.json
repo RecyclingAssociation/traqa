@@ -2947,6 +2947,10 @@
             "CodePackageType": {
                 "title": "Package",
                 "type": "string",
+                "enum": [
+                    "PX",
+                    "BL"
+                ],
                 "description": "The package type code of the smallest external packing unit eg. BL or BN",
                 "example": "BN"
             },
