@@ -1,0 +1,99 @@
+{
+  "shipper": {
+    "organizationId": "GB123456789000",
+    "vatNumber": "GB123456789"
+  },
+  "loadingSite": {
+    "organizationId": "GBLIVJMDA"
+  },
+  "carrier": {
+    "name": "Mediterranean Shipping Company S.A.",
+    "organizationId": "MSCU"
+  },
+  "consignee": {
+    "organizationId": "THBANACIM",
+    "name": "Acme Importer",
+    "address": {
+      "street": "5329 Industrial Zone",
+      "city": "Bangkok",
+      "state": "Bangkok",
+      "country": "TH",
+      "postcode": "345678"
+    },
+    "contact": {
+      "personName": "John Smith",
+      "telephone": "0123 456 7890",
+      "emailAddress": "person@domain.com"
+    }
+  },
+  "recoveryFacility": {
+    "organizationId": "THBANACID",
+    "name": "Acme Facility",
+    "address": {
+      "street": "5329 Industrial Zone",
+      "city": "Bangkok",
+      "state": "Bangkok",
+      "country": "TH",
+      "postcode": "345678"
+    },
+    "contact": {
+      "personName": "John Smith",
+      "telephone": "0123 456 7890",
+      "emailAddress": "person@domain.com"
+    }
+  },
+  "portOfLoading": {
+    "UNLocode": "GBLGP"
+  },
+  "portOfDischarge": {
+    "UNLocode": "THBKK"
+  },
+  "references": {
+    "shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
+    "pickupReferenceNumber": "LOAD-REFERENCE-1",
+    "carriersReferenceNumber": "MAEU12345678"
+  },
+  "tradeItem": [
+    {
+      "harmonizeSystemCode": "47071000",
+      "description": "OCC 90/10",
+      "pricePerTonne": 10
+    }
+  ],
+  "dates": {
+    "scheduledLoadingTransportEvent": "2025-01-09T00:12:00"
+  },
+  "pern": {
+    "percentage": 45
+  },
+  "countriesOfRouting": [
+    "GB",
+    "ES",
+    "TH"
+  ],
+  "recoveryDisposalCode": "R3",
+  "customs": {
+    "customsDeclaration": true,
+    "declaration": {
+      "goodsLocation": "GBAUDEUDEUDEUGVM",
+      "customsOfficeExit": "GB000060",
+      "countryOfDestination": "TH"
+    },
+    "invoice": {
+      "currency": "GBP"
+    },
+    "incoterms": "FOB",
+    "buyer": {
+      "organizationId": "NL987654321000",
+      "name": "Test Buyer",
+      "address": {
+        "street": "1234 Buyer Zone",
+        "city": "Amsterdam",
+        "state": "North Holland",
+        "country": "NL",
+        "postcode": "12345"
+      },
+      "vatNumber": "NL987654321"
+    }
+  }
+}

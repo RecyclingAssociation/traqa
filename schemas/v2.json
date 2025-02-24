@@ -169,18 +169,10 @@
                                 "Traqa Load Plan with PERN claim": {
                                     "value": {
                                         "shipper": {
-                                            "organizationId": "GB100000000",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "GB"
-                                            },
-                                            "name": "ACME Trader Ltd"
+                                            "organizationId": "GB100000000"
                                         },
                                         "carrier": {
-                                            "organizationId": "ACLU",
+                                            "organizationId": "MSCU",
                                             "name": "Mediterranean Shipping Company S.A."
                                         },
                                         "consignee": {
@@ -252,15 +244,7 @@
                                 "Traqa Load Plan with NO PERN claim": {
                                     "value": {
                                         "shipper": {
-                                            "organizationId": "GB123456789139",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "GB"
-                                            },
-                                            "name": "ACME Trader Ltd"
+                                            "organizationId": "GB123456789139"
                                         },
                                         "carrier": {
                                             "organizationId": "ACLU",
@@ -332,15 +316,7 @@
                                 "Traqa Load Plan with customs paperwork only": {
                                     "value": {
                                         "shipper": {
-                                            "organizationId": "GB123456789139",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "GB"
-                                            },
-                                            "name": "ACME Trader Ltd"
+                                            "organizationId": "GB123456789139"
                                         },
                                         "carrier": {
                                             "organizationId": "ACLU",
@@ -390,7 +366,8 @@
                                         "tradeItem": [
                                             {
                                                 "harmonizeSystemCode": "4707100000",
-                                                "description": "OCC 80/20"
+                                                "description": "OCC 80/20",
+                                                "pricePerTonne": 10
                                             }
                                         ],
                                         "portOfLoading": {
@@ -434,15 +411,7 @@
                                 "Traqa Load Plan with export customs declaration": {
                                     "value": {
                                         "shipper": {
-                                            "organizationId": "GB123456789139",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "GB"
-                                            },
-                                            "name": "ACME Trader Ltd"
+                                            "organizationId": "GB123456789139"
                                         },
                                         "carrier": {
                                             "organizationId": "ACLU",
@@ -516,9 +485,9 @@
                                         "customs": {
                                             "customsDeclaration": true,
                                             "declaration": {
-                                                "goodsLocation": "GBABD",
-                                                "customsOfficeExit": "GB000001",
-                                                "countryOfDestination": "GB"
+                                                "goodsLocation": "GBAUDEUDEUDEUGVM",
+                                                "customsOfficeExit": "GB000060",
+                                                "countryOfDestination": "TH"
                                             },
                                             "invoice": {
                                                 "currency": "GBP"
@@ -2947,6 +2916,10 @@
             "CodePackageType": {
                 "title": "Package",
                 "type": "string",
+                "enum": [
+                    "PX",
+                    "BL"
+                ],
                 "description": "The package type code of the smallest external packing unit eg. BL or BN",
                 "example": "BN"
             },

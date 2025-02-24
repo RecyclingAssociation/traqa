@@ -1,0 +1,61 @@
+{
+  "shipper": {
+    "organizationId": "GB123456789000"
+  },
+  "loadingSite": {
+    "organizationId": "GBLIVJMDA"
+  },
+  "dates": {
+    "actualArrivalTransportEvent": "2025-01-09T13:33:00",
+    "actualDepartureTransportEvent": "2025-01-09T16:44:00"
+  },
+  "haulier": {
+    "name": "Haulier Co Ltd",
+    "organizationId": "CBDU209018"
+  },
+  "references": {
+    "pickupReferenceNumber": "LOAD-REFERENCE-1",
+    "despatchNoteNumber": "211449",
+    "vehicleIdentificationNumber": "AB21UYU",
+    "driverName": "STEVEN"
+  },
+  "tradeItem": [
+    {
+      "goodsItemNumber": "1",
+      "quantity": 26,
+      "grossWeight": {
+        "value": 25680,
+        "unit": "KGM"
+      },
+      "netWeight": {
+        "value": 25680,
+        "unit": "KGM"
+      },
+      "tareWeight": {
+        "value": 0,
+        "unit": "KGM"
+      },
+      "packageTypeCode": "PX"
+    }
+  ],
+  "transportEquipment": {
+    "equipmentNumber": "AB1234",
+    "transportMeans": "TRAILER",
+    "equipmentType": "42G0",
+    "seal": [
+      {
+        "identifier": "EU28316323"
+      }
+    ],
+    "verifiedWeight": {
+      "value": 29380,
+      "weighingDate": "2025-01-09T16:44:00",
+      "unit": "KGM",
+      "weightVerificationMethod": "1"
+    },
+    "equipmentTareWeight": {
+      "value": 3700,
+      "unit": "KGM"
+    }
+  }
+}
