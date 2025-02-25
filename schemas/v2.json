@@ -2421,7 +2421,7 @@
                 "title": "Shippers Identifying Number For Shipment",
                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
                 "type": "string",
-                "description": "A purchase order number for the shipment, could be from shipper or consignee",
+                "description": "Sales Order number for the shipment for the Shipper to identify a collection of loads moving under same Order in Traqa.",
                 "example": "400126253"
             },
             "ReferencePickupReferenceNumber": {
@@ -2429,7 +2429,7 @@
                 "minLength": 3,
                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                 "type": "string",
-                "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa",
+                "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa that is agreed between the Load Site and the Shipper.",
                 "example": "OCC-2456-1"
             },
             "ReferenceVehicleIdentificationNumber": {
@@ -3134,6 +3134,12 @@
                             },
                             "pickupReferenceNumber": {
                                 "$ref": "#/components/schemas/ReferencePickupReferenceNumber"
+                            },
+                            "consigneeReference": {
+                                "$ref": "#/components/schemas/ReferenceConsignee"
+                            },
+                            "loadingSiteReference": {
+                                "$ref": "#/components/schemas/ReferenceLoadingSite"
                             }
                         }
                     },

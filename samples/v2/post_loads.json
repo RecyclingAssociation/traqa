@@ -51,7 +51,9 @@
   "references": {
     "shippersIdentifyingNumberForShipment": "UK1807325EOCC-002",
     "pickupReferenceNumber": "LOAD-REFERENCE-1",
-    "carriersReferenceNumber": "MAEU12345678"
+    "carriersReferenceNumber": "MAEU12345678",
+    "loadingSiteReference": "LS-123456",
+    "consigneeReference": "C-123456"
   },
   "tradeItem": [
     {
