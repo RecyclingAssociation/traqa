@@ -2248,7 +2248,7 @@
             "VATNumber": {
                 "title": "VAT Number",
                 "type": "string",
-                "pattern": "^[A-Z]{2}\\d{9}$",
+                "pattern": "^(?:[A-Z]{2})?[0-9A-Z]{8,15}$",
                 "example": "GB367877431"
             },
             "LoadingSite": {
