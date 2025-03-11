@@ -2945,7 +2945,7 @@
             },
             "CodeEORI": {
                 "example": "GB123456789000",
-                "pattern": "^[A-Z]{2}[0-9]{7,17}$",
+                "pattern": "^[A-Z]{2}[A-Z0-9]{7,17}$",
                 "title": "EORI Number",
                 "description": "This format represents an EORI number. It starts with 2 digit country code e.g 'GB' followed by a 12 digit number."
             },
