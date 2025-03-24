@@ -2374,6 +2374,12 @@
                         ],
                         "type": "object",
                         "properties": {
+                            "ewcCode": {
+                                "$ref": "#/components/schemas/CodeEWC"
+                            },
+                            "baselCode": {
+                                "$ref": "#/components/schemas/CodeBasel"
+                            },
                             "harmonizeSystemCode": {
                                 "$ref": "#/components/schemas/HarmonizeSystemCode"
                             },

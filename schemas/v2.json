@@ -2084,7 +2084,7 @@
                     "organizationId": {
                         "title": "A coded Identifier for the Shipper",
                         "description": "The shipper Organization Id is usually an EORI number assigned by a government, it can in place of this be a Traqa specific reference.",
-                        "oneOf": [
+                        "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
@@ -2125,7 +2125,7 @@
                 "type": "object",
                 "properties": {
                     "organizationId": {
-                        "oneOf": [
+                        "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
@@ -2191,7 +2191,7 @@
                     "organizationId": {
                         "title": "A coded Identifier for the Consignee",
                         "description": "The consignee Organization Id is usually an EORI number assigned by a government or a BIC Facility Code.",
-                        "oneOf": [
+                        "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
@@ -2297,7 +2297,7 @@
                     "organizationId": {
                         "title": "A coded identifier for the Recovery Facility",
                         "description": "A coded value for the Recovery Facility, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa.",
-                        "oneOf": [
+                        "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
@@ -2332,7 +2332,7 @@
                     "organizationId": {
                         "title": "A coded Identifier for the Shipper",
                         "description": "The Haulier who arrives at site to transport the goods. Populates box 5a on the Annex VII and verified with the EA",
-                        "oneOf": [
+                        "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeWasteCarrierLicense"
                             }
@@ -3176,6 +3176,12 @@
                             ],
                             "type": "object",
                             "properties": {
+                                "ewcCode": {
+                                    "$ref": "#/components/schemas/CodeEWC"
+                                },
+                                "baselCode": {
+                                    "$ref": "#/components/schemas/CodeBasel"
+                                },
                                 "harmonizeSystemCode": {
                                     "title": "Harmonize System Code",
                                     "pattern": "^[0-9]{4,10}$",
