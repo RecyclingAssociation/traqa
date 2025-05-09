@@ -4,7 +4,7 @@
         "title": "Traqa API",
         "description": "Traqa API to enable communication between Shippers and Load Sites for efficient exchange of data in the recycling supply chain",
         "version": "1.1.1",
-        "contact":{
+        "contact": {
             "name": "Traqa Integrations",
             "url": "https://www.traqa.io",
             "email": "integration@traqa.io"
@@ -27,7 +27,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Weights"
+                                "$ref": "#/components/schemas/WeighingRecord"
                             }
                         }
                     },
@@ -265,6 +265,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -282,6 +290,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -379,11 +398,32 @@
         },
         "/loads": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -688,7 +728,39 @@
                         "in": "path",
                         "required": true,
                         "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 52
+                        }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "OPEN",
+                                "COMPLETED"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 2000,
+                            "maximum": 2100
                         }
                     }
                 ],
@@ -707,6 +779,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1084,6 +1167,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1101,6 +1192,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1206,6 +1308,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "pagination-token",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1223,6 +1333,17 @@
                         "description": "200 response",
                         "headers": {
                             "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination-token": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Last load-plan key retrieved"
+                                }
+                            },
+                            "Access-Control-Expose-Headers": {
                                 "schema": {
                                     "type": "string"
                                 }
@@ -1732,6 +1853,16 @@
         },
         "/documents/annexvii": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2098,6 +2229,16 @@
         },
         "/documents/weighbridgeCertificate": {
             "get": {
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "404": {
                         "description": "404 response",
@@ -2202,9 +2343,17 @@
             "get": {
                 "parameters": [
                     {
-                        "name": "LoadingReference",
-                        "in": "path",
+                        "name": "loadingReference",
+                        "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -2233,7 +2382,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Empty"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2314,9 +2463,17 @@
             "get": {
                 "parameters": [
                     {
-                        "name": "LoadingReference",
-                        "in": "path",
+                        "name": "loadingReference",
+                        "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -2335,7 +2492,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Document"
+                                    "$ref": "#/components/schemas/DocumentRetrieved"
                                 }
                             }
                         }
@@ -2417,7 +2574,7 @@
                 "parameters": [
                     {
                         "name": "status",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "description": "Notification status",
@@ -2430,7 +2587,7 @@
                     },
                     {
                         "name": "type",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "description": "Notification type",
@@ -2511,7 +2668,7 @@
                 "parameters": [
                     {
                         "name": "organizationId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2519,7 +2676,7 @@
                     },
                     {
                         "name": "datetime",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -2582,7 +2739,7 @@
                 "parameters": [
                     {
                         "name": "taskId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2672,7 +2829,7 @@
                 "parameters": [
                     {
                         "name": "taskId",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2737,6 +2894,88 @@
                     }
                 ]
             }
+        },
+        "/permissions": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionsRetrieved"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "500 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "cognito_apikey_auth": []
+                    },
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "options": {
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Methods": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Access-Control-Allow-Headers": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2745,47 +2984,91 @@
                 "title": "Empty Schema",
                 "type": "object"
             },
-            "NotificationsRetrieved": {
-                "title": "Notifications Information",
+            "PermissionsRetrieved": {
+                "title": "Permissions Information",
                 "type": "object",
-                "description": "Information on a party's notifications",
+                "description": "Information on a user's available permissions groups",
                 "properties": {
-                    "Notifications": {
-                        "title": "Notifications",
+                    "groups": {
+                        "title": "Groups",
                         "type": "array",
-                        "description": "A list of notifications",
+                        "description": "A list of permission groups",
                         "items": {
-                            "Notification": {
-                                "title": "Notification",
-                                "description": "A notification",
-                                "type": "object",
-                                "properties": {
-                                    "NotificationStatus": {
-                                        "type": "String",
-                                        "enum": [
-                                            "OPEN",
-                                            "CLOSED"
-                                        ]
-                                    },
-                                    "NotificationType": {
-                                        "type": "String"
-                                    },
-                                    "TaskId": {
-                                        "type": "String"
-                                    },
-                                    "LoadingReference": {
-                                        "type": "String"
+                            "type": "object",
+                            "properties": {
+                                "group": {
+                                    "title": "Group",
+                                    "description": "A group permissions",
+                                    "type": "object",
+                                    "properties": {
+                                        "Name": {
+                                            "type": "string"
+                                        },
+                                        "Code": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
                         }
                     },
-                    "Count": {
+                    "count": {
+                        "title": "Groups Count",
+                        "description": "number of groups retrieved",
+                        "type": "number"
+                    },
+                    "dateOfRequest": {
+                        "title": "Date Retrieved",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "type": "string",
+                        "description": "The date that the permissions information was requested in ISO 8601 format"
+                    }
+                }
+            },
+            "NotificationsRetrieved": {
+                "title": "Notifications Information",
+                "type": "object",
+                "description": "Information on a party's notifications",
+                "properties": {
+                    "notifications": {
+                        "title": "Notifications",
+                        "type": "array",
+                        "description": "A list of notifications",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "notification": {
+                                    "title": "Notification",
+                                    "description": "A notification",
+                                    "type": "object",
+                                    "properties": {
+                                        "notificationStatus": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OPEN",
+                                                "CLOSED"
+                                            ]
+                                        },
+                                        "notificationType": {
+                                            "type": "string"
+                                        },
+                                        "taskId": {
+                                            "type": "string"
+                                        },
+                                        "loadingReference": {
+                                            "type": "string"
+                                        }
+                                    }
+                            }
+                            } 
+                        }
+                    },
+                    "count": {
                         "title": "Notifications Count",
                         "description": "number of notifications retrieved",
                         "type": "number"
                     },
-                    "DateOfRequest": {
+                    "dateOfRequest": {
                         "title": "Date Retrieved",
                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                         "type": "string",
@@ -2798,17 +3081,17 @@
                 "type": "object",
                 "description": "Information on a particular party's task",
                 "properties": {
-                    "Task": {
+                    "task": {
                         "title": "Task",
                         "description": "A task",
                         "type": "object"
                     },
-                    "TaskType": {
+                    "taskType": {
                         "title": "Task type",
                         "description": "Type of the task retrieved",
                         "type": "string"
                     },
-                    "DateOfRequest": {
+                    "dateOfRequest": {
                         "title": "Date Retrieved",
                         "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                         "type": "string",
@@ -2816,7 +3099,7 @@
                     }
                 }
             },
-            "Document": {
+            "DocumentRetrieved": {
                 "title": "Document",
                 "type": "object",
                 "description": "A document retrieved for a specific load plan.",
@@ -2836,17 +3119,20 @@
                     "street": {
                         "title": "Street Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "123 Main Street"
                     },
                     "city": {
                         "title": "City",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "Liverpool"
                     },
                     "state": {
                         "title": "State",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                        "type": "string"
+                        "type": "string",
+                        "example": "Merseyside"
                     },
                     "postcode": {
                         "title": "Post Code",
@@ -2864,7 +3150,9 @@
                 "title": "Ocean Carrier",
                 "description": "The Ocean Carrier for use when containerised freight is moving by deep sea, this will show in Box 5b on the Annex VII",
                 "type": "object",
-                "required": ["organizationId"],
+                "required": [
+                    "organizationId"
+                ],
                 "properties": {
                     "organizationId": {
                         "title": "A coded Identifier known as SCAC for Ocean Carriers",
@@ -2965,7 +3253,8 @@
                         "title": "The Name of the Ocean Carrier",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "The Name of the carrier in freetext"
+                        "description": "The Name of the carrier in freetext",
+                        "example": "Mediterranean Shipping Company S.A."
                     }
                 }
             },
@@ -2983,7 +3272,8 @@
                     "name": {
                         "title": "Consignee Name",
                         "type": "string",
-                        "description": "Free Text Name of the Consignee"
+                        "description": "Free Text Name of the Consignee",
+                        "example": "Acme Importer"
                     },
                     "address": {
                         "$ref": "#/components/schemas/Address"
@@ -3003,17 +3293,20 @@
                     "personName": {
                         "title": "Person Name",
                         "description": "The name, expressed as text, of this trade contact person.",
-                        "type": "string"
+                        "type": "string",
+                        "example": "Joe Smith"
                     },
                     "telephone": {
                         "title": "Telephone",
                         "description": "Telephone communication information for this trade contact.",
-                        "type": "string"
+                        "type": "string",
+                        "example": "0800 000 0000"
                     },
                     "emailAddress": {
                         "title": "Email Address",
                         "description": "The email address for this trade contact.",
-                        "type": "string"
+                        "type": "string",
+                        "example": "joe@domain.com"
                     }
                 }
             },
@@ -3021,12 +3314,14 @@
                 "title": "Harmonize System Code",
                 "pattern": "^[0-9]{4,10}$",
                 "type": "string",
-                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+                "description": "The Harmonised Commodity Code of the material for Customs reporting purposes",
+                "example": "4707100000"
             },
             "VATNumber": {
                 "title": "VAT Number",
                 "type": "string",
-                "pattern": "^[A-Z]{2}\\d{9}$"
+                "pattern": "^[A-Z]{2}\\d{9}$",
+                "example": "GB367877431"
             },
             "LoadingSite": {
                 "title": "Loading Site",
@@ -3039,7 +3334,8 @@
                         "title": "Loading Site Code",
                         "pattern": "^[A-Z]{9}$",
                         "type": "string",
-                        "description": "A registered BIC Facility Code to identify the facility the material is being loaded at"
+                        "description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
+                        "example": "GBEDMBIFA"
                     },
                     "address": {
                         "$ref": "#/components/schemas/Address"
@@ -3048,7 +3344,8 @@
                         "title": "Loading Site Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "Loading Site Name in Freetext"
+                        "description": "Loading Site Name in Freetext",
+                        "example": "Acme Loading Site Ltd"
                     }
                 },
                 "description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
@@ -3091,20 +3388,23 @@
                                 "title": "Carriers Reference Number",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements"
+                                "description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements",
+                                "example": "ONEY12345667"
                             },
                             "shippersIdentifyingNumberForShipment": {
                                 "title": "Shippers Identifying Number For Shipment",
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
                                 "type": "string",
-                                "description": "A purchase order number for the shipment, could be from shipper or consignee"
+                                "description": "A purchase order number for the shipment, could be from shipper or consignee",
+                                "example": "400126253"
                             },
                             "pickupReferenceNumber": {
                                 "title": "Pickup Reference Number",
                                 "minLength": 3,
                                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
                                 "type": "string",
-                                "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa"
+                                "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa",
+                                "example": "OCC-2456-1"
                             }
                         }
                     },
@@ -3132,7 +3432,8 @@
                                 "title": "The scheduledLoadingTransportEvent ",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss"
+                                "description": "The planned date time of the loading at site, conform to yyyy-mm-ddThh:mm:ss",
+                                "example": "2023-07-01T09:05:49"
                             }
                         },
                         "description": "Dates that are relevent to the load plan, namely the planned date time of loading"
@@ -3152,7 +3453,8 @@
                                 "title": "Description of Goods",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
-                                "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+                                "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII",
+                                "example": "OCC 80/20"
                             }
                         },
                         "description": "The detail for the type of material that is being loaded/exported"
@@ -3171,12 +3473,12 @@
                         "description": "A coded reference to the location for the port of loading, used in transport provided by the UN, populates Box 11 on the Annex VII for origin country."
                     },
                     "loadingSite": {
-                        "$ref": "#components/schemas/LoadingSite"
+                        "$ref": "#/components/schemas/LoadingSite"
                     },
                     "pern": {
-                        "$ref": "#components/schemas/PERN"
+                        "$ref": "#/components/schemas/PERN"
                     },
-                    "Customs": {
+                    "customs": {
                         "type": "object",
                         "properties": {
                             "invoice": {
@@ -3211,7 +3513,24 @@
                             },
                             "incoterms": {
                                 "type": "string",
-                                "enum": ["CFR", "CIF", "CIP", "CPT", "DAF", "DAP", "DAT", "DDP", "DDU","DEQ", "DES", "EXW", "FAS", "FCA", "FOB", "XXX"]
+                                "enum": [
+                                    "CFR",
+                                    "CIF",
+                                    "CIP",
+                                    "CPT",
+                                    "DAF",
+                                    "DAP",
+                                    "DAT",
+                                    "DDP",
+                                    "DDU",
+                                    "DEQ",
+                                    "DES",
+                                    "EXW",
+                                    "FAS",
+                                    "FCA",
+                                    "FOB",
+                                    "XXX"
+                                ]
                             },
                             "buyer": {
                                 "$ref": "#/components/schemas/Buyer"
@@ -3225,7 +3544,9 @@
                 "title": "Packaging Export Recovery Note (PERN)",
                 "description": "Information about a PERN thats required to appear on the Annex VII in Box 15, if not claiming a PERN omit from the load plan",
                 "type": "object",
-                "required": ["percentage"],
+                "required": [
+                    "percentage"
+                ],
                 "properties": {
                     "percentage": {
                         "title": "Percentage of MT",
@@ -3233,7 +3554,8 @@
                         "format": "float",
                         "minimum": 1,
                         "maximum": 100,
-                        "description": "Percentage of MT to be issued for PERN"
+                        "description": "Percentage of MT to be issued for PERN",
+                        "example": 65.5
                     }
                 }
             },
@@ -3250,7 +3572,8 @@
                     "name": {
                         "title": "Recovery Facility Name",
                         "type": "string",
-                        "description": "Free Text Name of the Recovery Facility"
+                        "description": "Free Text Name of the Recovery Facility",
+                        "example": "ACME Recovery Site Ltd"
                     },
                     "address": {
                         "$ref": "#/components/schemas/Address"
@@ -3282,7 +3605,8 @@
                         "title": "Shipper Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "The Name of the Shipper"
+                        "description": "The Name of the Shipper",
+                        "example": "ACME Trader Ltd"
                     }
                 }
             },
@@ -3307,7 +3631,8 @@
                         "title": "Buyer Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "The Name of the Buyer"
+                        "description": "The Name of the Buyer",
+                        "example": "ACME Buyer Co"
                     },
                     "vatNumber": {
                         "$ref": "#/components/schemas/VATNumber"
@@ -3318,16 +3643,37 @@
                 "title": "Unit of Measure",
                 "pattern": "^[a-zA-Z]+$",
                 "type": "string",
-                "description": "Units of measure"
+                "description": "Units of measure",
+                "example": "KGM"
             },
             "UNLocode": {
                 "title": "The UNLocode schema",
                 "pattern": "^[A-Z0-9]{5}$",
                 "type": "string",
-                "description": "A coded reference to the location provided by the UN"
+                "description": "A coded reference to the location provided by the UN",
+                "example": "GBLIV"
             },
-            "Weights": {
-                "title": "Weights",
+            "Weight": {
+                "required": [
+                    "unit",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "unit": {
+                        "$ref": "#/components/schemas/UnitOfMeasure"
+                    },
+                    "value": {
+                        "title": "Weight Value",
+                        "minimum": 1,
+                        "type": "number",
+                        "description": "The weight of the equipment, product or other",
+                        "example": 26350
+                    }
+                }
+            },
+            "WeighingRecord": {
+                "title": "Weighing Record from Weighbridge to complete load",
                 "required": [
                     "dates",
                     "haulier",
@@ -3352,25 +3698,29 @@
                                 "title": "The despatchNoteNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "The weighbridge ticket number from the loading site."
+                                "description": "The weighbridge ticket number from the loading site.",
+                                "example": "40012"
                             },
                             "vehicleIdentificationNumber": {
                                 "title": "The vehicleIdentificationNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "The registration number of the vehicle, populates box 5a on the Annex VII"
+                                "description": "The registration number of the vehicle, populates box 5a on the Annex VII",
+                                "example": "NV18 NLD"
                             },
                             "pickupReferenceNumber": {
                                 "title": "The pickupReferenceNumber schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa"
+                                "description": "The loading reference provided by the driver at site, must match the one from the load plan provided by Traqa",
+                                "example": "OCC-2456-1"
                             },
                             "driverName": {
                                 "title": "The driverName schema",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)]+$",
                                 "type": "string",
-                                "description": "Name of the driver. Populates box 5a on the Annex VII"
+                                "description": "Name of the driver. Populates box 5a on the Annex VII",
+                                "example": "Lee"
                             }
                         },
                         "description": "References that are relevant to the Traqa loads and Shipper and Load Site to enable efficient exchange of loading data"
@@ -3392,54 +3742,38 @@
                                     "weighingDate",
                                     "weightVerificationMethod"
                                 ],
-                                "type": "object",
-                                "properties": {
-                                    "weightVerificationMethod": {
-                                        "title": "Weight Verification Method",
-                                        "type": "string",
-                                        "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
-                                        "enum": [
-                                            "1",
-                                            "2"
-                                        ]
+                                "allOf": [
+                                { "$ref": "#/components/schemas/Weight"},
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "weightVerificationMethod": {
+                                            "title": "Weight Verification Method",
+                                            "type": "string",
+                                            "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
+                                            "enum": [
+                                                "1",
+                                                "2"
+                                            ]
+                                        },
+                                        "weighingDate": {
+                                            "title": "The weighingDate schema",
+                                            "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                            "type": "string",
+                                            "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+                                            "example": "2023-07-01T09:47:38"
+                                        }
                                     },
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "weighingDate": {
-                                        "title": "The weighingDate schema",
-                                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                        "type": "string",
-                                        "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
-                                    }
-                                },
-                                "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
+                                    "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
+                                }
+                                ]
                             },
                             "equipmentTareWeight": {
+                                "allOf": [{
+                                    "$ref": "#/components/schemas/Weight"
+                                }],
                                 "title": "Equipment Tare Weight",
-                                "required": [
-                                    "unit",
-                                    "value"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The Tare weight of a container (empty weight)"
-                                    }
-                                },
-                                "description": "The tare weight is required for containerised movements to calculate the VGM."
+                                "description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."
                             },
                             "seal": {
                                 "title": "Seal Number",
@@ -3465,13 +3799,15 @@
                             "equipmentNumber": {
                                 "title": "Equipment Number",
                                 "type": "string",
-                                "description": "The Container Number OR the Trailer number that the goods have been loaded onto"
+                                "description": "The Container Number OR the Trailer number that the goods have been loaded onto",
+                                "example": "MAEU1234567"
                             },
                             "equipmentType": {
                                 "title": "Equipment Type",
                                 "pattern": "^[a-zA-Z0-9]{4}$",
                                 "type": "string",
-                                "description": "The ISO Size Type for Deep Sea Containers"
+                                "description": "The ISO Size Type for Deep Sea Containers",
+                                "example": "45G1"
                             }
                         }
                     },
@@ -3487,13 +3823,15 @@
                                 "title": "A coded Identifier for the haulier who arrives at site",
                                 "pattern": "^[a-zA-Z0-9]{7,13}$",
                                 "type": "string",
-                                "description": "The haulier identifier is the waste carrier license number, mandated by the EA."
+                                "description": "The haulier identifier is the waste carrier license number, mandated by the EA.",
+                                "example": "CBDU1234567"
                             },
                             "name": {
                                 "title": "Name of Haulier",
                                 "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                 "type": "string",
-                                "description": "Freetext for Haulier Name"
+                                "description": "Freetext for Haulier Name",
+                                "example": "Acme Haulage Co"
                             }
                         },
                         "description": "The Haulier who arrives at site to trasport the goods.  Populates box 5a on the Annex VII and verified with the EA"
@@ -3510,13 +3848,15 @@
                                 "title": "The actualDepartureTransportEvent schema",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time."
+                                "description": "The Actual Departure of the laden vehicle from Loading Site from final weigh, populates box 4 on the Annex VII for Departure Time.",
+                                "example": "2023-07-01T09:47:38"
                             },
                             "actualArrivalTransportEvent": {
                                 "title": "The actualArrivalTransportEvent schema",
                                 "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
                                 "type": "string",
-                                "description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh"
+                                "description": "The Actual Arrival of the empty vehicle at Loading Site for the first weigh",
+                                "example": "2023-07-01T08:30:38"
                             }
                         },
                         "description": "Dates relevant to the actual movement of material provided by the loading site "
@@ -3529,49 +3869,30 @@
                         "type": "object",
                         "properties": {
                             "grossWeight": {
-                                "title": "Gross Weight",
-                                "required": [
-                                    "unit",
-                                    "value"
+                                "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Weight"
+                                }
                                 ],
-                                "type": "object",
-                                "properties": {
-                                    "unit": {
-                                        "$ref": "#/components/schemas/UnitOfMeasure"
-                                    },
-                                    "value": {
-                                        "title": "Value",
-                                        "minimum": 1,
-                                        "type": "number",
-                                        "description": "The weight of the material without any equipment (Product Weight)"
-                                    }
-                                },
-                                "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII"
+                                "description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
                             },
                             "quantity": {
                                 "title": "Quantity",
                                 "minimum": 1,
                                 "type": "number",
-                                "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII"
+                                "description": "Number of Bales or other that were loaded.  Populates Box 3 on the Annex VII",
+                                "example": 22
                             },
                             "packageTypeCode": {
                                 "title": "Package",
                                 "type": "string",
-                                "description": "The package type code of the smallest external packing unit eg. BL or BN"
-                            },
-                            "harmonizeSystemCode": {
-                                "$ref": "#/components/schemas/HarmonizeSystemCode"
-                            },
-                            "description": {
-                                "title": "Description",
-                                "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
-                                "type": "string",
-                                "description": "The Name of material that is loaded."
+                                "description": "The package type code of the smallest external packing unit eg. BL or BN",
+                                "example": "BN"
                             }
                         }
                     },
                     "loadingSite": {
-                        "$ref": "#components/schemas/LoadingSite"
+                        "$ref": "#/components/schemas/LoadingSite"
                     }
                 },
                 "description": "The Weight payload for a Loading Site to complete the weighing of planned Traqa loads, data comes from the weighbridge software. "
@@ -3629,40 +3950,42 @@
                                         "title": "Verified Weight",
                                         "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety.",
                                         "required": [
+                                            "unit",
                                             "value",
                                             "weighingDate"
                                         ],
-                                        "type": "object",
-                                        "properties": {
-                                            "weighingDate": {
-                                                "title": "The weighingDate schema",
-                                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                                "type": "string",
-                                                "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII"
+                                        "allOf": [
+                                        { "$ref": "#/components/schemas/Weight"},
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "weightVerificationMethod": {
+                                                    "title": "Weight Verification Method",
+                                                    "type": "string",
+                                                    "description": "SOLAS VGM provides 2 methods, for all that are weighed at a weighbridge use method 1.",
+                                                    "enum": [
+                                                        "1",
+                                                        "2"
+                                                    ]
+                                                },
+                                                "weighingDate": {
+                                                    "title": "The weighingDate schema",
+                                                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                                    "type": "string",
+                                                    "description": "Date of the weighing of trailer or container at a laoding site.  Populates Box 4 on the Annex VII",
+                                                    "example": "2023-07-01T09:47:38"
+                                                }
                                             },
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The weight of the laden trailer or container including the tare weight of a container if appropriate"
-                                            }
+                                            "description": "For container movements this container the Verified Gross Mass or VGM thats mandatory to enter a port for safety."
                                         }
+                                        ]
                                     },
                                     "equipmentTareWeight": {
+                                        "allOf": [{
+                                            "$ref": "#/components/schemas/Weight"
+                                        }],
                                         "title": "Equipment Tare Weight",
-                                        "description": "The tare weight is required for containerised movements to calculate the VGM.",
-                                        "required": [
-                                            "value"
-                                        ],
-                                        "type": "object",
-                                        "properties": {
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The Tare weight of a container (empty weight)"
-                                            }
-                                        }
+                                        "description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."
                                     },
                                     "seal": {
                                         "title": "Seal Number",
@@ -3747,23 +4070,12 @@
                                 "type": "object",
                                 "properties": {
                                     "grossWeight": {
-                                        "title": "Gross Weight",
-                                        "description": "Weight of the Product loaded for movement, populates Box 2 on the Annex VII",
-                                        "required": [
-                                            "value"
-                                        ],
-                                        "type": "object",
-                                        "properties": {
-                                            "unit": {
-                                                "$ref": "#/components/schemas/UnitOfMeasure"
-                                            },
-                                            "value": {
-                                                "title": "Value",
-                                                "minimum": 1,
-                                                "type": "number",
-                                                "description": "The weight of the material without any equipment (Product Weight)"
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Weight"
                                             }
-                                        }
+                                        ],
+                                        "description": "Weight of the Material loaded for movement, populates Box 2 on the Annex VII"
                                     },
                                     "quantity": {
                                         "title": "Quantity",
