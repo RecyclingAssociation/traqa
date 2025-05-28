@@ -1351,7 +1351,7 @@
         "/task": {
             "get": {
                 "tags": [
-                    "NILS"
+                    "Tasks"
                 ],
                 "parameters": [
                     {
@@ -3524,6 +3524,9 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CodeBICFacility"
                             }
                         ]
                     },
