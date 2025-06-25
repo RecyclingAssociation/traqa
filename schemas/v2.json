@@ -2242,14 +2242,14 @@
                             },
                             "country": {
                                 "$ref": "#/components/schemas/LocationsCountry"
-                            },
-                            "contact": {
-                                "$ref": "#/components/schemas/CommonContact"
-                            },
-                            "vatNumber": {
-                                "$ref": "#/components/schemas/CodeVATNumber"
                             }
                         }
+                    },
+                    "contact": {
+                        "$ref": "#/components/schemas/CommonContact"
+                    },
+                    "vatNumber": {
+                        "$ref": "#/components/schemas/CodeVATNumber"
                     }
                 }
             },
@@ -2260,18 +2260,18 @@
                 ],
                 "type": "object",
                 "properties": {
-                    "organizationId": {
-                        "$ref": "#/components/schemas/CodeBICFacility"
-                    },
-                    "address": {
-                        "$ref": "#/components/schemas/CommonAddress"
-                    },
                     "name": {
                         "title": "Loading Site Name",
                         "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                         "type": "string",
-                        "description": "Loading Site Name in Freetext",
+                        "description": "Loading Site Name",
                         "example": "Acme Loading Site Ltd"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/CommonAddress"
+                    },
+                    "organizationId": {
+                        "$ref": "#/components/schemas/CodeBICFacility"
                     }
                 },
                 "description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
@@ -3085,6 +3085,12 @@
                     },
                     "country": {
                         "$ref": "#/components/schemas/LocationsCountry"
+                    },
+                    "formatted": {
+                        "title": "Formatted Address",
+                        "description": "A formatted address string for display purposes",
+                        "type": "string",
+                        "example": "123 Main Street, Liverpool, Merseyside, L1 0AA, GB"
                     }
                 }
             },
@@ -3203,14 +3209,17 @@
                         }
                     },
                     "transportEquipment": {
-                        "transportMeans": {
-                            "title": "Transport Means",
-                            "type": "string",
-                            "description": "The type of transport means used to move the material, either 'TRAILER' or 'CONTAINER'",
-                            "enum": [
-                                "TRAILER",
-                                "CONTAINER"
-                            ]
+                        "type": "object",
+                        "properties": {
+                            "transportMeans": {
+                                "title": "Transport Means",
+                                "type": "string",
+                                "description": "The type of transport means used to move the material, either 'TRAILER' or 'CONTAINER'",
+                                "enum": [
+                                    "TRAILER",
+                                    "CONTAINER"
+                                ]
+                            }
                         }
                     },
                     "countriesOfRouting": {
@@ -3453,6 +3462,7 @@
                         "title": "Declare Customs",
                         "description": "Specify whether you would like Traqa to submit a customs declaration to HMRC on your behalf for the load. Default is 'false'.",
                         "type": "boolean",
+                        "nullable": true,
                         "default": false,
                         "example": false
                     },
