@@ -3669,6 +3669,10 @@
             "ModelCustoms": {
                 "type": "object",
                 "title": "Customs Model",
+                "required": [
+                    "invoice",
+                    "declaration"
+                ],
                 "properties": {
                     "mrn": {
                         "title": "MRN",
@@ -3686,6 +3690,7 @@
                         "title": "Customs Microservice Status",
                         "type": "string",
                         "enum": [
+                            "SENT",
                             "OPEN",
                             "UPDATED",
                             "COMPLETED",
