@@ -3465,6 +3465,12 @@
                                     "TRAILER",
                                     "CONTAINER"
                                 ]
+                            },
+                            "accompanied": {
+                                "title": "Accompanied",
+                                "type": "boolean",
+                                "description": "Whether the transport equipment is accompanied by a driver",
+                                "example": true
                             }
                         }
                     },
