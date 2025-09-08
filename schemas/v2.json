@@ -2372,6 +2372,9 @@
                     },
                     "contact": {
                         "$ref": "#/components/schemas/CommonContact"
+                    },
+                    "vatNumber": {
+                        "$ref": "#/components/schemas/CodeVATNumber"
                     }
                 },
                 "description": "The Recovery Facility should ONLY be provided when different to Box 2 (Consignee) if not provided it will default to Consignee.  This will populate Box 7 on the Annex VII"
@@ -3502,6 +3505,9 @@
                     },
                     "recoveryDisposalCode": {
                         "$ref": "#/components/schemas/CodeRecovery"
+                    },
+                    "wasteClassification": {
+                        "$ref": "#/components/schemas/WasteClassification"
                     }
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
@@ -3787,6 +3793,12 @@
                                 "description": "Currency code as defined by ISO 4217.",
                                 "type": "string",
                                 "example": "GBP"
+                            },
+                            "amount": {
+                                "description": "Invoice amount. This attribute should be used if the Item Price Per Tonne is NOT used. It should not be used if Price Per Tonne IS used. Never Both.",
+                                "type": "number",
+                                "format": "float",
+                                "example": 1.0
                             }
                         }
                     },
