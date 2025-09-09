@@ -3371,6 +3371,9 @@
                     "consignee": {
                         "$ref": "#/components/schemas/PartyConsignee"
                     },
+                    "haulier": {
+                        "$ref": "#/components/schemas/PartyHaulier"
+                    },
                     "recoveryFacility": {
                         "$ref": "#/components/schemas/PartyRecoveryFacility"
                     },
