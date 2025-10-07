@@ -1601,6 +1601,7 @@
                 "in": "query",
                 "required": true,
                 "schema": {
+                    "maxLength": 35,
                     "type": "string"
                 },
                 "example": "LR12345-1"
@@ -3689,61 +3690,144 @@
                     "declaration"
                 ],
                 "properties": {
-                    "mrn": {
-                        "title": "MRN",
-                        "type": "string",
-                        "description": "The Movement Reference Number is a unique identifier for the customs declaration.",
-                        "example": "19GB123456789000"
-                    },
-                    "route": {
-                        "title": "Route",
-                        "type": "string",
-                        "description": "The route of the customs declaration.",
-                        "example": "02"
-                    },
-                    "status": {
-                        "title": "Customs Microservice Status",
-                        "type": "string",
-                        "enum": [
-                            "SENT",
-                            "OPEN",
-                            "UPDATED",
-                            "COMPLETED",
-                            "TIMEOUT",
-                            "FAILED",
-                            "INTERNAL_ERROR"
-                        ],
-                        "example": "COMPLETED"
-                    },
-                    "errors": {
-                        "title": "Customs Errors",
-                        "type": "array",
-                        "items": {
+                    "declarationHistory": {
+                        "type": "object",
+                        "description": "A map of Customs Microservice Responses, keyed by unique declaration ID (UUID).",
+                        "additionalProperties": {
+                            "description": "Each entry represents a customs declaration response, keyed by unique UUID",
                             "type": "object",
                             "properties": {
-                                "code": {
-                                    "title": "Error Code",
+                                "declarationType": {
+                                    "title": "Declaration Type",
                                     "type": "string",
-                                    "description": "The error code returned by the customs microservice.",
-                                    "example": "CDS10001"
+                                    "description": "The type of customs declaration (e.g., EX for Export).",
+                                    "example": "EX"
                                 },
-                                "description": {
-                                    "title": "Error Description",
+                                "additionalDeclarationType": {
+                                    "title": "Additional Declaration Type",
                                     "type": "string",
-                                    "description": "The error description returned by the customs microservice.",
-                                    "example": "Obligation error: Mandatory Data Element has not been provided."
+                                    "description": "Additional declaration type code.",
+                                    "example": "A"
                                 },
-                                "explanation": {
-                                    "title": "Error Explanation",
+                                "submissionRoute": {
+                                    "title": "Submission Route",
                                     "type": "string",
-                                    "description": "The explanation of the error returned by the customs microservice.",
-                                    "example": "Required details are missing."
+                                    "description": "The route through which the customs declaration was submitted.",
+                                    "example": "09"
                                 },
-                                "details": {
-                                    "title": "Error Details",
+                                "ucr": {
+                                    "title": "UCR",
                                     "type": "string",
-                                    "description": "The details of the error returned by the customs microservice.",
-                                    "example": "Declaration. Consignment. Carrier. Address. Address. Country. Code"
+                                    "description": "Unique Consignment Reference.",
+                                    "example": "5GB594290217000-NPOCT613"
+                                },
+                                "submissionDatetime": {
+                                    "title": "Submission Date/Time",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The date and time when the declaration was submitted.",
+                                    "example": "2025-10-06T13:06:20"
+                                },
+                                "mrn": {
+                                    "title": "MRN",
+                                    "type": "string",
+                                    "description": "The Movement Reference Number is a unique identifier for the customs declaration.",
+                                    "example": "25GBB1YCY7XP0D7AA7"
+                                },
+                                "lrn": {
+                                    "title": "LRN",
+                                    "type": "string",
+                                    "description": "Local Reference Number.",
+                                    "example": "C67083DB977A4357"
+                                },
+                                "submissionMethod": {
+                                    "title": "Submission Method",
+                                    "type": "string",
+                                    "description": "The method used for submission (e.g., CDS for Customs Declaration Service).",
+                                    "example": "CDS"
+                                },
+                                "customsAction": {
+                                    "title": "Customs Action",
+                                    "type": "string",
+                                    "description": "The action taken on the customs declaration.",
+                                    "example": "SUBMIT"
+                                },
+                                "icr": {
+                                    "title": "ICR",
+                                    "type": "string",
+                                    "description": "Inventory Consignment Reference.",
+                                    "example": "C9D2D2B9C4AF44"
+                                },
+                                "dateOfReceipt": {
+                                    "title": "Date of Receipt",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The date and time when the declaration was received by customs.",
+                                    "example": "2025-10-06T13:06:31"
+                                },
+                                "freeTextSegments": {
+                                    "title": "Free Text Segments",
+                                    "type": "array",
+                                    "description": "Additional information provided as free text.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "Additional Information: A2: : []"
+                                    ]
+                                },
+                                "status": {
+                                    "title": "Customs Microservice Status",
+                                    "type": "string",
+                                    "enum": [
+                                        "SENT",
+                                        "OPEN",
+                                        "UPDATED",
+                                        "COMPLETED",
+                                        "TIMEOUT",
+                                        "FAILED",
+                                        "INTERNAL_ERROR"
+                                    ],
+                                    "example": "COMPLETED"
+                                },
+                                "errors": {
+                                    "title": "Customs Errors",
+                                    "type": "array",
+                                    "description": "List of HMRC errors returned from customs declaration processing.",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "title": "Error Code",
+                                                "type": "string",
+                                                "description": "The error code returned by the customs microservice.",
+                                                "example": "CDS10001"
+                                            },
+                                            "description": {
+                                                "title": "Error Description",
+                                                "type": "string",
+                                                "description": "The error description returned by the customs microservice.",
+                                                "example": "Obligation error: Mandatory Data Element has not been provided."
+                                            },
+                                            "explanation": {
+                                                "title": "Error Explanation",
+                                                "type": "string",
+                                                "description": "The explanation of the error returned by the customs microservice.",
+                                                "example": "Required details are missing."
+                                            },
+                                            "details": {
+                                                "title": "Error Details",
+                                                "type": "string",
+                                                "description": "The details of the error returned by the customs microservice.",
+                                                "example": "Declaration. Consignment. Carrier. Address. Address. Country. Code"
+                                            }
+                                        }
+                                    }
+                                },
+                                "errorMessage": {
+                                    "title": "Error Message",
+                                    "type": "string",
+                                    "description": "Plain text error message from the customs microservice, used when the error is not a structured HMRC error list."
                                 }
                             }
                         }
