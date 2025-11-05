@@ -2954,21 +2954,7 @@
                 "title": "Recovery Code",
                 "description": "Recovery is one of the operations specified in Annex II B of Directive 2006/12/EC.",
                 "type": "string",
-                "enum": [
-                    "R1",
-                    "R2",
-                    "R3",
-                    "R4",
-                    "R5",
-                    "R6",
-                    "R7",
-                    "R8",
-                    "R9",
-                    "R10",
-                    "R11",
-                    "R12",
-                    "R13"
-                ],
+                "pattern": "^(R[1-9]|R1[0-3])(,\\s*(R[1-9]|R1[0-3]))*$",
                 "example": "R3"
             },
             "CodeIncoTerms": {
