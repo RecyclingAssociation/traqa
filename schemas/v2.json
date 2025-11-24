@@ -3770,9 +3770,7 @@
                                         "OPEN",
                                         "UPDATED",
                                         "COMPLETED",
-                                        "TIMEOUT",
-                                        "FAILED",
-                                        "INTERNAL_ERROR"
+                                        "INTERNAL_SERVER_ERROR"
                                     ],
                                     "example": "COMPLETED"
                                 },
