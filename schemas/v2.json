@@ -1918,6 +1918,12 @@
                                             },
                                             "LoadingReference": {
                                                 "type": "string"
+                                            },
+                                            "LoadingSiteName": {
+                                                "type": "string"
+                                            },
+                                            "ShipperName": {
+                                                "type": "string"
                                             }
                                         }
                                     }
@@ -3387,6 +3393,12 @@
                             },
                             "loadingSiteReference": {
                                 "$ref": "#/components/schemas/ReferenceLoadingSite"
+                            },
+                            "orderReference": {
+                                "$ref": "#/components/schemas/ReferenceOrderReference"
+                            },
+                            "nilsTaskId": {
+                                "$ref": "#/components/schemas/NILSTaskId"
                             }
                         }
                     },
