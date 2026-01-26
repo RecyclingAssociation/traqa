@@ -86,7 +86,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "basic_auth": []
+                    }
+                ]
             }
         },
         "/permissions": {
@@ -155,14 +160,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads": {
@@ -269,14 +267,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -384,14 +375,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byDate/{date}": {
@@ -501,14 +485,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -618,14 +595,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -738,14 +708,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/weights": {
@@ -855,14 +818,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/preAnnexvii": {
@@ -969,14 +925,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii": {
@@ -1091,14 +1040,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -1185,14 +1127,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -1307,14 +1242,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1401,14 +1329,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/commercialInvoice": {
@@ -1523,14 +1444,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1612,14 +1526,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1706,14 +1613,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         }
     },
@@ -2859,16 +2759,16 @@
             }
         },
         "securitySchemes": {
-            "cognito_apikey_auth": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "in": "header",
-                "x-amazon-apigateway-authtype": "custom"
+            "basic_auth": {
+                "type": "http",
+                "scheme": "basic",
+                "description": "Base64-encoded username:password credentials. Used to obtain a Bearer token via /getToken."
             },
-            "api_key": {
-                "type": "apiKey",
-                "name": "x-api-key",
-                "in": "header"
+            "bearer_auth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "JWT token obtained from /getToken. Pass as 'Bearer <token>' in the Authorization header."
             }
         }
     }
