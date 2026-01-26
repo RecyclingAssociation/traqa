@@ -90,7 +90,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads": {
@@ -137,7 +141,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -534,7 +542,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byDate/{date}": {
@@ -584,7 +596,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -634,7 +650,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -687,7 +707,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/weights": {
@@ -742,7 +766,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/preAnnexvii": {
@@ -780,7 +808,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/annexvii": {
@@ -818,7 +850,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -873,7 +909,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -911,7 +951,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -966,7 +1010,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/commercialInvoice": {
@@ -1004,7 +1052,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/exportAccompanyingDocument": {
@@ -1042,7 +1094,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1077,7 +1133,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1132,193 +1192,11 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": []
-            }
-        },
-        "/notifications": {
-            "get": {
-                "tags": [
-                    "NILS"
-                ],
-                "parameters": [
+                "security": [
                     {
-                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
-                    },
-                    {
-                        "name": "status",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "description": "Notification status",
-                            "type": "string",
-                            "enum": [
-                                "OPEN",
-                                "CLOSED"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "description": "Notification type",
-                            "type": "string"
-                        }
+                        "bearer_auth": []
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/Notifications"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/Common500"
-                    }
-                },
-                "security": [],
-                "description": "Fetch a list of `Notifications` from Traqa. These could be as example;\n* Weighbridge ticket requiring validation for NILS sites.\n* VGM submissions that have been rejected and require attention",
-                "summary": "Retrieve notifications"
-            },
-            "post": {
-                "description": "Close a notification from Traqa.",
-                "tags": [
-                    "NILS"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
-                    },
-                    {
-                        "$ref": "#/components/parameters/QueryOrganizationId"
-                    },
-                    {
-                        "$ref": "#/components/parameters/QueryDatetime"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The post was successful",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModelEmpty"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/Common404"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/Common500"
-                    }
-                },
-                "security": [],
-                "summary": "Create or update a notification"
-            }
-        },
-        "/task": {
-            "get": {
-                "tags": [
-                    "Tasks"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
-                    },
-                    {
-                        "name": "taskId",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request was successful",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModelGetTask"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/Common404"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/Common500"
-                    }
-                },
-                "security": [],
-                "description": "Retrieve the AI analysis text result for NILS tasks, taken from the Weighbridge tickets, hand completed Annex VII and other provided documents.",
-                "summary": "Retrieve task details"
-            },
-            "post": {
-                "tags": [
-                    "NILS"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
-                    },
-                    {
-                        "name": "taskId",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/TaskPost"
-                },
-                "responses": {
-                    "200": {
-                        "description": "The post was successful",
-                        "headers": {
-                            "Access-Control-Allow-Origin": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModelEmpty"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/Common404"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/Common500"
-                    }
-                },
-                "security": [],
-                "description": "Provide the shipper reviewed text from the task to complete the open NILS task as a completed load in Traqa.",
-                "summary": "Complete a NILS task"
+                ]
             }
         }
     },
@@ -1746,86 +1624,6 @@
                     }
                 }
             },
-            "Notifications": {
-                "description": "Information on a party's notifications.",
-                "headers": {
-                    "Access-Control-Allow-Origin": {
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Notifications": {
-                                    "title": "Notifications",
-                                    "type": "array",
-                                    "description": "A List of notifications.",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "NotificationStatus": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "OPEN",
-                                                    "CLOSED"
-                                                ]
-                                            },
-                                            "NotificationType": {
-                                                "type": "string"
-                                            },
-                                            "TaskId": {
-                                                "type": "string"
-                                            },
-                                            "LoadingReference": {
-                                                "type": "string"
-                                            },
-                                            "LoadingSiteName": {
-                                                "type": "string"
-                                            },
-                                            "ShipperName": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "Count": {
-                                    "title": "Notifications Count",
-                                    "description": "Number of notifications retrieved.",
-                                    "type": "number"
-                                },
-                                "DateOfRequest": {
-                                    "title": "Date Retrieved",
-                                    "type": "string",
-                                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                                    "description": "The date that the notifications information was requested in ISO 8601 format."
-                                }
-                            }
-                        },
-                        "example": {
-                            "Notifications": [
-                                {
-                                    "NotificationStatus": "OPEN",
-                                    "NotificationType": "TypeA",
-                                    "TaskId": "12345",
-                                    "LoadingReference": "LR-67890"
-                                },
-                                {
-                                    "NotificationStatus": "CLOSED",
-                                    "NotificationType": "TypeB",
-                                    "TaskId": "67890",
-                                    "LoadingReference": "LR-12345"
-                                }
-                            ],
-                            "Count": 2,
-                            "DateOfRequest": "2024-08-01T14:22:30"
-                        }
-                    }
-                }
-            },
             "Permissions": {
                 "description": "Information on a user's available permissions groups.",
                 "headers": {
@@ -1971,16 +1769,6 @@
             }
         },
         "requestBodies": {
-            "TaskPost": {
-                "description": "Model for posting data against a particular task.",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/ModelPostTask"
-                        }
-                    }
-                }
-            },
             "FilesPost": {
                 "description": "Specify the path to file(s) to be uploaded.",
                 "content": {
@@ -4031,548 +3819,19 @@
                     "xeroContactId": "ea51cc52-2d3e-4e54-8686-a8904d89cf47",
                     "role": "Shipper"
                 }
-            },
-            "ModelPostTask": {
-                "oneOf": [
-                    {
-                        "$ref": "#/components/schemas/TaskPostNILS"
-                    },
-                    {
-                        "$ref": "#/components/schemas/TaskPostONBOARDING"
-                    }
-                ]
-            },
-            "ModelGetTask": {
-                "oneOf": [
-                    {
-                        "$ref": "#/components/schemas/TaskGetNILS"
-                    },
-                    {
-                        "$ref": "#/components/schemas/TaskGetONBOARDING"
-                    },
-                    {
-                        "$ref": "#/components/schemas/TaskGetMULTITRADEITEM"
-                    }
-                ],
-                "example": {
-                    "Task": {
-                        "NILSAIAnalysis": {
-                            "shipper": {
-                                "organizationId": "TQGBDEMOA"
-                            },
-                            "references": {
-                                "pickupReferenceNumber": "LR-67890",
-                                "despatchNoteNumber": "98761234",
-                                "vehicleIdentificationNumber": ""
-                            },
-                            "transportEquipment": {
-                                "seal": [
-                                    {
-                                        "identifier": "EU1234567890"
-                                    }
-                                ],
-                                "equipmentNumber": "MSMU4453130",
-                                "verifiedWeight": {
-                                    "value": 25800,
-                                    "weighingDate": "2023-10-30T08:56:00"
-                                },
-                                "equipmentTareWeight": {
-                                    "value": 3700,
-                                    "unit": "KGM"
-                                }
-                            },
-                            "haulier": {
-                                "name": "Haulier Co Ltd",
-                                "organizationId": "CBDU209018"
-                            },
-                            "dates": {
-                                "actualDepartureTransportEvent": "2023-10-30T08:56:00",
-                                "actualArrivalTransportEvent": "2023-10-30T08:26:00"
-                            },
-                            "tradeItem": [
-                                {
-                                    "goodsItemNumber": "1",
-                                    "grossWeight": {
-                                        "value": 29500
-                                    },
-                                    "quantity": 27,
-                                    "description": "OCC 90/10",
-                                    "harmonizeSystemCode": "47071000",
-                                    "pricePerTonne": 1000
-                                }
-                            ],
-                            "loadingSite": {
-                                "organizationId": "GBLIVNILS"
-                            }
-                        },
-                        "TaskStatus": "OPEN",
-                        "WeighbridgeCertificateName": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/1.png",
-                        "LoadingReference": "LR-67890",
-                        "AnnexVIIName": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/2.png",
-                        "AttachmentURLs": [
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/1.png",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            },
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/2.png",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            },
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/3.jpg",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            },
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/4.jpg",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            },
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/5.jpg",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            },
-                            {
-                                "id": "NILS/2c92b51a-cbf0-4e37-87ea-1401f1328545/6.jpg",
-                                "url": "https://uat-traqa-application-nils-attachments.s3.amazonaws.com/NILS/..."
-                            }
-                        ]
-                    },
-                    "TaskType": "NILS",
-                    "DateOfRequest": "2024-01-10T09:41:42"
-                }
-            },
-            "TaskPostNILS": {
-                "title": "NILS",
-                "description": "Model for posting data against a particular task",
-                "type": "object",
-                "properties": {
-                    "WeighbridgeCertificateName": {
-                        "title": "Weighbridge Certificate Name"
-                    },
-                    "WeighbridgeData": {
-                        "description": "The Weight payload for a NILS to complete the weighing of planned Traqa loads, data comes from the weighbridge software and is verified manually by the Shipper.",
-                        "properties": {
-                            "references": {
-                                "title": "References",
-                                "description": "References that are relevant to the Traqa loads and Shipper and NILS to enable efficient exchange of loading data",
-                                "required": [
-                                    "pickupReferenceNumber"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "despatchNoteNumber": {
-                                        "$ref": "#/components/schemas/ReferenceDespatchNoteNumber"
-                                    },
-                                    "vehicleIdentificationNumber": {
-                                        "$ref": "#/components/schemas/ReferenceVehicleIdentificationNumber"
-                                    },
-                                    "pickupReferenceNumber": {
-                                        "$ref": "#/components/schemas/ReferencePickupReferenceNumber"
-                                    }
-                                }
-                            },
-                            "transportEquipment": {
-                                "title": "Transport Equipment",
-                                "description": "The Trailer or Container that is loaded with the material from load site.",
-                                "required": [
-                                    "equipmentNumber",
-                                    "verifiedWeight",
-                                    "equipmentTareWeight"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "verifiedWeight": {
-                                        "$ref": "#/components/schemas/WeightVerifiedGrossMass"
-                                    },
-                                    "equipmentTareWeight": {
-                                        "$ref": "#/components/schemas/WeightEquipmentTareWeight"
-                                    },
-                                    "seal": {
-                                        "$ref": "#/components/schemas/EquipmentSeal"
-                                    },
-                                    "equipmentNumber": {
-                                        "$ref": "#/components/schemas/EquipmentNumber"
-                                    }
-                                }
-                            },
-                            "haulier": {
-                                "$ref": "#/components/schemas/PartyHaulier"
-                            },
-                            "dates": {
-                                "title": "Dates",
-                                "required": [
-                                    "actualArrivalTransportEvent",
-                                    "actualDepartureTransportEvent"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "actualDepartureTransportEvent": {
-                                        "$ref": "#/components/schemas/DatesActualDepartureTransportEvent"
-                                    },
-                                    "actualArrivalTransportEvent": {
-                                        "$ref": "#/components/schemas/DatesActualArrivalTransportEvent"
-                                    }
-                                }
-                            },
-                            "tradeItem": {
-                                "title": "Trade Items",
-                                "type": "array",
-                                "minItems": 1,
-                                "items": {
-                                    "title": "Trade Item",
-                                    "required": [
-                                        "grossWeight",
-                                        "goodsItemNumber"
-                                    ],
-                                    "type": "object",
-                                    "properties": {
-                                        "goodsItemNumber": {
-                                            "$ref": "#/components/schemas/IdentifierGoodsItemNumber"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "OCC 90/10"
-                                        },
-                                        "harmonizeSystemCode": {
-                                            "$ref": "#/components/schemas/CodeHarmonizeSystem"
-                                        },
-                                        "grossWeight": {
-                                            "$ref": "#/components/schemas/WeightTradeItemGross"
-                                        },
-                                        "netWeight": {
-                                            "$ref": "#/components/schemas/WeightTradeItemNet"
-                                        },
-                                        "tareWeight": {
-                                            "$ref": "#/components/schemas/WeightTradeItemTare"
-                                        },
-                                        "quantity": {
-                                            "title": "Quantity",
-                                            "minimum": 1,
-                                            "type": "number",
-                                            "description": "Number of Bales or other that were loaded. Populates Box 3 on the Annex VII",
-                                            "example": 22
-                                        },
-                                        "packageTypeCode": {
-                                            "$ref": "#/components/schemas/CodePackageType"
-                                        },
-                                        "pricePerTonne": {
-                                            "$ref": "#/components/schemas/CommonPricePerTonne"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "example": {
-                    "WeighbridgeCertificateName": "weighbridge_certificate_123.jpg",
-                    "WeighbridgeData": {}
-                }
-            },
-            "TaskGetNILS": {
-                "title": "NILS Task Information",
-                "description": "NILS Task Information",
-                "type": "object",
-                "properties": {
-                    "Task": {
-                        "title": "Task",
-                        "description": "Task Fields",
-                        "type": "object",
-                        "properties": {
-                            "Shipper": {
-                                "$ref": "#/components/schemas/PartyShipper"
-                            },
-                            "LoadingSite": {
-                                "$ref": "#/components/schemas/PartyLoadingSite"
-                            },
-                            "WeighbridgeCertificateName": {
-                                "type": "string",
-                                "description": "Path to the predicted Weighbridge Certificate image"
-                            },
-                            "AnnexVIIName": {
-                                "type": "string",
-                                "description": "Path to the predicted Annex VII image"
-                            },
-                            "AttachmentURLs": {
-                                "type": "array",
-                                "description": "List of attachment URLs",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "description": "Name of the attachment"
-                                        },
-                                        "url": {
-                                            "type": "string",
-                                            "description": "Temporary URL of the attachment"
-                                        }
-                                    }
-                                }
-                            },
-                            "NILSAIAnalysis": {
-                                "$ref": "#/components/schemas/ModelWeighingRecord"
-                            },
-                            "NILSEnhancedAnalysis": {
-                                "$ref": "#/components/schemas/ModelWeighingRecord"
-                            },
-                            "TaskStatus": {
-                                "type": "string",
-                                "enum": [
-                                    "OPEN",
-                                    "CLOSED"
-                                ],
-                                "description": "Status of the task"
-                            }
-                        }
-                    },
-                    "TaskType": {
-                        "title": "Task Type",
-                        "description": "Type of the task retrieved",
-                        "type": "string"
-                    },
-                    "DateOfRequest": {
-                        "title": "Date Retrieved",
-                        "type": "string",
-                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                        "description": "The date that the task information was requested in ISO 8601 format"
-                    }
-                },
-                "example": {
-                    "Task": {
-                        "WeighbridgeCertificateName": "weighbridge_certificate_123.jpg",
-                        "AnnexVIIName": "annex_vii_123.jpg",
-                        "AttachmentURLs": [
-                            {
-                                "id": "https://example.com/attachment1.jpg"
-                            },
-                            {
-                                "id": "https://example.com/attachment2.jpg"
-                            }
-                        ],
-                        "NILSAIAnalysis": {
-                            "WeightValue": 12345,
-                            "WeightUnit": "kg",
-                            "WeighingDate": "2024-08-12T10:15:30"
-                        },
-                        "NILSEnhancedAnalysis": {
-                            "WeightValue": 12345,
-                            "WeightUnit": "kg",
-                            "WeighingDate": "2024-08-12T10:15:30"
-                        },
-                        "TaskStatus": "OPEN"
-                    },
-                    "TaskType": "Loading",
-                    "DateOfRequest": "2024-08-12T10:30:00"
-                }
-            },
-            "TaskGetMULTITRADEITEM": {
-                "title": "Multi Trade Item Task Information",
-                "description": "Multi Trade Item Resolution Data",
-                "type": "object",
-                "properties": {
-                    "Task": {
-                        "title": "Task",
-                        "description": "Task Fields",
-                        "type": "object",
-                        "properties": {
-                            "LoadplanTradeItems": {
-                                "$ref": "#/components/schemas/TradeItems"
-                            },
-                            "WeighbridgeData": {
-                                "$ref": "#/components/schemas/ModelWeighingRecord"
-                            },
-                            "TaskStatus": {
-                                "type": "string",
-                                "enum": [
-                                    "OPEN",
-                                    "CLOSED"
-                                ],
-                                "description": "Status of the task"
-                            }
-                        }
-                    },
-                    "TaskType": {
-                        "title": "Task Type",
-                        "description": "Type of the task retrieved",
-                        "type": "string"
-                    },
-                    "DateOfRequest": {
-                        "title": "Date Retrieved",
-                        "type": "string",
-                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                        "description": "The date that the task information was requested in ISO 8601 format"
-                    }
-                }
-            },
-            "TaskGetONBOARDING": {
-                "title": "Onboarding Task Information",
-                "description": "ONBOARDING Get Task Information",
-                "type": "object",
-                "properties": {
-                    "Task": {
-                        "title": "Task",
-                        "description": "Task Fields",
-                        "type": "object",
-                        "properties": {
-                            "OrganizationDetails": {
-                                "$ref": "#/components/schemas/ModelOrganization"
-                            },
-                            "TaskStatus": {
-                                "type": "string",
-                                "enum": [
-                                    "OPEN",
-                                    "CLOSED"
-                                ],
-                                "description": "Status of the task"
-                            }
-                        }
-                    },
-                    "TaskType": {
-                        "title": "Task Type",
-                        "description": "Type of the task retrieved",
-                        "type": "string"
-                    },
-                    "DateOfRequest": {
-                        "title": "Date Retrieved",
-                        "type": "string",
-                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                        "description": "The date that the task information was requested in ISO 8601 format"
-                    }
-                },
-                "example": {
-                    "Task": {
-                        "OrganizationDetails": {
-                            "identifier": "GB220861924000",
-                            "name": "Test Shipper for Traqa 4",
-                            "address": {
-                                "street": "1 Old Hall Street",
-                                "city": "Liverpool",
-                                "postcode": "L3 9HG",
-                                "country": "GB",
-                                "state": "Merseyside"
-                            },
-                            "contact": {
-                                "personName": "John Smith",
-                                "telephone": "+44 0000000000",
-                                "emailAddress": "help@traqa.io"
-                            },
-                            "config": {
-                                "submitVGM": true,
-                                "declareCustoms": true
-                            },
-                            "identifiers": {
-                                "eori": "GB220861924000",
-                                "license": "CBDU296918",
-                                "vat": "220861924"
-                            },
-                            "billing": {
-                                "emailAddress": "bill@email.com",
-                                "automation": {
-                                    "flat": true,
-                                    "value": 25.0
-                                },
-                                "customs": {
-                                    "flat": true,
-                                    "value": 250.0
-                                }
-                            },
-                            "creatorId": "person@email.com",
-                            "updaterId": "person@email.com",
-                            "approverId": "person@email.com",
-                            "xeroContactId": "ea51cc52-2d3e-4e54-8686-a8904d89cf47",
-                            "role": "Shipper"
-                        },
-                        "TaskStatus": "OPEN"
-                    },
-                    "TaskType": "ONBOARDING",
-                    "DateOfRequest": "2024-08-12T10:30:00"
-                }
-            },
-            "TaskPostONBOARDING": {
-                "title": "ONBOARDING",
-                "description": "ONBOARDING Task Information",
-                "type": "object",
-                "properties": {
-                    "Task": {
-                        "title": "Task",
-                        "description": "Task Fields",
-                        "type": "object",
-                        "properties": {
-                            "OrganizationDetails": {
-                                "$ref": "#/components/schemas/ModelOrganization"
-                            },
-                            "TaskStatus": {
-                                "type": "string",
-                                "enum": [
-                                    "OPEN",
-                                    "CLOSED"
-                                ],
-                                "description": "Status of the task"
-                            }
-                        }
-                    },
-                    "TaskType": {
-                        "title": "Task Type",
-                        "description": "Type of the task retrieved",
-                        "type": "string"
-                    },
-                    "DateOfRequest": {
-                        "title": "Date Retrieved",
-                        "type": "string",
-                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
-                        "description": "The date that the task information was requested in ISO 8601 format"
-                    }
-                },
-                "example": {
-                    "organizationDetails": {
-                        "identifier": "GB100000000000",
-                        "role": "Shipper",
-                        "name": "ACME COMPANY LTD",
-                        "address": {
-                            "street": "10 Downing Street",
-                            "city": "London",
-                            "postcode": "SW1A 2AA",
-                            "country": "GB",
-                            "state": "state"
-                        },
-                        "contact": {
-                            "personName": "John Doe",
-                            "telephone": "+441234123456",
-                            "emailAddress": "business@email.co.uk"
-                        },
-                        "identifiers": {
-                            "vat": "100000000",
-                            "license": "CBDU100000",
-                            "eori": "GB100000000000"
-                        },
-                        "config": {
-                            "declareCustoms": false,
-                            "digitalWasteTracking": false,
-                            "submitVGM": false
-                        },
-                        "billing": {
-                            "emailAddress": "billing@email.co.uk",
-                            "automation": {
-                                "flat": false,
-                                "value": 4,
-                                "target": 100
-                            },
-                            "customs": {
-                                "flat": false,
-                                "value": 20,
-                                "target": 100
-                            }
-                        },
-                        "creatorId": "traqastaff@email.co.uk"
-                    }
-                }
             }
         },
         "securitySchemes": {
             "basic_auth": {
                 "type": "http",
                 "scheme": "basic",
-                "description": "Base64-encoded username:password credentials"
+                "description": "Base64-encoded username:password credentials. Used to obtain a Bearer token via /getToken."
+            },
+            "bearer_auth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "JWT token obtained from /getToken. Pass as 'Bearer <token>' in the Authorization header."
             }
         }
     }

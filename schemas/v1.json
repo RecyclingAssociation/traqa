@@ -160,7 +160,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads": {
@@ -267,7 +271,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -375,7 +383,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byDate/{date}": {
@@ -485,7 +497,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -595,7 +611,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -708,7 +728,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/weights": {
@@ -818,7 +842,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/preAnnexvii": {
@@ -925,7 +953,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/annexvii": {
@@ -1040,7 +1072,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -1127,7 +1163,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -1242,7 +1282,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1329,7 +1373,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/documents/commercialInvoice": {
@@ -1444,7 +1492,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1526,7 +1578,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1613,7 +1669,11 @@
                         }
                     }
                 },
-                "security": []
+                "security": [
+                    {
+                        "bearer_auth": []
+                    }
+                ]
             }
         }
     },
@@ -2762,7 +2822,13 @@
             "basic_auth": {
                 "type": "http",
                 "scheme": "basic",
-                "description": "Base64-encoded username:password credentials"
+                "description": "Base64-encoded username:password credentials. Used to obtain a Bearer token via /getToken."
+            },
+            "bearer_auth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "JWT token obtained from /getToken. Pass as 'Bearer <token>' in the Authorization header."
             }
         }
     }
