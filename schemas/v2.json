@@ -36,11 +36,6 @@
                 "tags": [
                     "Authentication"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/HeaderAuthorizationRequest"
-                    }
-                ],
                 "description": "Before making requests you need to authorise and exchange your username and password for an IdToken that can be passed in subsequent requests.\n* The token will expire after 60 minutes.\n* You can use the RefreshToken (which expires after 1 month).\n* To refresh: send a POST request to the getToken endpoint with the header refresh_token.",
                 "responses": {
                     "200": {
@@ -58,7 +53,12 @@
                     "500": {
                         "$ref": "#/components/responses/Common500"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "basic_auth": []
+                    }
+                ]
             }
         },
         "/permissions": {
@@ -90,14 +90,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads": {
@@ -144,14 +137,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -548,14 +534,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byDate/{date}": {
@@ -605,14 +584,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -662,14 +634,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -722,14 +687,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/weights": {
@@ -784,14 +742,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/preAnnexvii": {
@@ -829,14 +780,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii": {
@@ -874,14 +818,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -936,14 +873,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -981,14 +911,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1043,14 +966,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/commercialInvoice": {
@@ -1088,14 +1004,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/exportAccompanyingDocument": {
@@ -1133,14 +1042,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1175,14 +1077,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1237,14 +1132,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": []
             }
         },
         "/notifications": {
@@ -1287,15 +1175,9 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Fetch a list of `Notifications` from Traqa. These could be as example;\n* Weighbridge ticket requiring validation for NILS sites.\n* VGM submissions that have been rejected and require attention"
+                "security": [],
+                "description": "Fetch a list of `Notifications` from Traqa. These could be as example;\n* Weighbridge ticket requiring validation for NILS sites.\n* VGM submissions that have been rejected and require attention",
+                "summary": "Retrieve notifications"
             },
             "post": {
                 "description": "Close a notification from Traqa.",
@@ -1338,14 +1220,8 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ]
+                "security": [],
+                "summary": "Create or update a notification"
             }
         },
         "/task": {
@@ -1391,15 +1267,9 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Retrieve the AI analysis text result for NILS tasks, taken from the Weighbridge tickets, hand completed Annex VII and other provided documents."
+                "security": [],
+                "description": "Retrieve the AI analysis text result for NILS tasks, taken from the Weighbridge tickets, hand completed Annex VII and other provided documents.",
+                "summary": "Retrieve task details"
             },
             "post": {
                 "tags": [
@@ -1446,15 +1316,9 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "cognito_apikey_auth": []
-                    },
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Provide the shipper reviewed text from the task to complete the open NILS task as a completed load in Traqa."
+                "security": [],
+                "description": "Provide the shipper reviewed text from the task to complete the open NILS task as a completed load in Traqa.",
+                "summary": "Complete a NILS task"
             }
         }
     },
@@ -1483,7 +1347,7 @@
             },
             "HeaderAuthorizationToken": {
                 "in": "header",
-                "name": "AuthorizationToken",
+                "name": "Authorization",
                 "description": "OAuth 2.0 Access token retrieved from the token endpoint",
                 "required": true,
                 "schema": {
@@ -2551,6 +2415,18 @@
                     }
                 }
             },
+            "ReferenceOrderReference": {
+                "description": "ShippersIdentifyingNumberForShipment for the order plus the unique order reference in Traqa",
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9\\ \\-\\/\\#\\.\\:\\*\\&\\+\\~_]+$",
+                "example": "ORD-123456#550e8400-e29b-41d4-a716-446655440000"
+            },
+            "NILSTaskId": {
+                "description": "TaskId of the associated Notification (if applicable) for a loading plan in Traqa",
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9\\ \\-\\/\\#\\.\\:\\*\\&\\+\\~_]+$",
+                "example": "4cde67da-a3vb-49d3-8d23-h38ed8c1a485"
+            },
             "LocationsPortOfLoading": {
                 "title": "Port Of Loading",
                 "required": [
@@ -2962,6 +2838,17 @@
                 "type": "string",
                 "pattern": "^(R[1-9]|R1[0-3])(,\\s*(R[1-9]|R1[0-3]))*$",
                 "example": "R3"
+            },
+            "WasteClassification": {
+                "title": "Waste Classification",
+                "description": "Traqa will determine this the waste risk classification automatically based on commodity code in accordance to government guidelines.",
+                "type": "string",
+                "enum": [
+                    "GREEN",
+                    "AMBER",
+                    "RED"
+                ],
+                "example": "GREEN"
             },
             "CodeIncoTerms": {
                 "title": "Incoterms",
@@ -4516,19 +4403,176 @@
                         "description": "The date that the task information was requested in ISO 8601 format"
                     }
                 }
+            },
+            "TaskGetONBOARDING": {
+                "title": "Onboarding Task Information",
+                "description": "ONBOARDING Get Task Information",
+                "type": "object",
+                "properties": {
+                    "Task": {
+                        "title": "Task",
+                        "description": "Task Fields",
+                        "type": "object",
+                        "properties": {
+                            "OrganizationDetails": {
+                                "$ref": "#/components/schemas/ModelOrganization"
+                            },
+                            "TaskStatus": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "CLOSED"
+                                ],
+                                "description": "Status of the task"
+                            }
+                        }
+                    },
+                    "TaskType": {
+                        "title": "Task Type",
+                        "description": "Type of the task retrieved",
+                        "type": "string"
+                    },
+                    "DateOfRequest": {
+                        "title": "Date Retrieved",
+                        "type": "string",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "description": "The date that the task information was requested in ISO 8601 format"
+                    }
+                },
+                "example": {
+                    "Task": {
+                        "OrganizationDetails": {
+                            "identifier": "GB220861924000",
+                            "name": "Test Shipper for Traqa 4",
+                            "address": {
+                                "street": "1 Old Hall Street",
+                                "city": "Liverpool",
+                                "postcode": "L3 9HG",
+                                "country": "GB",
+                                "state": "Merseyside"
+                            },
+                            "contact": {
+                                "personName": "John Smith",
+                                "telephone": "+44 0000000000",
+                                "emailAddress": "help@traqa.io"
+                            },
+                            "config": {
+                                "submitVGM": true,
+                                "declareCustoms": true
+                            },
+                            "identifiers": {
+                                "eori": "GB220861924000",
+                                "license": "CBDU296918",
+                                "vat": "220861924"
+                            },
+                            "billing": {
+                                "emailAddress": "bill@email.com",
+                                "automation": {
+                                    "flat": true,
+                                    "value": 25.0
+                                },
+                                "customs": {
+                                    "flat": true,
+                                    "value": 250.0
+                                }
+                            },
+                            "creatorId": "person@email.com",
+                            "updaterId": "person@email.com",
+                            "approverId": "person@email.com",
+                            "xeroContactId": "ea51cc52-2d3e-4e54-8686-a8904d89cf47",
+                            "role": "Shipper"
+                        },
+                        "TaskStatus": "OPEN"
+                    },
+                    "TaskType": "ONBOARDING",
+                    "DateOfRequest": "2024-08-12T10:30:00"
+                }
+            },
+            "TaskPostONBOARDING": {
+                "title": "ONBOARDING",
+                "description": "ONBOARDING Task Information",
+                "type": "object",
+                "properties": {
+                    "Task": {
+                        "title": "Task",
+                        "description": "Task Fields",
+                        "type": "object",
+                        "properties": {
+                            "OrganizationDetails": {
+                                "$ref": "#/components/schemas/ModelOrganization"
+                            },
+                            "TaskStatus": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "CLOSED"
+                                ],
+                                "description": "Status of the task"
+                            }
+                        }
+                    },
+                    "TaskType": {
+                        "title": "Task Type",
+                        "description": "Type of the task retrieved",
+                        "type": "string"
+                    },
+                    "DateOfRequest": {
+                        "title": "Date Retrieved",
+                        "type": "string",
+                        "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                        "description": "The date that the task information was requested in ISO 8601 format"
+                    }
+                },
+                "example": {
+                    "organizationDetails": {
+                        "identifier": "GB100000000000",
+                        "role": "Shipper",
+                        "name": "ACME COMPANY LTD",
+                        "address": {
+                            "street": "10 Downing Street",
+                            "city": "London",
+                            "postcode": "SW1A 2AA",
+                            "country": "GB",
+                            "state": "state"
+                        },
+                        "contact": {
+                            "personName": "John Doe",
+                            "telephone": "+441234123456",
+                            "emailAddress": "business@email.co.uk"
+                        },
+                        "identifiers": {
+                            "vat": "100000000",
+                            "license": "CBDU100000",
+                            "eori": "GB100000000000"
+                        },
+                        "config": {
+                            "declareCustoms": false,
+                            "digitalWasteTracking": false,
+                            "submitVGM": false
+                        },
+                        "billing": {
+                            "emailAddress": "billing@email.co.uk",
+                            "automation": {
+                                "flat": false,
+                                "value": 4,
+                                "target": 100
+                            },
+                            "customs": {
+                                "flat": false,
+                                "value": 20,
+                                "target": 100
+                            }
+                        },
+                        "creatorId": "traqastaff@email.co.uk"
+                    }
+                }
             }
         },
         "securitySchemes": {
-            "cognito_apikey_auth": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "in": "header",
-                "x-amazon-apigateway-authtype": "custom"
-            },
-            "api_key": {
-                "type": "apiKey",
-                "name": "x-api-key",
-                "in": "header"
+            "basic_auth": {
+                "type": "http",
+                "scheme": "basic",
+                "description": "Base64-encoded username:password credentials"
             }
         }
     }
