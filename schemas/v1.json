@@ -160,11 +160,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads": {
@@ -271,11 +267,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -383,11 +375,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byDate/{date}": {
@@ -497,11 +485,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -611,11 +595,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -728,11 +708,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/weights": {
@@ -842,11 +818,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/preAnnexvii": {
@@ -953,11 +925,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii": {
@@ -1072,11 +1040,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -1163,11 +1127,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -1282,11 +1242,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1373,11 +1329,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/commercialInvoice": {
@@ -1492,11 +1444,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1578,11 +1526,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1669,11 +1613,7 @@
                         }
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         }
     },

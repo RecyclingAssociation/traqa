@@ -90,11 +90,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads": {
@@ -141,11 +137,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             },
             "post": {
                 "summary": "Post or update loadplan details",
@@ -542,11 +534,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byDate/{date}": {
@@ -596,11 +584,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byLoadingReference/{loadingReference}": {
@@ -650,11 +634,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/loads/byWeekNo/{weekNo}": {
@@ -707,11 +687,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/weights": {
@@ -766,11 +742,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/preAnnexvii": {
@@ -808,11 +780,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii": {
@@ -850,11 +818,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/annexvii/{loadingReference}/{shipperOrganizationId}": {
@@ -909,11 +873,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate": {
@@ -951,11 +911,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/weighbridgeCertificate/{loadingReference}/{shipperOrganizationId}": {
@@ -1010,11 +966,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/commercialInvoice": {
@@ -1052,11 +1004,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/documents/exportAccompanyingDocument": {
@@ -1094,11 +1042,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}": {
@@ -1133,11 +1077,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         },
         "/photos/byLoadingReference/{loadingReference}/{shipperOrganizationId}": {
@@ -1192,11 +1132,7 @@
                         "$ref": "#/components/responses/Common500"
                     }
                 },
-                "security": [
-                    {
-                        "bearer_auth": []
-                    }
-                ]
+                "security": []
             }
         }
     },
