@@ -13,20 +13,12 @@
     },
     "servers": [
         {
-            "url": "https://uat.api.traqa.io/v1",
-            "description": "User Acceptance Testing Url for Traqa API"
-        },
-        {
-            "url": "https://api.traqa.io/v1",
-            "description": "Production Base URL for Traqa API"
-        },
-        {
             "url": "https://uat.api.traqa.io/v2",
             "description": "User Acceptance Testing Url for Traqa API V2"
         },
         {
             "url": "https://api.traqa.io/v2",
-            "description": "Production Base URL for Traqa API for V2"
+            "description": "Production Base URL for Traqa API V2"
         }
     ],
     "paths": {
