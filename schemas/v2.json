@@ -3287,8 +3287,7 @@
                 "type": "object",
                 "title": "Customs Model",
                 "required": [
-                    "invoice",
-                    "declaration"
+                    "invoice"
                 ],
                 "properties": {
                     "declarationHistory": {
