@@ -1788,6 +1788,11 @@
                     },
                     "vatNumber": {
                         "$ref": "#/components/schemas/CodeVATNumber"
+                    },
+                    "traqaId": {
+                        "title": "Traqa ID",
+                        "type": "string",
+                        "description": "Address book party identifier"
                     }
                 }
             },
@@ -1892,6 +1897,11 @@
                     },
                     "vatNumber": {
                         "$ref": "#/components/schemas/CodeVATNumber"
+                    },
+                    "traqaId": {
+                        "title": "Traqa ID",
+                        "type": "string",
+                        "description": "Address book party identifier"
                     }
                 }
             },
@@ -1962,6 +1972,11 @@
                     },
                     "vatNumber": {
                         "$ref": "#/components/schemas/CodeVATNumber"
+                    },
+                    "traqaId": {
+                        "title": "Traqa ID",
+                        "type": "string",
+                        "description": "Address book party identifier"
                     }
                 },
                 "description": "The Recovery Facility should ONLY be provided when different to Box 2 (Consignee) if not provided it will default to Consignee.  This will populate Box 7 on the Annex VII"
@@ -3114,6 +3129,18 @@
                     },
                     "wasteClassification": {
                         "$ref": "#/components/schemas/WasteClassification"
+                    },
+                    "trader": {
+                        "title": "Trader",
+                        "type": "object",
+                        "description": "The trader from which the waste was purchased, if applicable.",
+                        "properties": {
+                            "traqaId": {
+                                "title": "Traqa ID",
+                                "type": "string",
+                                "description": "The Traqa address book ID of the trader"
+                            }
+                        }
                     }
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
