@@ -1037,6 +1037,88 @@
                 "security": []
             }
         },
+        "/photos": {
+            "delete": {
+                "summary": "Delete a photo from a loadplan",
+                "tags": [
+                    "Photos"
+                ],
+                "description": "Delete a `loading photo` from a load. Removes the photo from the load's gallery and deletes both the full-size image and its thumbnail.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
+                    },
+                    {
+                        "name": "loadingReference",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/ReferencePickupReferenceNumber"
+                        },
+                        "description": "The loading reference of the load the photo belongs to",
+                        "example": "LR12345-1"
+                    },
+                    {
+                        "name": "photoName",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The photo name exactly as returned by the photos GET endpoints"
+                    },
+                    {
+                        "name": "shipperOrganizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The shipper organisation the load belongs to. Required for Internal users; optional for Shipper users belonging to a single organisation."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful photo delete response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PhotoDeleted"
+                                },
+                                "examples": {
+                                    "deleted": {
+                                        "summary": "Photo removed from the load",
+                                        "value": {
+                                            "deleted": "TQGBSHIPPER1/LR12345-1_IMG_08072026_10c549ff.jpg"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/Common400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Common403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/Common404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Common500"
+                    }
+                },
+                "security": []
+            }
+        },
         "/photos/byLoadingReference/{loadingReference}": {
             "get": {
                 "summary": "Retrieve the photos of a loadplan",
@@ -1107,6 +1189,144 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ModelEmpty"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/Common400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Common403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/Common404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Common500"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/uploads": {
+            "get": {
+                "summary": "Get presigned URLs for uploading files to a load",
+                "tags": [
+                    "Uploads"
+                ],
+                "description": "Returns presigned upload URLs for sending files directly to Traqa's storage. Uploaded files register against the load automatically and appear on the corresponding GET endpoints within a few seconds; there is no confirmation call. Available to Shipper and Internal users only.\n\n**How to upload:** for each entry in `uploads`, send a `multipart/form-data` POST to `url` containing every key/value of `fields` \u2014 treat it as an opaque, ready-made form; copy it in verbatim, don't read or edit it \u2014 followed by the file itself as the **last** form field, named `file`. A `204` response means the upload succeeded. The complete integration:\n\n```javascript\nconst {uploads} = await getUploadUrls(loadingReference, 'photo', files.length);\n\nfor (const [i, upload] of uploads.entries()) {\n  const form = new FormData();\n  for (const [name, value] of Object.entries(upload.fields)) {\n    form.append(name, value);\n  }\n  form.append('file', files[i]);                          // must be the last field\n  await fetch(upload.url, {method: 'POST', body: form});  // 204 = success\n}\n```\n\n**Rules:** `fields` is cryptographically signed \u2014 adding, renaming, or editing entries makes the upload fail with a `403` (the one permitted change: set the `Content-Type` field to your file's real image type, e.g. `image/png`). Don't set a `Content-Type` *header* on the POST yourself \u2014 let your HTTP client generate the multipart boundary (`FormData`, curl `-F`, and Python `requests`' `files=` all do). URLs expire after 10 minutes; request fresh ones rather than caching. Photos accept up to 20 images (max 50MB each) per call; the document types accept a single PDF.",
+                "externalDocs": {
+                    "description": "Amazon S3 browser-based uploads using POST policies (the mechanism behind fields)",
+                    "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html"
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
+                    },
+                    {
+                        "name": "loadingReference",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/ReferencePickupReferenceNumber"
+                        },
+                        "description": "The loading reference of the load to upload files for",
+                        "example": "LR12345-1"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "photo",
+                                "annexvii",
+                                "weighbridgeCertificate"
+                            ]
+                        },
+                        "description": "What kind of file is being uploaded. Photos accept image content; the document types accept a single PDF."
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 1
+                        },
+                        "description": "How many upload URLs to issue (one per file). Maximum 20 for photos; must be 1 for the document types."
+                    },
+                    {
+                        "name": "shipperOrganizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The shipper organisation the load belongs to. Required for Internal users; optional for Shipper users belonging to a single organisation."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful upload URLs response",
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadUrls"
+                                },
+                                "examples": {
+                                    "twoPhotos": {
+                                        "summary": "Upload URLs for two photos (?type=photo&count=2)",
+                                        "value": {
+                                            "uploads": [
+                                                {
+                                                    "key": "TQGBSHIPPER1/LR12345-1_IMG_08072026_10c549ff.jpg",
+                                                    "url": "https://prod-traqa-application-fullsize-photos.s3.eu-west-1.amazonaws.com/",
+                                                    "fields": {
+                                                        "Content-Type": "image/jpeg",
+                                                        "x-amz-meta-shipper": "TQGBSHIPPER1",
+                                                        "x-amz-meta-loading-reference": "LR12345-1",
+                                                        "x-amz-meta-uploaded-by": "operations@shipper.example.com",
+                                                        "key": "TQGBSHIPPER1/LR12345-1_IMG_08072026_10c549ff.jpg",
+                                                        "x-amz-algorithm": "AWS4-HMAC-SHA256",
+                                                        "x-amz-credential": "ASIAEXAMPLEEXAMPLE/20260708/eu-west-1/s3/aws4_request",
+                                                        "x-amz-date": "20260708T101500Z",
+                                                        "x-amz-security-token": "IQoJb3JpZ2luX2VjEXAMPLETOKEN...",
+                                                        "policy": "eyJleHBpcmF0aW9uIjogIjIwMjYtMDctMDhUMTA6MjU6MDBaIiwgImNvbmRpdGlvbnMiOiBbXX0=",
+                                                        "x-amz-signature": "9d3c1a8f0eEXAMPLESIGNATURE"
+                                                    }
+                                                },
+                                                {
+                                                    "key": "TQGBSHIPPER1/LR12345-1_IMG_08072026_77aa01bc.jpg",
+                                                    "url": "https://prod-traqa-application-fullsize-photos.s3.eu-west-1.amazonaws.com/",
+                                                    "fields": {
+                                                        "Content-Type": "image/jpeg",
+                                                        "x-amz-meta-shipper": "TQGBSHIPPER1",
+                                                        "x-amz-meta-loading-reference": "LR12345-1",
+                                                        "x-amz-meta-uploaded-by": "operations@shipper.example.com",
+                                                        "key": "TQGBSHIPPER1/LR12345-1_IMG_08072026_77aa01bc.jpg",
+                                                        "x-amz-algorithm": "AWS4-HMAC-SHA256",
+                                                        "x-amz-credential": "ASIAEXAMPLEEXAMPLE/20260708/eu-west-1/s3/aws4_request",
+                                                        "x-amz-date": "20260708T101500Z",
+                                                        "x-amz-security-token": "IQoJb3JpZ2luX2VjEXAMPLETOKEN...",
+                                                        "policy": "eyJleHBpcmF0aW9uIjogIjIwMjYtMDctMDhUMTA6MjU6MDBaIiwgImNvbmRpdGlvbnMiOiBbXX0=",
+                                                        "x-amz-signature": "1b2c3d4e5fEXAMPLESIGNATURE"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1715,6 +1935,55 @@
             }
         },
         "schemas": {
+            "UploadUrls": {
+                "title": "Upload URLs",
+                "description": "Presigned S3 POST targets, one per requested file",
+                "type": "object",
+                "required": [
+                    "uploads"
+                ],
+                "properties": {
+                    "uploads": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "url",
+                                "fields"
+                            ],
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "description": "The name the file will be stored and registered under"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "description": "The URL to send the multipart/form-data POST to"
+                                },
+                                "fields": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "description": "Form fields that must be included in the POST ahead of the file field, exactly as returned"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PhotoDeleted": {
+                "title": "Photo Deleted",
+                "description": "Confirmation of a deleted photo",
+                "type": "object",
+                "properties": {
+                    "deleted": {
+                        "type": "string",
+                        "description": "The photo name that was deleted"
+                    }
+                }
+            },
             "PartyShipper": {
                 "title": "Shipper",
                 "description": "The Shipper is the party who is exporting the material and submitting the load plan into Traqa, populates Box 1 on the Annex VII",
@@ -2069,6 +2338,48 @@
                 "type": "string",
                 "description": "Date of the weighing of trailer or container at a Loading Site. Populates Box 4 on the Annex VII",
                 "example": "2023-07-01T09:05:49"
+            },
+            "DatesVermasMessageSentEvent": {
+                "title": "VERMAS Message Sent Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the most recent VERMAS (VGM) message for this container was sent to the port. Updated on each resubmission.",
+                "example": "2023-07-01T10:15:02"
+            },
+            "DatesVermasFirstMessageSentEvent": {
+                "title": "VERMAS First Message Sent Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the first VERMAS (VGM) message for this container was sent to the port.",
+                "example": "2023-07-01T10:15:02"
+            },
+            "DatesVermasMessageAcceptedEvent": {
+                "title": "VERMAS Message Accepted Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the port accepted the VERMAS (VGM) message for this container.",
+                "example": "2023-07-01T10:22:47"
+            },
+            "DatesVermasMessageRejectedEvent": {
+                "title": "VERMAS Message Rejected Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the port rejected the VERMAS (VGM) message for this container. Not present once a later submission is accepted.",
+                "example": "2023-07-01T10:22:47"
+            },
+            "DatesVermasTerminalWeighedEvent": {
+                "title": "VERMAS Terminal Weighed Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the terminal weighed the container itself and provided the VGM.",
+                "example": "2023-07-02T06:41:00"
+            },
+            "DatesVermasThirdPartyVGMEvent": {
+                "title": "VERMAS Third Party VGM Event",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the port reported that a VGM for this container had already been submitted by another party.",
+                "example": "2023-07-02T06:41:00"
             },
             "ReferenceCarriersReferenceNumber": {
                 "title": "Carriers Reference Number",
@@ -2842,6 +3153,19 @@
                 "title": "Equipment Tare Weight",
                 "description": "The tare weight of the equipment (container or trailer) is required for containerised movements to calculate the VGM."
             },
+            "WeightVermasTerminalVGM": {
+                "title": "Terminal VGM Weight",
+                "minimum": 1,
+                "type": "number",
+                "description": "The VGM weight in kilograms recorded by the terminal when it weighed the container. Present alongside vermasTerminalWeighedEvent.",
+                "example": 26410
+            },
+            "EquipmentVermasTerminalWeighRequested": {
+                "title": "Terminal Weigh Requested",
+                "type": "boolean",
+                "description": "Whether the terminal weigh was requested. Present once a terminal weigh has been recorded against the load.",
+                "example": false
+            },
             "CommonContact": {
                 "type": "object",
                 "title": "Contact",
@@ -3093,7 +3417,8 @@
                             "accompanied": {
                                 "title": "Accompanied",
                                 "type": "boolean",
-                                "description": "Whether the transport equipment is accompanied by a driver",
+                                "deprecated": true,
+                                "description": "Deprecated: no longer used. GVMS routing is derived from the goods location code (a `GVM` suffix indicates an accompanied/GVMS location). This field will be removed in a future revision.",
                                 "example": true
                             }
                         }
@@ -3145,6 +3470,51 @@
                 },
                 "description": "The Load Plan that is provided by the shipper to a load site via Traqa, this will create new loads in Traqa for loading at a site."
             },
+            "ModelLoadplanVermasResult": {
+                "title": "VERMAS Result",
+                "type": "object",
+                "description": "The outcome of the VERMAS (VGM) submission for a container. Read-only, returned on completed loads. Only the events that have occurred are present.",
+                "properties": {
+                    "dates": {
+                        "title": "Dates",
+                        "type": "object",
+                        "description": "Dates relevant to the VERMAS (VGM) submission and its outcome at the port",
+                        "properties": {
+                            "vermasFirstMessageSentEvent": {
+                                "$ref": "#/components/schemas/DatesVermasFirstMessageSentEvent"
+                            },
+                            "vermasMessageSentEvent": {
+                                "$ref": "#/components/schemas/DatesVermasMessageSentEvent"
+                            },
+                            "vermasMessageAcceptedEvent": {
+                                "$ref": "#/components/schemas/DatesVermasMessageAcceptedEvent"
+                            },
+                            "vermasMessageRejectedEvent": {
+                                "$ref": "#/components/schemas/DatesVermasMessageRejectedEvent"
+                            },
+                            "vermasTerminalWeighedEvent": {
+                                "$ref": "#/components/schemas/DatesVermasTerminalWeighedEvent"
+                            },
+                            "vermasThirdPartyVGMEvent": {
+                                "$ref": "#/components/schemas/DatesVermasThirdPartyVGMEvent"
+                            }
+                        }
+                    },
+                    "transportEquipment": {
+                        "title": "Transport Equipment",
+                        "type": "object",
+                        "description": "Terminal weigh details recorded against the container",
+                        "properties": {
+                            "vermasTerminalVGMWeight": {
+                                "$ref": "#/components/schemas/WeightVermasTerminalVGM"
+                            },
+                            "vermasTerminalWeighRequested": {
+                                "$ref": "#/components/schemas/EquipmentVermasTerminalWeighRequested"
+                            }
+                        }
+                    }
+                }
+            },
             "ModelLoadplanCompleted": {
                 "description": "The Load Plan that is provided by the shipper augmented with data provided by the loading site.",
                 "type": "object",
@@ -3154,6 +3524,9 @@
                     },
                     {
                         "$ref": "#/components/schemas/ModelWeighingRecord"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ModelLoadplanVermasResult"
                     }
                 ]
             },
@@ -3230,7 +3603,8 @@
                             "accompanied": {
                                 "title": "Accompanied",
                                 "type": "boolean",
-                                "description": "Whether the transport equipment is accompanied by a driver",
+                                "deprecated": true,
+                                "description": "Deprecated: no longer used. GVMS routing is derived from the goods location code (a `GVM` suffix indicates an accompanied/GVMS location). This field will be removed in a future revision.",
                                 "example": true
                             },
                             "verifiedWeight": {
@@ -3464,6 +3838,13 @@
                         "type": "boolean",
                         "nullable": true,
                         "default": false,
+                        "example": false
+                    },
+                    "isExported": {
+                        "title": "Is Exported",
+                        "description": "True if any declaration in declarationHistory has been confirmed as exited the customs union (CDS route 16), regardless of whether other entries (e.g. earlier rejections) are also present.",
+                        "type": "boolean",
+                        "readOnly": true,
                         "example": false
                     },
                     "declaration": {
