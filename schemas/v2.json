@@ -2412,7 +2412,7 @@
             "ReferencePickupReferenceNumber": {
                 "title": "Pickup Reference Number",
                 "minLength": 3,
-                "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
+                "pattern": "^[a-zA-Z0-9\\ \\-\\/\\_]+$",
                 "type": "string",
                 "description": "The loading reference the driver will provide to site on arrival, must be unique per load this is a key identifier in Traqa that is agreed between the Load Site and the Shipper.",
                 "example": "OCC-2456-1"
