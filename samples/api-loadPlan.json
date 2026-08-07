@@ -56,10 +56,13 @@
     "shipper": {
         "organizationId": "TQGBACMEL"
     },
-    "tradeItem": {
+    "tradeItem": [{
         "harmonizeSystemCode": "47071000",
         "description": "OCC 90/10"
-    },
+    },{
+        "harmonizeSystemCode": "47079090",
+        "description": "Mixed Material"
+    }],
     "loadingSite": {
         "organizationId": "GBLIVRFAC"
     },
