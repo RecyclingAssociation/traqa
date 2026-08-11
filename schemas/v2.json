@@ -2193,6 +2193,13 @@
                     },
                     "organizationId": {
                         "$ref": "#/components/schemas/CodeBICFacility"
+                    },
+                    "weighbridgeOnsite": {
+                        "title": "Weighbridge On Site",
+                        "type": "boolean",
+                        "readOnly": true,
+                        "description": "Whether the Loading Site has a weighbridge on site.  A site with no weighbridge cannot produce a verified weight, so Traqa will not submit a VGM for its loads.  Absent or true means a weighbridge is present.",
+                        "example": true
                     }
                 },
                 "description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
