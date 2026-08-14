@@ -3084,7 +3084,7 @@
             },
             "CodeBICFacility": {
                 "title": "Loading Site Code",
-                "pattern": "^[A-Z]{9}$",
+                "pattern": "^[A-Z0-9]{9}$",
                 "type": "string",
                 "description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
                 "example": "GBEDMBIFA"
