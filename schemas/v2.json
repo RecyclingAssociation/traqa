@@ -2194,6 +2194,13 @@
                     "organizationId": {
                         "$ref": "#/components/schemas/CodeLoadingSiteIdentifier"
                     },
+                    "traqaId": {
+                        "title": "Traqa ID",
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Traqa-generated id the load was created with, issued while the Loading Site was pending verification. It stays the same after the site is verified and organizationId becomes its BIC Facility Code. Present only when the load was created with this id.",
+                        "example": "TQC3V7CAJ7"
+                    },
                     "weighbridgeOnsite": {
                         "title": "Weighbridge On Site",
                         "type": "boolean",
