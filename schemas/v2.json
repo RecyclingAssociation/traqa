@@ -2192,7 +2192,7 @@
                         "$ref": "#/components/schemas/CommonAddress"
                     },
                     "organizationId": {
-                        "$ref": "#/components/schemas/CodeBICFacility"
+                        "$ref": "#/components/schemas/CodeLoadingSiteIdentifier"
                     },
                     "weighbridgeOnsite": {
                         "title": "Weighbridge On Site",
@@ -2200,6 +2200,24 @@
                         "readOnly": true,
                         "description": "Whether the Loading Site has a weighbridge on site.  A site with no weighbridge cannot produce a verified weight, so Traqa will not submit a VGM for its loads.  Absent or true means a weighbridge is present.",
                         "example": true
+                    },
+                    "forceEuAnnexVII": {
+                        "title": "Force EU Annex VII",
+                        "type": "boolean",
+                        "readOnly": true,
+                        "description": "When true, always generate the Regulation (EU) 2024/1157 Annex VII template for this loading site's loads, regardless of shipment geography. Absent means false (geography-based auto-detection).",
+                        "example": true
+                    },
+                    "identifiers": {
+                        "type": "object",
+                        "readOnly": true,
+                        "description": "Free-form key/value map of identifiers. wasteOperatorPermitNumber is the EA-issued permit number (2 letters, 4 numbers, 2 letters), when set on this site's master record.",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "example": {
+                            "wasteOperatorPermitNumber": "AB1234CD"
+                        }
                     }
                 },
                 "description": "The physical Loading Site of the Material which will provide weights to Traqa.  This will appear in Box 6 of the Annex VII"
@@ -2395,6 +2413,13 @@
                 "description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements",
                 "example": "ONEY12345667"
             },
+            "ReferenceTransportDocumentReference": {
+                "title": "Transport Document Reference",
+                "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
+                "type": "string",
+                "description": "The transport document reference for the shipment - the Bill of Lading number for deep sea movements or the CMR consignment note reference for road movements.",
+                "example": "271213791"
+            },
             "ReferenceShippersIdentifyingNumberForShipment": {
                 "title": "Shippers Identifying Number For Shipment",
                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\,\\/\\_]+$",
@@ -2461,8 +2486,28 @@
                         "maximum": 100,
                         "description": "Percentage of MT to be issued for PERN",
                         "example": 97.5
+                    },
+                    "method": {
+                        "title": "How the recyclable proportion was calculated",
+                        "description": "EPR summary log column P \u2014 the recyclable proportion calculation method from the exporter's approved sampling and inspection plan. Defaults to 'Actual weight (100%)' on the EPR report when omitted.",
+                        "type": "string",
+                        "enum": [
+                            "AAIG percentage",
+                            "Actual weight (100%)",
+                            "National protocol percentage",
+                            "S&I plan agreed methodology",
+                            "S&I plan agreed site-specific protocol percentage"
+                        ],
+                        "example": "Actual weight (100%)"
                     }
                 }
+            },
+            "EprWasteDescription": {
+                "title": "EPR description of waste received",
+                "description": "DEFRA picklist value for the EPR summary log column I ('Description of waste received') \u2014 one of the values from the accredited-exporter template for the material, e.g. 'Paper - sorted mixed paper or board ' (the trailing space is part of the official value). When omitted, paper-material rows default to 'Paper - sorted mixed paper or board ' on the EPR report; other materials fall back to the trade item description.",
+                "type": "string",
+                "maxLength": 100,
+                "example": "Paper - sorted mixed paper or board "
             },
             "ReferenceOrderReference": {
                 "description": "ShippersIdentifyingNumberForShipment for the order plus the unique order reference in Traqa",
@@ -3077,17 +3122,29 @@
             },
             "CodeTraqa": {
                 "type": "string",
-                "example": "TQGBACMEL",
-                "pattern": "^TQ[A-Z]{7}$",
+                "example": "K3JQP8XZ",
+                "pattern": "^[A-Z0-9]{1,24}$",
                 "title": "Traqa Code",
                 "description": "Traqa created identifying code for a party."
             },
             "CodeBICFacility": {
-                "title": "Loading Site Code",
+                "title": "BIC Facility Code",
                 "pattern": "^[A-Z0-9]{9}$",
                 "type": "string",
-                "description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
+                "description": "A registered BIC Facility Code to identify the facility the material is being loaded at.",
                 "example": "GBEDMBIFA"
+            },
+            "CodeLoadingSiteIdentifier": {
+                "title": "Loading Site Identifier",
+                "description": "A BIC Facility Code, or the Traqa-generated identifier for a Loading Site pending verification.",
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/CodeBICFacility"
+                    },
+                    {
+                        "$ref": "#/components/schemas/CodeTraqa"
+                    }
+                ]
             },
             "WeightTradeItemNet": {
                 "allOf": [
@@ -3332,6 +3389,9 @@
                             "carriersReferenceNumber": {
                                 "$ref": "#/components/schemas/ReferenceCarriersReferenceNumber"
                             },
+                            "transportDocumentReference": {
+                                "$ref": "#/components/schemas/ReferenceTransportDocumentReference"
+                            },
                             "shippersIdentifyingNumberForShipment": {
                                 "$ref": "#/components/schemas/ReferenceShippersIdentifyingNumberForShipment"
                             },
@@ -3405,6 +3465,9 @@
                                 },
                                 "pricePerTonne": {
                                     "$ref": "#/components/schemas/CommonPricePerTonne"
+                                },
+                                "eprWasteDescription": {
+                                    "$ref": "#/components/schemas/EprWasteDescription"
                                 }
                             }
                         }
