@@ -85,6 +85,76 @@
                 "security": []
             }
         },
+        "/organization/consignee": {
+            "get": {
+                "summary": "Retrieve consignees from your address book",
+                "tags": [
+                    "Organization"
+                ],
+                "description": "Retrieve a paginated list of active consignees belonging to the authenticated shipper.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
+                    },
+                    {
+                        "$ref": "#/components/parameters/HeaderPaginationToken"
+                    },
+                    {
+                        "$ref": "#/components/parameters/QueryOrganizationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ConsigneesAddressBook"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/Common400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Common403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Common500"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/organization/trader": {
+            "get": {
+                "summary": "Retrieve traders from your address book",
+                "tags": [
+                    "Organization"
+                ],
+                "description": "Retrieve a paginated list of active traders belonging to the authenticated shipper.",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
+                    },
+                    {
+                        "$ref": "#/components/parameters/HeaderPaginationToken"
+                    },
+                    {
+                        "$ref": "#/components/parameters/QueryOrganizationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/TradersAddressBook"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/Common400"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Common403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Common500"
+                    }
+                },
+                "security": []
+            }
+        },
         "/loads": {
             "get": {
                 "summary": "Retrieve loadplan(s) details",
@@ -1914,6 +1984,120 @@
                         }
                     }
                 }
+            },
+            "TradersAddressBook": {
+                "description": "Traders from your address book.",
+                "headers": {
+                    "Access-Control-Allow-Origin": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "pagination-token": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64-encoded pagination token. Present only when more results exist."
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "traders": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PartyTrader"
+                                    }
+                                }
+                            }
+                        },
+                        "example": {
+                            "traders": [
+                                {
+                                    "traderId": "a3f1c2d4-8b7e-4e2a-9f0d-1c2b3a4d5e6f",
+                                    "organisationName": "Example Recycling Co.",
+                                    "address": {
+                                        "street": "1 Example Street",
+                                        "city": "Example City",
+                                        "postcode": "EX1 1AA",
+                                        "country": "GB"
+                                    },
+                                    "contact": {
+                                        "responsiblePerson": "John Doe",
+                                        "telephone": "+44 0000 000000",
+                                        "emailAddress": "john@email.com"
+                                    },
+                                    "identifiers": {
+                                        "eori": "GB123456789012",
+                                        "vat": "123456789"
+                                    },
+                                    "status": "ACTIVE",
+                                    "createdAt": "2026-05-20T10:00:00Z",
+                                    "updatedAt": "2026-05-20T10:00:00Z"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "ConsigneesAddressBook": {
+                "description": "Consignees from your address book.",
+                "headers": {
+                    "Access-Control-Allow-Origin": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "pagination-token": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64-encoded pagination token. Present only when more results exist."
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "consignees": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AddressBookConsignee"
+                                    }
+                                }
+                            }
+                        },
+                        "example": {
+                            "consignees": [
+                                {
+                                    "consigneeId": "ABCD1234",
+                                    "organisationName": "DS Smith Paper Rouen SAS",
+                                    "address": {
+                                        "street": "1 Rue Example",
+                                        "city": "Rouen",
+                                        "postcode": "76000",
+                                        "country": "FR"
+                                    },
+                                    "contact": {
+                                        "responsiblePerson": "Pierre",
+                                        "telephone": "+33 0000 0001",
+                                        "emailAddress": "pierre@example.fr"
+                                    },
+                                    "identifiers": {
+                                        "eori": "FR123456789012",
+                                        "vat": "FR53330044891"
+                                    },
+                                    "status": "ACTIVE",
+                                    "createdAt": "2026-05-20T10:00:00Z",
+                                    "updatedAt": "2026-05-20T10:00:00Z"
+                                }
+                            ]
+                        }
+                    }
+                }
             }
         },
         "requestBodies": {
@@ -2022,8 +2206,7 @@
                 "anyOf": [
                     {
                         "required": [
-                            "organizationId",
-                            "address"
+                            "organizationId"
                         ]
                     },
                     {
@@ -2036,12 +2219,17 @@
                 "type": "object",
                 "properties": {
                     "organizationId": {
+                        "title": "A coded Identifier for the Buyer",
+                        "description": "The buyer's EORI number or BIC Facility Code, or the Traqa ID.",
                         "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
                             {
                                 "$ref": "#/components/schemas/CodeBICFacility"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CodeTraqa"
                             }
                         ]
                     },
@@ -2091,8 +2279,7 @@
                 "anyOf": [
                     {
                         "required": [
-                            "organizationId",
-                            "address"
+                            "organizationId"
                         ]
                     },
                     {
@@ -2106,13 +2293,16 @@
                 "properties": {
                     "organizationId": {
                         "title": "A coded Identifier for the Consignee",
-                        "description": "The consignee Organization Id is usually an EORI number assigned by a government or a BIC Facility Code.",
+                        "description": "The consignee Organization Id is usually an EORI number assigned by a government or a BIC Facility Code or Traqa ID.",
                         "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
                             {
                                 "$ref": "#/components/schemas/CodeBICFacility"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CodeTraqa"
                             }
                         ]
                     },
@@ -2235,8 +2425,7 @@
                 "anyOf": [
                     {
                         "required": [
-                            "organizationId",
-                            "address"
+                            "organizationId"
                         ]
                     },
                     {
@@ -2249,13 +2438,16 @@
                 "properties": {
                     "organizationId": {
                         "title": "A coded identifier for the Recovery Facility",
-                        "description": "A coded value for the Recovery Facility, for UK and Europe this should be the EORI if available or if not mutually agreed with Traqa.",
+                        "description": "A coded value for the Recovery Facility, for UK and Europe this should be the EORI or Traqa ID.",
                         "anyOf": [
                             {
                                 "$ref": "#/components/schemas/CodeEORI"
                             },
                             {
                                 "$ref": "#/components/schemas/CodeBICFacility"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CodeTraqa"
                             }
                         ]
                     },
@@ -3350,6 +3542,244 @@
                 "minimum": 1e-05,
                 "example": 100.0
             },
+            "DocumentConfigContactDetail": {
+                "title": "DocumentConfigContactDetail",
+                "type": "object",
+                "description": "Contact configuration for a document config entry (e.g. annexBox1, tfsBox3). Stores email, contactName and telephoneNumber for the default contact and per condition override.",
+                "properties": {
+                    "default": {
+                        "type": "object",
+                        "description": "Default contact details to use when no condition matches.",
+                        "properties": {
+                            "email": {
+                                "type": "string",
+                                "format": "email"
+                            },
+                            "contactName": {
+                                "type": "string"
+                            },
+                            "telephoneNumber": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "email"
+                        ]
+                    },
+                    "conditions": {
+                        "type": "array",
+                        "description": "Ordered list of conditional overrides. First matching condition is used.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rule": {
+                                    "type": "object",
+                                    "properties": {
+                                        "field": {
+                                            "type": "string",
+                                            "enum": [
+                                                "WasteClassification",
+                                                "ConsigneeCountry",
+                                                "harmonizeSystemCode"
+                                            ]
+                                        },
+                                        "operator": {
+                                            "type": "string",
+                                            "enum": [
+                                                "equals",
+                                                "starts_with"
+                                            ]
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "field",
+                                        "operator",
+                                        "value"
+                                    ]
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "contactName": {
+                                    "type": "string"
+                                },
+                                "telephoneNumber": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "rule",
+                                "email"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "default"
+                ],
+                "example": {
+                    "default": {
+                        "email": "person@email.com",
+                        "contactName": "Jane Smith",
+                        "telephoneNumber": "+44123456789"
+                    },
+                    "conditions": [
+                        {
+                            "rule": {
+                                "field": "harmonizeSystemCode",
+                                "operator": "starts_with",
+                                "value": "3825"
+                            },
+                            "email": "amberlist@email.com",
+                            "contactName": "Amber Contact",
+                            "telephoneNumber": "+44987654321"
+                        }
+                    ]
+                }
+            },
+            "ConfigDetail": {
+                "type": "object",
+                "properties": {
+                    "default": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    },
+                    "conditions": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rule": {
+                                    "type": "object",
+                                    "properties": {
+                                        "field": {
+                                            "type": "string",
+                                            "enum": [
+                                                "WasteClassification",
+                                                "ConsigneeCountry",
+                                                "harmonizeSystemCode"
+                                            ]
+                                        },
+                                        "operator": {
+                                            "type": "string",
+                                            "description": "equals can be used for all fields. starts_with can only be used with the harmonizeSystemCode field with a minimum of 4 characters",
+                                            "enum": [
+                                                "equals",
+                                                "starts_with"
+                                            ]
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "field",
+                                        "operator",
+                                        "value"
+                                    ]
+                                },
+                                "emails": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "rule",
+                                "emails"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "default"
+                ]
+            },
+            "LoadingSiteConfigurations": {
+                "title": "LoadingSiteConfigurations",
+                "type": "object",
+                "description": "Root configuration object containing email and document configuration settings for a Loading Site.",
+                "properties": {
+                    "emailConfig": {
+                        "type": "object",
+                        "description": "Email notification configuration for different workflow stages.",
+                        "properties": {
+                            "documentsNotification": {
+                                "$ref": "#/components/schemas/ConfigDetail"
+                            }
+                        },
+                        "additionalProperties": false,
+                        "example": {
+                            "documentsNotification": {
+                                "default": [
+                                    "person@email.com"
+                                ],
+                                "conditions": [
+                                    {
+                                        "rule": {
+                                            "field": "harmonizeSystemCode",
+                                            "operator": "starts_with",
+                                            "value": "3825"
+                                        },
+                                        "emails": [
+                                            "amberlist@email.com"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "documentConfig": {
+                        "type": "object",
+                        "description": "Document contact configuration for different document sections.",
+                        "properties": {
+                            "responsiblePerson": {
+                                "$ref": "#/components/schemas/DocumentConfigContactDetail"
+                            }
+                        },
+                        "additionalProperties": false,
+                        "example": {
+                            "responsiblePerson": {
+                                "default": {
+                                    "email": "person@email.com",
+                                    "contactName": "Jane Smith",
+                                    "telephoneNumber": "+44123456789"
+                                },
+                                "conditions": [
+                                    {
+                                        "rule": {
+                                            "field": "harmonizeSystemCode",
+                                            "operator": "starts_with",
+                                            "value": "3825"
+                                        },
+                                        "email": "amberlist@email.com",
+                                        "contactName": "Amber Contact",
+                                        "telephoneNumber": "+44987654321"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "forceEuAnnexVII": {
+                        "type": "boolean",
+                        "description": "When true, always generate the Regulation (EU) 2024/1157 Annex VII template for this loading site's loads, regardless of shipment geography. Required for Northern Ireland sites, where the Windsor Framework mandates the EU form but GB-prefixed routing would otherwise resolve to the GB template. Defaults to false (geography-based auto-detection).",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "emailConfig",
+                    "documentConfig"
+                ]
+            },
             "ModelEmpty": {
                 "title": "Empty Model",
                 "type": "object"
@@ -3537,10 +3967,17 @@
                         "type": "object",
                         "description": "The trader from which the waste was purchased, if applicable.",
                         "properties": {
+                            "organizationId": {
+                                "title": "Organization Id",
+                                "type": "string",
+                                "description": "The Traqa ID of a trader in the shipper's address book.",
+                                "example": "K3JQP8XZ"
+                            },
                             "traqaId": {
                                 "title": "Traqa ID",
                                 "type": "string",
-                                "description": "The Traqa address book ID of the trader"
+                                "description": "The Traqa address book ID of the trader",
+                                "example": "K3JQP8XZ"
                             }
                         }
                     }
@@ -4231,6 +4668,128 @@
                     "approverId": "person@cif-consulting.co.uk",
                     "xeroContactId": "ea51cc52-2d3e-4e54-8686-a8904d89cf47",
                     "role": "Shipper"
+                }
+            },
+            "PartyTrader": {
+                "type": "object",
+                "description": "A trader record in the address book",
+                "properties": {
+                    "traderId": {
+                        "type": "string",
+                        "description": "The trader's Traqa ID. Send it as trader.organizationId on a load to use this trader."
+                    },
+                    "organisationName": {
+                        "type": "string",
+                        "description": "The trading name of the organisation"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "postcode": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "identifiers": {
+                        "type": "object",
+                        "description": "Free-form key/value map of identifiers. Keys vary by party type (e.g. eori, vat, license, bicCode).",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "example": {
+                            "eori": "GB123456789012",
+                            "vat": "123456789",
+                            "license": "CBDU98765"
+                        }
+                    },
+                    "configurations": {
+                        "$ref": "#/components/schemas/LoadingSiteConfigurations"
+                    },
+                    "statusRole": {
+                        "type": "string",
+                        "description": "Composite status and role attribute, e.g. ACTIVE#Trader"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "AddressBookConsignee": {
+                "type": "object",
+                "description": "A consignee record in the address book",
+                "properties": {
+                    "consigneeId": {
+                        "type": "string",
+                        "description": "The consignee's Traqa ID. Send it as the organizationId of a consignee, buyer or recovery facility on a load to use this party."
+                    },
+                    "organisationName": {
+                        "type": "string",
+                        "description": "The trading name of the organisation"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "postcode": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "identifiers": {
+                        "type": "object",
+                        "description": "Free-form key/value map of identifiers (e.g. eori, vat). approvedOverseasReprocessorId (the DEFRA accreditation ID) flows onto the EPR report.",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "example": {
+                            "eori": "FR123456789012",
+                            "vat": "FR53330044891",
+                            "approvedOverseasReprocessorId": "123"
+                        }
+                    },
+                    "configurations": {
+                        "$ref": "#/components/schemas/LoadingSiteConfigurations"
+                    },
+                    "statusRole": {
+                        "type": "string",
+                        "description": "Composite status and role attribute, e.g. ACTIVE#Consignee"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
                 }
             }
         },
