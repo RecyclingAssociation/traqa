@@ -224,37 +224,10 @@
                                             "name": "Mediterranean Shipping Company S.A."
                                         },
                                         "consignee": {
-                                            "organizationId": "sWVgNvgjsHRD2",
-                                            "name": "Acme Importer",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "GB"
-                                            },
-                                            "contact": {
-                                                "personName": "Joe Smith",
-                                                "telephone": "0800 000 0000",
-                                                "emailAddress": "joe@domain.com"
-                                            },
-                                            "vatNumber": "GB367877431"
+                                            "organizationId": "M4QZ7RXK"
                                         },
                                         "recoveryFacility": {
-                                            "organizationId": "F78VO84GQ2",
-                                            "name": "ACME Recovery Site Ltd",
-                                            "address": {
-                                                "street": "123 Main Street",
-                                                "city": "Liverpool",
-                                                "state": "Merseyside",
-                                                "postcode": "L1 0AA",
-                                                "country": "TH"
-                                            },
-                                            "contact": {
-                                                "personName": "Joe Smith",
-                                                "telephone": "0800 000 0000",
-                                                "emailAddress": "joe@domain.com"
-                                            }
+                                            "organizationId": "T6WJ2NPB"
                                         },
                                         "references": {
                                             "carriersReferenceNumber": "ONEY12345667",
@@ -361,6 +334,82 @@
                                         }
                                     }
                                 },
+                                "Traqa Load Plan with a trader": {
+                                    "description": "Set `trader.organizationId` to the `traderId` of a trader in your address book (see GET /organization/trader).",
+                                    "value": {
+                                        "shipper": {
+                                            "organizationId": "GB123456789139"
+                                        },
+                                        "carrier": {
+                                            "organizationId": "ACLU",
+                                            "name": "Mediterranean Shipping Company S.A."
+                                        },
+                                        "consignee": {
+                                            "organizationId": "GB123456789139",
+                                            "name": "Acme Importer",
+                                            "address": {
+                                                "street": "123 Main Street",
+                                                "city": "Liverpool",
+                                                "state": "Merseyside",
+                                                "postcode": "L1 0AA",
+                                                "country": "GB"
+                                            },
+                                            "contact": {
+                                                "personName": "Joe Smith",
+                                                "telephone": "0800 000 0000",
+                                                "emailAddress": "joe@domain.com"
+                                            },
+                                            "vatNumber": "GB367877431"
+                                        },
+                                        "recoveryFacility": {
+                                            "organizationId": "GB123456789139",
+                                            "name": "ACME Recovery Site Ltd",
+                                            "address": {
+                                                "street": "123 Main Street",
+                                                "city": "Liverpool",
+                                                "state": "Merseyside",
+                                                "postcode": "L1 0AA",
+                                                "country": "TH"
+                                            },
+                                            "contact": {
+                                                "personName": "Joe Smith",
+                                                "telephone": "0800 000 0000",
+                                                "emailAddress": "joe@domain.com"
+                                            }
+                                        },
+                                        "references": {
+                                            "carriersReferenceNumber": "ONEY12345667",
+                                            "shippersIdentifyingNumberForShipment": "400126253",
+                                            "pickupReferenceNumber": "OCC-2456-1"
+                                        },
+                                        "dates": {
+                                            "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
+                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "description": "OCC 80/20"
+                                            }
+                                        ],
+                                        "portOfLoading": {
+                                            "UNLocode": "GBLIV"
+                                        },
+                                        "loadingSite": {
+                                            "organizationId": "GBEDMBIFA",
+                                            "address": {
+                                                "street": "123 Main Street",
+                                                "city": "Liverpool",
+                                                "state": "Merseyside",
+                                                "postcode": "L1 0AA",
+                                                "country": "GB"
+                                            },
+                                            "name": "Acme Loading Site Ltd"
+                                        },
+                                        "trader": {
+                                            "organizationId": "K3JQP7XZ"
+                                        }
+                                    }
+                                },
                                 "Traqa Load Plan with customs paperwork only": {
                                     "value": {
                                         "shipper": {
@@ -442,16 +491,7 @@
                                             },
                                             "incoterms": "CFR",
                                             "buyer": {
-                                                "organizationId": "kXHCLMGJq5M",
-                                                "address": {
-                                                    "street": "123 Main Street",
-                                                    "city": "Liverpool",
-                                                    "state": "Merseyside",
-                                                    "postcode": "L1 0AA",
-                                                    "country": "GB"
-                                                },
-                                                "name": "ACME Buyer Co",
-                                                "vatNumber": "GB367877431"
+                                                "organizationId": "H5CL3MGQ"
                                             }
                                         }
                                     }
@@ -542,16 +582,7 @@
                                             },
                                             "incoterms": "CFR",
                                             "buyer": {
-                                                "organizationId": "kXHCLMGJq5M",
-                                                "address": {
-                                                    "street": "123 Main Street",
-                                                    "city": "Liverpool",
-                                                    "state": "Merseyside",
-                                                    "postcode": "L1 0AA",
-                                                    "country": "GB"
-                                                },
-                                                "name": "ACME Buyer Co",
-                                                "vatNumber": "GB367877431"
+                                                "organizationId": "H5CL3MGQ"
                                             }
                                         }
                                     }
