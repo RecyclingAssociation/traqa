@@ -2160,9 +2160,9 @@
                 "properties": {
                     "organizationId": {
                         "title": "Loading Site Code",
-                        "pattern": "^[A-Z0-9]{9}$",
+                        "pattern": "^[A-Z0-9]{1,24}$",
                         "type": "string",
-                        "description": "A registered BIC Facility Code to identify the facility the material is being loaded at",
+                        "description": "A registered BIC Facility Code, or the Traqa-generated identifier for a Loading Site pending verification",
                         "example": "GBEDMBIFA"
                     },
                     "address": {
@@ -2218,6 +2218,13 @@
                                 "type": "string",
                                 "description": "The Ocean Carrier Booking Number used for tracking containers after loading, only useful for deep sea movements",
                                 "example": "ONEY12345667"
+                            },
+                            "transportDocumentReference": {
+                                "title": "Transport Document Reference",
+                                "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
+                                "type": "string",
+                                "description": "The transport document reference for the shipment - the Bill of Lading number for deep sea movements or the CMR consignment note reference for road movements.",
+                                "example": "271213791"
                             },
                             "shippersIdentifyingNumberForShipment": {
                                 "title": "Shippers Identifying Number For Shipment",
