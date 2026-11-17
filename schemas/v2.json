@@ -4073,6 +4073,9 @@
                     },
                     {
                         "$ref": "#/components/schemas/ModelLoadplanVermasResult"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ModelLoadplanPortResult"
                     }
                 ]
             },
