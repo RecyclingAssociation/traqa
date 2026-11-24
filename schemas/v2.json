@@ -13,12 +13,12 @@
     },
     "servers": [
         {
-            "url": "https://uat.api.traqa.io/v2",
-            "description": "User Acceptance Testing Url for Traqa API V2"
-        },
-        {
             "url": "https://api.traqa.io/v2",
             "description": "Production Base URL for Traqa API V2"
+        },
+        {
+            "url": "https://uat.api.traqa.io/v2",
+            "description": "User Acceptance Testing Url for Traqa API V2"
         }
     ],
     "paths": {
@@ -259,6 +259,56 @@
                                         },
                                         "pern": {
                                             "percentage": 97.5
+                                        }
+                                    }
+                                },
+                                "Traqa Load Plan with two trade items": {
+                                    "value": {
+                                        "shipper": {
+                                            "organizationId": "GB100000000"
+                                        },
+                                        "carrier": {
+                                            "organizationId": "MSCU",
+                                            "name": "Mediterranean Shipping Company S.A."
+                                        },
+                                        "consignee": {
+                                            "organizationId": "M4QZ7RXK"
+                                        },
+                                        "recoveryFacility": {
+                                            "organizationId": "T6WJ2NPB"
+                                        },
+                                        "references": {
+                                            "carriersReferenceNumber": "ONEY12345667",
+                                            "shippersIdentifyingNumberForShipment": "400126253",
+                                            "pickupReferenceNumber": "OCC-2456-2"
+                                        },
+                                        "dates": {
+                                            "scheduledLoadingTransportEvent": "2023-07-01T09:05:49"
+                                        },
+                                        "tradeItem": [
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "ewcCode": "191201",
+                                                "baselCode": "B3020",
+                                                "description": "OCC 80/20",
+                                                "pricePerTonne": 120
+                                            },
+                                            {
+                                                "harmonizeSystemCode": "4707100000",
+                                                "ewcCode": "191201",
+                                                "baselCode": "B3020",
+                                                "description": "OCC 90/10",
+                                                "pricePerTonne": 130
+                                            }
+                                        ],
+                                        "portOfLoading": {
+                                            "UNLocode": "GBLIV"
+                                        },
+                                        "loadingSite": {
+                                            "organizationId": "GBEDMBIFA"
+                                        },
+                                        "pern": {
+                                            "percentage": 80
                                         }
                                     }
                                 },
@@ -2636,6 +2686,59 @@
                 "description": "When the port reported that a VGM for this container had already been submitted by another party.",
                 "example": "2023-07-02T06:41:00"
             },
+            "DatesArrivedAtPortOfLoading": {
+                "title": "Arrived At Port Of Loading",
+                "type": "string",
+                "description": "When the container arrived (gated in) at the port of loading. From the carrier's tracking events, or from the port (CNS Compass unit arrival, MCP Destin8 VGM06) when tracking gives none. Tracking values may carry a UTC offset or 'Z'; port values are UK local time without one.",
+                "example": "2026-11-13T15:11:46"
+            },
+            "DatesVgmCutOff": {
+                "title": "VGM Cut-Off",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "The terminal's VGM cut-off for the container's vessel, UK local time. From CNS Compass; MCP does not provide it.",
+                "example": "2026-11-22T23:59:00"
+            },
+            "DatesVesselExpectedDeparture": {
+                "title": "Vessel Expected Departure",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the container's vessel is expected to depart the port of loading, UK local time. Updated when the port reports a new time.",
+                "example": "2026-11-25T12:00:00"
+            },
+            "DatesVesselActualDeparture": {
+                "title": "Vessel Actual Departure",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the container's vessel departed the port of loading, UK local time. Present once the vessel has sailed.",
+                "example": "2026-11-25T14:30:00"
+            },
+            "DatesPortCustomsCleared": {
+                "title": "Port Customs Cleared",
+                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                "type": "string",
+                "description": "When the container was cleared by customs at the port of loading (permitted to progress), UK local time. From CNS Compass; MCP gives no date.",
+                "example": "2026-11-13T15:12:43"
+            },
+            "TransportVessel": {
+                "title": "Vessel",
+                "type": "string",
+                "description": "The name of the vessel the container is booked on, as the port reports it.",
+                "example": "BALTIMORE EXPRESS"
+            },
+            "TransportVoyage": {
+                "title": "Voyage",
+                "type": "string",
+                "description": "The port's voyage reference for the vessel call: the CNS Compass TOS voyage number or the MCP UVI.",
+                "example": "BALE641W"
+            },
+            "TransportVesselIMO": {
+                "title": "Vessel IMO",
+                "pattern": "^\\d{7}$",
+                "type": "string",
+                "description": "The vessel's IMO number. From MCP Destin8 vessel amendments.",
+                "example": "9963607"
+            },
             "ReferenceCarriersReferenceNumber": {
                 "title": "Carriers Reference Number",
                 "pattern": "^[a-zA-Z0-9\\ \\-\\.\\/\\_]+$",
@@ -2702,7 +2805,7 @@
             },
             "ReferencePERN": {
                 "title": "Packaging Export Recovery Note (PERN)",
-                "description": "Information about a PERN thats required to appear on the Annex VII in Box 15, if not claiming a PERN omit from the load plan",
+                "description": "Information about a PERN thats required to appear on the Annex VII in Box 15, if not claiming a PERN omit from the load plan. It applies to the whole load, not to a single trade item.",
                 "type": "object",
                 "required": [
                     "percentage"
@@ -3064,7 +3167,7 @@
             "IdentifierGoodsItemNumber": {
                 "title": "Good Item Number",
                 "type": "string",
-                "description": "The Good Item Number is a linear numeric identifier for the goods in the trade item object.",
+                "description": "The number of a trade item on the load: \"1\" for the first item in the load plan's `tradeItem` array, \"2\" for the second, and so on. Traqa assigns it when the load plan is posted.",
                 "example": "1"
             },
             "TradeItems": {
@@ -3152,7 +3255,7 @@
             "CodeEWC": {
                 "title": "EWC Code",
                 "pattern": "^[0-9]{6}$",
-                "description": "The European Waste Code classification/description of the type of waste.",
+                "description": "The European Waste Code classification/description of the type of waste. 6 digits, no spaces.",
                 "type": "string",
                 "example": "191201"
             },
@@ -3902,7 +4005,7 @@
                     },
                     "tradeItem": {
                         "title": "Trade Items",
-                        "description": "The details for the types of materials that are being loaded/exported",
+                        "description": "The materials being loaded/exported. Send one object per material, up to 8 on a load.\n\nTraqa numbers the items by their position in this array, starting at 1, and returns that number as `goodsItemNumber` when you retrieve the load. A `goodsItemNumber` sent here is ignored, so keep the items in the same order every time you post the load. The loading site reports its weights against each `goodsItemNumber`.",
                         "type": "array",
                         "minItems": 1,
                         "items": {
@@ -3924,13 +4027,13 @@
                                     "title": "Harmonize System Code",
                                     "pattern": "^[0-9]{4,10}$",
                                     "type": "string",
-                                    "description": "The Harmonised Commodity Code of the material for Customs reporting purposes"
+                                    "description": "The Harmonised Commodity Code of the material for Customs reporting purposes. 4 to 10 digits, no spaces."
                                 },
                                 "description": {
                                     "title": "Description of Goods",
                                     "pattern": "^[a-zA-Z0-9\\&\\ \\-\\.\\,\\/\\_\\(\\)\\']+$",
                                     "type": "string",
-                                    "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII"
+                                    "description": "A free text description of the type of material that is being loaded/exported.  Populates Box 9 on the Annex VII. Letters, numbers, spaces and `& - . , / _ ( ) '` are allowed. It does not have to be unique on the load."
                                 },
                                 "pricePerTonne": {
                                     "$ref": "#/components/schemas/CommonPricePerTonne"
@@ -4056,6 +4159,71 @@
                             },
                             "vermasTerminalWeighRequested": {
                                 "$ref": "#/components/schemas/EquipmentVermasTerminalWeighRequested"
+                            }
+                        }
+                    }
+                }
+            },
+            "ModelLoadplanPortResult": {
+                "title": "Port and Vessel Result",
+                "type": "object",
+                "description": "Port and vessel details for the container, from the port community system (CNS Compass or MCP Destin8). Read-only, returned on completed loads. Only the values the port has given are present.",
+                "properties": {
+                    "dates": {
+                        "title": "Dates",
+                        "type": "object",
+                        "description": "Port and vessel dates for the container",
+                        "properties": {
+                            "arrivedAtPortOfLoading": {
+                                "$ref": "#/components/schemas/DatesArrivedAtPortOfLoading"
+                            },
+                            "vgmCutOff": {
+                                "$ref": "#/components/schemas/DatesVgmCutOff"
+                            },
+                            "vesselExpectedDeparture": {
+                                "$ref": "#/components/schemas/DatesVesselExpectedDeparture"
+                            },
+                            "vesselActualDeparture": {
+                                "$ref": "#/components/schemas/DatesVesselActualDeparture"
+                            },
+                            "portCustomsCleared": {
+                                "$ref": "#/components/schemas/DatesPortCustomsCleared"
+                            }
+                        }
+                    },
+                    "transport": {
+                        "title": "Transport",
+                        "type": "object",
+                        "description": "The sea leg: the vessel and voyage the container is on",
+                        "properties": {
+                            "vessel": {
+                                "$ref": "#/components/schemas/TransportVessel"
+                            },
+                            "voyage": {
+                                "$ref": "#/components/schemas/TransportVoyage"
+                            },
+                            "vesselIMO": {
+                                "$ref": "#/components/schemas/TransportVesselIMO"
+                            }
+                        }
+                    },
+                    "arrivalPortOfLoading": {
+                        "title": "Arrival Port of Loading",
+                        "type": "object",
+                        "description": "The port the container arrived (gated in) at, from carrier tracking or the port. Usually the same as portOfLoading; set together with dates.arrivedAtPortOfLoading.",
+                        "properties": {
+                            "UNLocode": {
+                                "$ref": "#/components/schemas/CodeUNLocode"
+                            }
+                        }
+                    },
+                    "finalDestination": {
+                        "title": "Final Destination",
+                        "type": "object",
+                        "description": "The container's final destination (final port of discharge) as the port reports it. Separate from portOfDischarge, which the shipper sets.",
+                        "properties": {
+                            "UNLocode": {
+                                "$ref": "#/components/schemas/CodeUNLocode"
                             }
                         }
                     }
