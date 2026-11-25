@@ -4383,7 +4383,7 @@
                     },
                     "customsDeclaration": {
                         "title": "Declare Customs",
-                        "description": "Specify whether you would like Traqa to submit a customs declaration to HMRC on your behalf for the load. Default is 'false'.",
+                        "description": "Specify whether you would like Traqa to submit a customs declaration to HMRC on your behalf for the load. Default is 'false'. Traqa can only declare loads leaving from GB ports, so 'true' with a non-GB port of loading is rejected with a 400.",
                         "type": "boolean",
                         "nullable": true,
                         "default": false,
