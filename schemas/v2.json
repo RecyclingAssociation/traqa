@@ -1497,6 +1497,55 @@
                 },
                 "security": []
             }
+        },
+        "/notifications": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/HeaderAuthorizationToken"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "description": "Return only notifications with this status. `OPEN` notifications still need action.",
+                        "schema": {
+                            "description": "Notification status",
+                            "type": "string",
+                            "enum": [
+                                "OPEN",
+                                "CLOSED"
+                            ]
+                        },
+                        "example": "OPEN"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "description": "Return only notifications of this type. Use `NILS` for weighbridge tickets awaiting review.",
+                        "schema": {
+                            "description": "Notification type",
+                            "type": "string"
+                        },
+                        "example": "NILS"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/Notifications"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Common500"
+                    }
+                },
+                "security": [],
+                "description": "Fetch the `Notifications` for your organisation. A notification is something in Traqa that needs a person to act on it, such as a weighbridge ticket from a non-integrated loading site (NILS) that needs reviewing.\n\nEvery matching notification is returned in one response, so filter with `status` and `type`.\n\n### List the NILS tasks awaiting review\n\nWhen a non-integrated loading site emails its paperwork, Traqa reads the weighbridge ticket and creates a NILS task for the shipper to review. Each task has a notification, which stays `OPEN` until the task is completed. To list the tasks still awaiting review:\n\n```\nGET /notifications?status=OPEN&type=NILS\n```\n\nEach notification returned has the `taskId` of its task and the `LoadingReference` of the load it belongs to.\n\n### Link to a NILS task\n\nA NILS task is reviewed on its own page in the Traqa web app. Build the link by adding the `taskId` to the page address:\n\n* Production: `https://app.traqa.io/nils/{taskId}`\n* UAT: `https://uat.traqa.io/nils/{taskId}`\n\nFor example `https://app.traqa.io/nils/4cde67da-a3vb-49d3-8d23-h38ed8c1a485`.\n\nThe link opens the task for a signed-in Traqa user of the shipper the task belongs to. Use the web app for the same environment the `taskId` came from.",
+                "summary": "Retrieve notifications"
+            }
         }
     },
     "components": {
@@ -1919,6 +1968,103 @@
                             "items": {
                                 "$ref": "#/components/schemas/ModelLoadplanAny"
                             }
+                        }
+                    }
+                }
+            },
+            "Notifications": {
+                "description": "Information on a party's notifications.",
+                "headers": {
+                    "Access-Control-Allow-Origin": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Notifications": {
+                                    "title": "Notifications",
+                                    "type": "array",
+                                    "description": "A List of notifications.",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "NotificationStatus": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "OPEN",
+                                                    "CLOSED"
+                                                ]
+                                            },
+                                            "NotificationType": {
+                                                "type": "string",
+                                                "description": "What the notification is about. `NILS` is a weighbridge ticket awaiting review."
+                                            },
+                                            "taskId": {
+                                                "type": "string",
+                                                "description": "Id of the task behind the notification. For a `NILS` notification, add it to `https://app.traqa.io/nils/` to link to the task's review page."
+                                            },
+                                            "CreationDatetime": {
+                                                "type": "string",
+                                                "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                                "description": "When the notification was created, UK local time in ISO 8601 format."
+                                            },
+                                            "LoadingReference": {
+                                                "type": "string",
+                                                "description": "Loading reference of the load the notification belongs to."
+                                            },
+                                            "LoadingSiteName": {
+                                                "type": "string"
+                                            },
+                                            "ShipperName": {
+                                                "type": "string"
+                                            },
+                                            "Flag": {
+                                                "$ref": "#/components/schemas/TaskFlag"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Count": {
+                                    "title": "Notifications Count",
+                                    "description": "Number of notifications retrieved.",
+                                    "type": "number"
+                                },
+                                "DateOfRequest": {
+                                    "title": "Date Retrieved",
+                                    "type": "string",
+                                    "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+                                    "description": "The date that the notifications information was requested in ISO 8601 format."
+                                }
+                            }
+                        },
+                        "example": {
+                            "Notifications": [
+                                {
+                                    "NotificationStatus": "OPEN",
+                                    "NotificationType": "NILS",
+                                    "taskId": "4cde67da-a3vb-49d3-8d23-h38ed8c1a485",
+                                    "CreationDatetime": "2026-11-24T09:14:02",
+                                    "LoadingReference": "LR-67890",
+                                    "LoadingSiteName": "Example Recycling Ltd",
+                                    "ShipperName": "Example Shipper Ltd"
+                                },
+                                {
+                                    "NotificationStatus": "OPEN",
+                                    "NotificationType": "NILS",
+                                    "taskId": "9b1f2c3d-7e6a-4f50-a1b2-c3d4e5f6a7b8",
+                                    "CreationDatetime": "2026-11-25T08:02:47",
+                                    "LoadingReference": "LR-12345",
+                                    "LoadingSiteName": "Example Recycling Ltd",
+                                    "ShipperName": "Example Shipper Ltd"
+                                }
+                            ],
+                            "Count": 2,
+                            "DateOfRequest": "2026-11-25T10:22:30"
                         }
                     }
                 }
@@ -4871,6 +5017,31 @@
                     "approverId": "person@cif-consulting.co.uk",
                     "xeroContactId": "ea51cc52-2d3e-4e54-8686-a8904d89cf47",
                     "role": "Shipper"
+                }
+            },
+            "TaskFlag": {
+                "title": "Task Flag",
+                "type": "object",
+                "description": "An issue raised against a NILS task so reviewers know not to revisit it.",
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "maxLength": 150,
+                        "description": "Plain text explanation of the issue."
+                    },
+                    "flaggedAt": {
+                        "type": "string",
+                        "description": "When the flag was raised, ISO 8601 UTC."
+                    },
+                    "flaggedBy": {
+                        "type": "string",
+                        "description": "First name of the reviewer who raised it, or Traqa Staff."
+                    }
+                },
+                "example": {
+                    "reason": "Weighbridge ticket photo is unreadable",
+                    "flaggedAt": "2026-09-22T09:14:00Z",
+                    "flaggedBy": "Declan"
                 }
             },
             "PartyTrader": {
